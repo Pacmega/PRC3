@@ -1,10 +1,10 @@
 #ifndef _SEDAN_H
 #define _SEDAN_H
 
-class Sedan
+class Sedan : public Car
 {
 	public:
-		Sedan(string manufacturer, string model, int buildYear, string licencePlate, bool hasTowbar);
+		Sedan(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasTowbar);
 		~Sedan();
 		void Clean();
 
