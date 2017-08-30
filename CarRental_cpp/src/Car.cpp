@@ -7,9 +7,9 @@ using namespace std;
 
 // TODO: implement your class methods here
 
-Car::Car(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, double pricePerKm)
+Car::Car(const string manufacturer, const string model, const int buildYear, const string licencePlate, const double pricePerKm)
 {
-	if ((manufacturer == NULL) || (model == NULL) || (licencePlate == NULL))
+	if ((*manufacturer == NULL) || (*model == NULL) || (*licencePlate == NULL))
 	{
 		throw std::invalid_argument("A constructorvalue is NULL")
 	}
