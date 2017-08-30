@@ -5,9 +5,7 @@ using namespace std;
 
 #include "Car.h"
 
-// TODO: implement your class methods here
-
-Car::Car(const string manufacturer, const string model, const int buildYear, const string licencePlate, const double pricePerKm)
+Car(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, double pricePerKm)
 {
 	Manufacturer = manufacturer;
 	Model = model;
@@ -16,9 +14,10 @@ Car::Car(const string manufacturer, const string model, const int buildYear, con
     Kilometers = 0;
     IsAvailable = true;
     this.pricePerKm = pricePerKm;
+    NeedsCleaning = false; // New cars don't need cleaning.
 }
 
-int Car::Rent()
+bool Car::Rent()
 {
     if (!IsAvailable)
     {
@@ -33,25 +32,20 @@ double Car::Return(int kilometers)
 {
     if (IsAvailable)
     {
-        throw new InvalidOperationException("car was not rented");
+        throw std::out_of_range("car was not rented");
     }
     if (kilometers < Kilometers)
     {
-        throw new ArgumentException("car is returned with less kilometers than it had", "kilometers");
+        throw std::invalid_argument("car is returned with less kilometers than it had");
     }
 
-    Decimal cost = pricePerKm * (kilometers - Kilometers);
+    double cost = pricePerKm * (kilometers - Kilometers);
     Kilometers = kilometers;
     IsAvailable = true;
     return cost;
 }
 
-void Car::Clean()
-{
-
-}
-
-string Car::ToString()
+const std::string Car::ToString()
 {
 	return Manufacturer +
         " - " + Model +
