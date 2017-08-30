@@ -6,7 +6,7 @@ Limousine::Limousine(std::string manufacturer, std::string model, int buildYear,
  : Car( manufacturer, model, buildYear, licencePlate, pricePerKm)
 {
 	HasMinibar = hasMinibar;
-	needsCleaning = False;
+	needsCleaning = 1;
 }
 
 Limousine::Return(int kilometers)
