@@ -1,6 +1,8 @@
 #ifndef CAR_H
 #define CAR_H
 
+#include <string>
+
 class Car
 {
 	public:
@@ -28,9 +30,12 @@ class Car
 		string GetModel();
 		int GetBuildYear();
 		string GetLicencePlate();
-		bool GetNeedsCleaning();
+		virtual bool GetNeedsCleaning() = 0;
 		int GetKilometers();
 		bool GetIsAvailable();
+
+	private:
+		double pricePerKm;
 };
 
 #endif
