@@ -2,7 +2,7 @@
 
 // TODO: implement your class methods here
 
-Limousine::Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, int hasMinibar)
+Limousine::Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasMinibar)
  : Car( manufacturer, model, buildYear, licencePlate, pricePerKm)
 {
 	HasMinibar = hasMinibar;
@@ -18,5 +18,5 @@ double Limousine::Return(int kilometers)
 
 void Limousine::Clean()
 {
-	needsCleaning = False;
+	needsCleaning = false;
 }

@@ -5,7 +5,7 @@ using namespace std;
 
 #include "Sedan.h"
 
-Sedan::Sedan(string manufacturer, string model, int buildYear, string licencePlate, int hasTowbar)
+Sedan::Sedan(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasTowbar)
  : Car( manufacturer, model, buildYear, licencePlate, pricePerKm)
 {
 	HasTowbar = hasTowbar;
