@@ -7,7 +7,7 @@ class Limousine// : public Car
 {
 	public:
 		// Functions
-		Limousine(string manufacturer, string model, int buildYear, string licencePlate, bool hasMinibar);
+		Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasMinibar);
 		~Limousine();
 		double Return(int kilometers);
 		void Clean();

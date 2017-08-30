@@ -7,15 +7,15 @@ class Car
 {
 	public:
 		// Con- and destructor
-		Car(string manufacturer, string model, int buildYear, string licencePlate, double pricePerKm);
+		Car(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, double pricePerKm);
 		~Car();
 
 		// Variables
-		const string Manufacturer;
-		const string Model;
+		const std::string Manufacturer;
+		const std::string Model;
 		const int BuildYear;
-		const string LicencePlate;
-		bool NeedsCleaning; // TODO: should be abstract, but how?
+		const std::string LicencePlate;
+		bool NeedsCleaning;
 		int Kilometers;
 		bool IsAvailable;
 
@@ -23,13 +23,13 @@ class Car
 		bool Rent();
 		double Return(int kilometers);
 		virtual void Clean() = 0;
-		const string ToString();
+		const std::string ToString();
 
 		// Additional functions
-		string GetManufacturer();
-		string GetModel();
+		std::string GetManufacturer();
+		std::string GetModel();
 		int GetBuildYear();
-		string GetLicencePlate();
+		std::string GetLicencePlate();
 		virtual bool GetNeedsCleaning() = 0;
 		int GetKilometers();
 		bool GetIsAvailable();
