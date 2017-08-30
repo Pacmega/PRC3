@@ -25,14 +25,14 @@ class Car
 		virtual void Clean() = 0;
 		const std::string ToString();
 
-		// Additional functions
-		std::string GetManufacturer();
-		std::string GetModel();
-		int GetBuildYear();
-		std::string GetLicencePlate();
-		virtual bool GetNeedsCleaning() = 0;
-		int GetKilometers();
-		bool GetIsAvailable();
+		// Get functions
+		const std::string GetManufacturer();
+		const std::string GetModel();
+		const int GetBuildYear();
+		const std::string GetLicencePlate();
+		const virtual bool GetNeedsCleaning() = 0;
+		const int GetKilometers();
+		const bool GetIsAvailable();
 
 	private:
 		double PricePerKm;

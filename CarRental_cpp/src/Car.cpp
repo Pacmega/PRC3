@@ -51,3 +51,38 @@ const std::string Car::ToString()
         " - " + Model +
         ", " + LicencePlate;
 }
+
+const std::string GetManufacturer()
+{
+	return Manufacturer;
+}
+
+const std::string GetModel()
+{
+	return Model;
+}
+
+const int GetBuildYear()
+{
+	return BuildYear;
+}
+
+const std::string GetLicencePlate()
+{
+	return LicencePlate;
+}
+
+const bool GetNeedsCleaning() override
+{
+	return NeedsCleaning;
+}
+
+const int GetKilometers()
+{
+	return Kilometers;
+}
+
+const bool GetIsAvailable()
+{
+	return IsAvailable;
+}
