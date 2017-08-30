@@ -4,7 +4,7 @@
 class Sedan
 {
 	public:
-		Sedan(string manufacturar, string model, int buildYear, string licencePlate, bool hasTowbar);
+		Sedan(string manufacturer, string model, int buildYear, string licencePlate, bool hasTowbar);
 		~Sedan();
 		void Clean();
 
