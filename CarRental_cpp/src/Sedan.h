@@ -10,6 +10,8 @@ class Sedan : public Car
 
 		bool HasTowbar;
 		bool NeedsCleaning;
+
+	private:
 	
 };
 #endif

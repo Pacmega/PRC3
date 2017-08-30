@@ -3,7 +3,7 @@
 
 #include "Car.h"
 
-class Limousine : public Car
+class Limousine : public Car	
 {
 	public:
 		// Functions
@@ -15,5 +15,8 @@ class Limousine : public Car
 		// Variables
 		bool HasMinibar;
 		bool NeedsCleaning;	
+
+	private:
+		double pricePerKm;
 };
 #endif
