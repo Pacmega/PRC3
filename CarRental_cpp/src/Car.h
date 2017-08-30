@@ -35,7 +35,7 @@ class Car
 		bool GetIsAvailable();
 
 	private:
-		double pricePerKm;
+		double PricePerKm;
 };
 
 #endif

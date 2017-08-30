@@ -5,7 +5,7 @@ using namespace std;
 
 #include "Car.h"
 
-Car(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, double pricePerKm)
+Car::Car(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, double pricePerKm)
 {
 	Manufacturer = manufacturer;
 	Model = model;
@@ -13,7 +13,7 @@ Car(std::string manufacturer, std::string model, int buildYear, std::string lice
     LicencePlate = licencePlate;
     Kilometers = 0;
     IsAvailable = true;
-    this.pricePerKm = pricePerKm;
+    PricePerKm = pricePerKm;
     NeedsCleaning = false; // New cars don't need cleaning.
 }
 
@@ -32,14 +32,14 @@ double Car::Return(int kilometers)
 {
     if (IsAvailable)
     {
-        throw std::out_of_range("car was not rented");
+        throw std::out_of_range("Car is currently not available.");
     }
     if (kilometers < Kilometers)
     {
-        throw std::invalid_argument("car is returned with less kilometers than it had");
+        throw std::invalid_argument("Car is returned with less kilometers than it had.");
     }
 
-    double cost = pricePerKm * (kilometers - Kilometers);
+    double cost = PricePerKm * (kilometers - Kilometers);
     Kilometers = kilometers;
     IsAvailable = true;
     return cost;

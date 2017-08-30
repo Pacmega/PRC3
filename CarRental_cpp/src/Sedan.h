@@ -12,6 +12,6 @@ class Sedan : public Car
 		bool NeedsCleaning;
 
 	private:
-	
+		double pricePerKm;
 };
 #endif
