@@ -12,7 +12,7 @@ Sedan::Sedan(string manufacturer, string model, int buildYear, string licencePla
 	lastCleanedAtKm = 0;
 }
 
-Sedan::Clean()
+void Sedan::Clean()
 {
 	lastCleanedAtKm = kilometers;
 }

@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include <cstddef>
-#include <string>
+#include <string> 	
 using namespace std;
 
 #include "Car.h"
@@ -9,10 +9,6 @@ using namespace std;
 
 Car::Car(const string manufacturer, const string model, const int buildYear, const string licencePlate, const double pricePerKm)
 {
-	if ((*manufacturer == NULL) || (*model == NULL) || (*licencePlate == NULL))
-	{
-		throw std::invalid_argument("A constructorvalue is NULL")
-	}
 	Manufacturer = manufacturer;
 	Model = model;
     BuildYear = buildYear;
@@ -22,7 +18,7 @@ Car::Car(const string manufacturer, const string model, const int buildYear, con
     this.pricePerKm = pricePerKm;
 }
 
-Car::Rent()
+int Car::Rent()
 {
     if (!IsAvailable)
     {
@@ -33,7 +29,7 @@ Car::Rent()
     return true;
 }
 
-Car::Return(int kilometers)
+double Car::Return(int kilometers)
 {
     if (IsAvailable)
     {
@@ -50,12 +46,12 @@ Car::Return(int kilometers)
     return cost;
 }
 
-Car::Clean()
+void Car::Clean()
 {
 
 }
 
-Car::ToString()
+string Car::ToString()
 {
 	return Manufacturer +
         " - " + Model +

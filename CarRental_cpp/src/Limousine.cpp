@@ -9,14 +9,14 @@ Limousine::Limousine(std::string manufacturer, std::string model, int buildYear,
 	needsCleaning = 1;
 }
 
-Limousine::Return(int kilometers)
+double Limousine::Return(int kilometers)
 {
 	double price = Car::Return(kilometers);
 	needsCleaning = true;
 	return price;
 }
 
-Limousine::Clean()
+void Limousine::Clean()
 {
 	needsCleaning = False;
 }
