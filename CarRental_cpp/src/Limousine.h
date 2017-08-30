@@ -3,7 +3,7 @@
 
 #include "Car.h"
 
-class Limousine// : public Car
+class Limousine : public Car
 {
 	public:
 		// Functions
