@@ -1,7 +1,6 @@
 #include <stdexcept>
 #include <cstddef>
 #include <string>
-using namespace std;
 
 #include "Car.h"
 #include "Sedan.h"

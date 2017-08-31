@@ -1,7 +1,6 @@
 #include <stdexcept>
 #include <cstddef>
 #include <string> 	
-using namespace std;
 
 #include "Car.h"
 
@@ -71,11 +70,6 @@ const std::string Car::GetLicencePlate()
 {
 	return LicencePlate;
 }
-
-// const bool Car::GetNeedsCleaning()
-// {
-// 	return NeedsCleaning;
-// }
 
 const int Car::GetKilometers()
 {
