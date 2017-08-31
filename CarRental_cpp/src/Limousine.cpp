@@ -21,3 +21,8 @@ void Limousine::Clean()
 {
 	NeedsCleaning = false;
 }
+
+const bool Limousine::GetNeedsCleaning()
+{
+	return NeedsCleaning;
+}

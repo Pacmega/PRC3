@@ -7,6 +7,7 @@ class Sedan : public Car
 		Sedan(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasTowbar);
 		~Sedan();
 		void Clean();
+		const bool GetNeedsCleaning();
 
 		bool HasTowbar;
 		bool NeedsCleaning;

@@ -17,3 +17,8 @@ void Sedan::Clean()
 {
 	NeedsCleaning = false;
 }
+
+const bool Sedan::GetNeedsCleaning()
+{
+	return NeedsCleaning;
+}

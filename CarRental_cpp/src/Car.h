@@ -11,10 +11,10 @@ class Car
 		~Car();
 
 		// Variables
-		const std::string Manufacturer;
-		const std::string Model;
-		const int BuildYear;
-		const std::string LicencePlate;
+		std::string Manufacturer;
+		std::string Model;
+		int BuildYear;
+		std::string LicencePlate;
 		bool NeedsCleaning;
 		int Kilometers;
 		bool IsAvailable;
