@@ -37,29 +37,35 @@ static void printCars(const RentalAdministration* administration)
 
     for (int i = 0; i < CarCount; i++)
     {
-        cout << ("Car " + i + ": " + administration->Cars[i].ToString());
+        cout << ("Car %d: " + administration->Cars[i]->ToString() + "\n", i);
     }
+
 }
 
 static size_t selectCar(const RentalAdministration* administration)
 {
+
     return 0;
 }
 
 static void rentCar(RentalAdministration* administration, size_t carNumber)
 {
+
 }
 
 static void returnCar(RentalAdministration* administration, size_t carNumber)
 {
+
 }
 
 static void printIfCarNeedsCleaning(const RentalAdministration* administration, size_t carNumber)
 {
+
 }
 
 static void cleanCar(RentalAdministration* administration, size_t carNumber)
 {
+
 }
 
 
