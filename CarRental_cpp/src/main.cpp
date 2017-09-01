@@ -37,19 +37,21 @@ static void printCars(const RentalAdministration* administration)
 
     for (int i = 0; i < CarCount; i++)
     {
-        cout << ("Car %d: " + administration->Cars[i]->ToString() + "\n", i);
+        cout << "Car " << i << ": " << administration->Cars[i]->ToString() << "\n";
     }
 
 }
 
 static size_t selectCar(const RentalAdministration* administration)
 {
-    char choice = '\0';
+    int choice = '0';
+    printCars(administration);
+    cout << "Select car: ";
     cin >> choice;
     cin.ignore();
 
     // if the chosen number is higher than the size of the vector, the choice will be the last item in the vector
-    if (choice > administration->Cars.size())
+    if (choice >= (administration->Cars.size()))
     {
         choice = administration->Cars.size() -1; 
     }
@@ -58,6 +60,8 @@ static size_t selectCar(const RentalAdministration* administration)
     {
         choice = 0;
     }
+
+    cout << "Car " << choice << ": " << administration->Cars[choice]->ToString() << "\n";
     return choice;
 }
 
@@ -65,12 +69,21 @@ static void rentCar(RentalAdministration* administration, size_t carNumber)
 {
     string plate = administration->Cars[carNumber]->GetLicencePlate();
 
-    administration->RentCar(plate);
+    if (administration->RentCar(plate))
+    {
+        cout << "Car rented.";
+    }
+    else
+    {
+        cout << "Unable to rent car. Is it already rented?";
+    }
 }
 
 static void returnCar(RentalAdministration* administration, size_t carNumber) // <-- missing driven kilometers?
 {
     string plate = administration->Cars[carNumber]->GetLicencePlate();
+
+    cout << "This function is only available with the premium Rental service.";
     // administration->ReturnCar(plate);  
 }
 
@@ -90,6 +103,11 @@ static void cleanCar(RentalAdministration* administration, size_t carNumber)
     if (administration->Cars[carNumber]->GetNeedsCleaning())
     {
         administration->Cars[carNumber]->Clean();
+        cout << "Car cleaned!";
+    }
+    else
+    {
+        cout << "Car is already clean.";
     }
 }
 

@@ -46,9 +46,21 @@ double Car::Return(int kilometers)
 
 const std::string Car::ToString()
 {
-	return Manufacturer +
+    if (IsAvailable == true)
+    {
+        return Manufacturer +
         " - " + Model +
-        ", " + LicencePlate;
+        ", " + LicencePlate +
+        " - Currently available.";
+    }
+    else
+    {
+        return Manufacturer +
+        " - " + Model +
+        ", " + LicencePlate +
+        " - Currently not available.";
+    }
+	
 }
 
 const std::string Car::GetManufacturer()
