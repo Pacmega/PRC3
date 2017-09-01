@@ -63,24 +63,34 @@ static size_t selectCar(const RentalAdministration* administration)
 
 static void rentCar(RentalAdministration* administration, size_t carNumber)
 {
-    string plate = administration->Cars[carNumber]->licencePlate;
+    string plate = administration->Cars[carNumber]->GetLicencePlate();
+
     administration->RentCar(plate);
 }
 
-static void returnCar(RentalAdministration* administration, size_t carNumber)
+static void returnCar(RentalAdministration* administration, size_t carNumber) // <-- missing driven kilometers?
 {
-    string plate = administration->Cars[carNumber]->licencePlate;
-    administration->ReturnCar(plate);
+    string plate = administration->Cars[carNumber]->GetLicencePlate();
+    // administration->ReturnCar(plate);  
 }
 
 static void printIfCarNeedsCleaning(const RentalAdministration* administration, size_t carNumber)
 {
-    
+    bool needsCleaning = administration->Cars[carNumber]->GetNeedsCleaning();
+    if (needsCleaning)
+    {
+        cout << ("This car is dirty as shit! \n");
+        return;
+    }
+    cout << ("This car is fine! \n");
 }
 
 static void cleanCar(RentalAdministration* administration, size_t carNumber)
 {
-
+    if (administration->Cars[carNumber]->GetNeedsCleaning())
+    {
+        administration->Cars[carNumber]->Clean();
+    }
 }
 
 
