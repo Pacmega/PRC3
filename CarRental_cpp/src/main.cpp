@@ -92,10 +92,10 @@ static void printIfCarNeedsCleaning(const RentalAdministration* administration, 
     bool needsCleaning = administration->Cars[carNumber]->GetNeedsCleaning();
     if (needsCleaning)
     {
-        cout << ("This car is dirty as shit! \n");
+        cout << ("This car is dirty as shit!");
         return;
     }
-    cout << ("This car is fine! \n");
+    cout << ("This car is fine!");
 }
 
 static void cleanCar(RentalAdministration* administration, size_t carNumber)
