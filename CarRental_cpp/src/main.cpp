@@ -90,6 +90,7 @@ static void cleanCar(RentalAdministration* administration, size_t carNumber)
     if (administration->Cars[carNumber]->GetNeedsCleaning())
     {
         administration->Cars[carNumber]->Clean();
+        cout << ("Car has been cleaned");
     }
 }
 
