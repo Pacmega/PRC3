@@ -33,6 +33,12 @@ void addTestDataToAdministration(RentalAdministration* administration)
 
 static void printCars(const RentalAdministration* administration)
 {
+    int CarCount = administration->Cars.size();
+
+    for (int i = 0; i < CarCount; i++)
+    {
+        cout << ("Car " + i + ": " + administration->Cars[i].ToString());
+    }
 }
 
 static size_t selectCar(const RentalAdministration* administration)
