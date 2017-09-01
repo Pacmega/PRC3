@@ -44,23 +44,38 @@ static void printCars(const RentalAdministration* administration)
 
 static size_t selectCar(const RentalAdministration* administration)
 {
+    char choice = '\0';
+    cin >> choice;
+    cin.ignore();
 
-    return 0;
+    // if the chosen number is higher than the size of the vector, the choice will be the last item in the vector
+    if (choice > administration->Cars.size())
+    {
+        choice = administration->Cars.size() -1; 
+    }
+    // if the chosen number is lower than 0, the choice will be 0
+    if (choice < 0)
+    {
+        choice = 0;
+    }
+    return choice;
 }
 
 static void rentCar(RentalAdministration* administration, size_t carNumber)
 {
-
+    string plate = administration->Cars[carNumber]->licencePlate;
+    administration->RentCar(plate);
 }
 
 static void returnCar(RentalAdministration* administration, size_t carNumber)
 {
-
+    string plate = administration->Cars[carNumber]->licencePlate;
+    administration->ReturnCar(plate);
 }
 
 static void printIfCarNeedsCleaning(const RentalAdministration* administration, size_t carNumber)
 {
-
+    
 }
 
 static void cleanCar(RentalAdministration* administration, size_t carNumber)
