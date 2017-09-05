@@ -91,10 +91,6 @@ static void returnCar(RentalAdministration* administration, size_t carNumber, in
         {
             cout << "An error occured while returning the car. Was it not rented out?";
         }
-        else if (cost == 0)
-        {
-        	cout << "The car moved so little, there is no cost involved.";
-        }
         else
         {
         	cout << "Car returned. Cost: $" << cost << endl;
