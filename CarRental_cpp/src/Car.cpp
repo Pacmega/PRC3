@@ -44,9 +44,17 @@ double Car::Return(int kilometers)
     }
 
     double cost = PricePerKm * (kilometers - Kilometers);
-    Kilometers = kilometers;
-    IsAvailable = true;
-    return cost;
+
+    if (cost < 0)
+    {
+        return -1;
+    }
+    else
+    {
+        Kilometers = kilometers;
+        IsAvailable = true;
+        return cost;
+    }
 }
 
 const std::string Car::ToString()

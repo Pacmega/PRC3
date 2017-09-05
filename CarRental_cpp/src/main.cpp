@@ -83,9 +83,6 @@ static void returnCar(RentalAdministration* administration, size_t carNumber, in
 {
     string plate = administration->Cars[carNumber]->GetLicencePlate();
 
-    cout << administration->Cars[carNumber]->LicencePlate << " ?= " << plate << endl;
-	cout << administration->Cars[carNumber]->IsAvailable << " ?= true" << endl;
-
     try
     {
         double cost = administration->ReturnCar(plate, kilometers);
@@ -93,6 +90,14 @@ static void returnCar(RentalAdministration* administration, size_t carNumber, in
         if (cost == -1)
         {
             cout << "An error occured while returning the car. Was it not rented out?";
+        }
+        else if (cost == 0)
+        {
+        	cout << "The car apparently hasn't moved since it was rented?";
+        }
+        else
+        {
+        	cout << "Car returned. Cost: $" << cost << endl;
         }
     }
     catch (const std::out_of_range& e)
