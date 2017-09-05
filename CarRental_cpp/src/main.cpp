@@ -93,7 +93,7 @@ static void returnCar(RentalAdministration* administration, size_t carNumber, in
         }
         else if (cost == 0)
         {
-        	cout << "The car apparently hasn't moved since it was rented?";
+        	cout << "The car moved so little, there is no cost involved.";
         }
         else
         {
