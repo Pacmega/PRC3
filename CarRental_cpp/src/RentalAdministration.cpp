@@ -1,6 +1,5 @@
 #include <string>
 #include <vector>
-#include <iostream>
 
 #include "Car.h"
 #include "RentalAdministration.h"
