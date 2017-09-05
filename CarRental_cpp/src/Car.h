@@ -15,7 +15,7 @@ class Car
 		std::string Model;
 		int BuildYear;
 		std::string LicencePlate;
-		bool NeedsCleaning;
+		virtual bool NeedsCleaning;
 		int Kilometers;
 		bool IsAvailable;
 

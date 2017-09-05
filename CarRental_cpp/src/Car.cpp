@@ -37,6 +37,10 @@ double Car::Return(int kilometers)
     {
         throw std::invalid_argument("Car is returned with less kilometers than it had.");
     }
+    if (Kilometers+1000 < kilometers)
+    {
+        NeedsCleaning = true;
+    }
 
     double cost = PricePerKm * (kilometers - Kilometers);
     Kilometers = kilometers;
