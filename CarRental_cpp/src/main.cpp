@@ -83,20 +83,23 @@ static void returnCar(RentalAdministration* administration, size_t carNumber, in
 {
     string plate = administration->Cars[carNumber]->GetLicencePlate();
 
+    cout << administration->Cars[carNumber]->LicencePlate << " ?= " << plate << endl;
+	cout << administration->Cars[carNumber]->IsAvailable << " ?= true" << endl;
+
     try
     {
-        double cost = administration->ReturnCar(plate);
+        double cost = administration->ReturnCar(plate, kilometers);
 
         if (cost == -1)
         {
             cout << "An error occured while returning the car. Was it not rented out?";
         }
     }
-    catch (std::out_of_range e)
+    catch (const std::out_of_range& e)
     {
         cout << e.what();
     }
-    catch (std::invalid_argument)
+    catch (const std::invalid_argument& e)
     {
         cout << e.what();
     }
@@ -147,6 +150,7 @@ int main( void )
 {
     bool quit = false;
     size_t carNumber = 0;
+    int kilometers = 0;
 
     RentalAdministration administration;
     addTestDataToAdministration(&administration);
@@ -154,9 +158,11 @@ int main( void )
     while (!quit)
     {
         char choice = '\0';
+        kilometers = 0;
         showMenu();
         cin >> choice;
         cin.ignore();
+        cout << "\n";
 
         switch (choice)
         {
@@ -170,7 +176,10 @@ int main( void )
             rentCar(&administration, carNumber);
             break;
         case '4' :
-            returnCar(&administration, carNumber);
+        	cout << "What is the current amount of kilometers on the meter?" << endl;
+        	cin >> kilometers;
+        	cin.ignore();
+            returnCar(&administration, carNumber, kilometers);
             break;
         case '5' :
             printIfCarNeedsCleaning(&administration, carNumber);
