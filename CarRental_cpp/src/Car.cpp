@@ -13,7 +13,7 @@ Car::Car(std::string manufacturer, std::string model, int buildYear, std::string
     Kilometers = 0;
     IsAvailable = true;
     PricePerKm = pricePerKm;
-    NeedsCleaning = false; // New cars don't need cleaning.
+    NeedsCleaning = false;
 }
 
 bool Car::Rent()
@@ -37,7 +37,8 @@ double Car::Return(int kilometers)
     {
         throw std::invalid_argument("Car is returned with less kilometers than it had.");
     }
-    if (Kilometers+1000 < kilometers)
+
+    if (Kilometers + 1000 < kilometers)
     {
         NeedsCleaning = true;
     }

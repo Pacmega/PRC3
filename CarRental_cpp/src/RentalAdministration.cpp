@@ -39,8 +39,8 @@ double RentalAdministration::ReturnCar(std::string licencePlate, int kilometers)
 	{
 		if (Cars[i]->LicencePlate == licencePlate && Cars[i]->IsAvailable == true)
 		{
-			Cars[i]->IsAvailable = false;
-			return true;
+			int result = Cars[i]->Return(kilometers);
+			return result;
 		}
 	}
 	

@@ -79,12 +79,28 @@ static void rentCar(RentalAdministration* administration, size_t carNumber)
     }
 }
 
-static void returnCar(RentalAdministration* administration, size_t carNumber) // <-- missing driven kilometers?
+static void returnCar(RentalAdministration* administration, size_t carNumber, int kilometers)
 {
     string plate = administration->Cars[carNumber]->GetLicencePlate();
 
-    cout << "This function is only available with the premium Rental service.";
-    // administration->ReturnCar(plate);  
+    try
+    {
+        double cost = administration->ReturnCar(plate);
+
+        if (cost == -1)
+        {
+            cout << "An error occured while returning the car. Was it not rented out?";
+        }
+    }
+    catch (std::out_of_range e)
+    {
+        cout << e.what();
+    }
+    catch (std::invalid_argument)
+    {
+        cout << e.what();
+    }
+    
 }
 
 static void printIfCarNeedsCleaning(const RentalAdministration* administration, size_t carNumber)
