@@ -9,11 +9,6 @@ RentalAdministration::RentalAdministration()
 
 }
 
-RentalAdministration::~RentalAdministration()
-{
-	delete &Cars;
-}
-
 void RentalAdministration::Add(Car *car)
 {
 	if (car != NULL)

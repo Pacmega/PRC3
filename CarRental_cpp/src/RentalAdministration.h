@@ -10,7 +10,6 @@ class RentalAdministration
 	public:
 		std::vector<Car*> Cars;
 		RentalAdministration();
-		~RentalAdministration();
 		void Add(Car *car);
 		bool RentCar(std::string licencePlate);
 		double ReturnCar(std::string licencePlate, int kilometers);

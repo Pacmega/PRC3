@@ -39,7 +39,6 @@ static void printCars(const RentalAdministration* administration)
     {
         cout << "Car " << i << ": " << administration->Cars[i]->ToString() << "\n";
     }
-
 }
 
 static size_t selectCar(const RentalAdministration* administration)
@@ -199,7 +198,13 @@ int main( void )
         }
     }
     
-    delete &administration;
+    //delete &administration;
+    int CarCount = administration.Cars.size();
+
+    for (int i = 0; i < CarCount; i++)
+    {
+        delete administration.Cars[i];
+    }
 
     return 0;
 }

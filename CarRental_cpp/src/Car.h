@@ -8,7 +8,6 @@ class Car
 	public:
 		// Con- and destructor
 		Car(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, double pricePerKm);
-		~Car();
 
 		// Functions
 		bool Rent();
