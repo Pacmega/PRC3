@@ -1,7 +1,7 @@
 #include "Car.h"
 #include "Limousine.h"
 
-Limousine::Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasMinibar)
+Limousine::Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasMinibar, double pricePerKm)
  : Car( manufacturer, model, buildYear, licencePlate, pricePerKm)
 {
 	HasMinibar = hasMinibar;
