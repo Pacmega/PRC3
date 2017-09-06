@@ -11,7 +11,7 @@ RentalAdministration::RentalAdministration()
 
 RentalAdministration::~RentalAdministration()
 {
-
+	Cars.erase(Cars.begin(), Cars.end());
 }
 
 void RentalAdministration::Add(Car *car)

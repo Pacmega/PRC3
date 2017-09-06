@@ -10,15 +10,6 @@ class Car
 		Car(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, double pricePerKm);
 		~Car();
 
-		// Variables
-		std::string Manufacturer;
-		std::string Model;
-		int BuildYear;
-		std::string LicencePlate;
-		bool NeedsCleaning;
-		int Kilometers;
-		bool IsAvailable;
-
 		// Functions
 		bool Rent();
 		double Return(int kilometers);
@@ -35,7 +26,14 @@ class Car
 		const bool GetIsAvailable();
 
 	private:
-		double PricePerKm;
+		// Variables
+		std::string Manufacturer;
+		std::string Model;
+		int BuildYear;
+		std::string LicencePlate;
+		bool NeedsCleaning;
+		int Kilometers;
+		bool IsAvailable;double PricePerKm;
 };
 
 #endif
