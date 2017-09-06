@@ -12,9 +12,10 @@ Sedan::Sedan(std::string manufacturer, std::string model, int buildYear, std::st
 	NeedsCleaning = true;
 }
 
-void Sedan::Clean()
+void Sedan::Clean(int kilometers)
 {
 	NeedsCleaning = false;
+	LastCleanedAtKm = kilometers;
 }
 
 const bool Sedan::GetNeedsCleaning()

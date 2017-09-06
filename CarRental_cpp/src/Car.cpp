@@ -11,6 +11,7 @@ Car::Car(std::string manufacturer, std::string model, int buildYear, std::string
     BuildYear = buildYear;
     LicencePlate = licencePlate;
     Kilometers = 0;
+    LastCleanedAtKm = 0;
     IsAvailable = true;
     PricePerKm = pricePerKm;
     NeedsCleaning = false;
@@ -38,7 +39,7 @@ double Car::Return(int kilometers)
         throw std::invalid_argument("Car is returned with less kilometers than it had.");
     }
 
-    if (Kilometers + 1000 < kilometers)
+    if (LastCleanedAtKm + 1000 <= kilometers)
     {
         NeedsCleaning = true;
     }

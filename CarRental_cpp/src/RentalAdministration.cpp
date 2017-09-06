@@ -11,12 +11,15 @@ RentalAdministration::RentalAdministration()
 
 RentalAdministration::~RentalAdministration()
 {
-	Cars.erase(Cars.begin(), Cars.end());
+	delete &Cars;
 }
 
 void RentalAdministration::Add(Car *car)
 {
-	Cars.push_back(car);
+	if (car != NULL)
+	{
+		Cars.push_back(car);
+	}
 }
 
 bool RentalAdministration::RentCar(std::string licencePlate)

@@ -33,7 +33,9 @@ class Car
 		std::string LicencePlate;
 		bool NeedsCleaning;
 		int Kilometers;
-		bool IsAvailable;double PricePerKm;
+		bool IsAvailable;
+		double PricePerKm;
+		int LastCleanedAtKm;
 };
 
 #endif

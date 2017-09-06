@@ -31,14 +31,6 @@ void addTestDataToAdministration(RentalAdministration* administration)
     }
 }
 
-void removeTestDataFromAdministration(RentalAdministration* administration)
-{
-    for (int i = 0; i < 4; i++)
-    {
-
-    }
-}
-
 static void printCars(const RentalAdministration* administration)
 {
     int CarCount = administration->Cars.size();
@@ -130,7 +122,8 @@ static void cleanCar(RentalAdministration* administration, size_t carNumber)
 {
     if (administration->Cars[carNumber]->GetNeedsCleaning())
     {
-        administration->Cars[carNumber]->Clean();
+        int cleanedAtKilometers = administration->Cars[carNumber]->GetKilometers();
+        administration->Cars[carNumber]->Clean(cleanedAtKilometers);
         cout << "Car cleaned!";
     }
     else
@@ -205,7 +198,7 @@ int main( void )
             break;
         }
     }
-
+    
     delete &administration;
 
     return 0;

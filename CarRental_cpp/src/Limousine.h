@@ -10,13 +10,12 @@ class Limousine : public Car
 		Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasMinibar);
 		~Limousine();
 		double Return(int kilometers);
-		void Clean();
+		void Clean(int kilometers);
 		const bool GetNeedsCleaning();
 		const bool GetHasMinibar();
 
 	private:
 		// Variables
-		double pricePerKm;
 		bool NeedsCleaning;	
 		bool HasMinibar;
 };
