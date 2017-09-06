@@ -14,5 +14,6 @@ class Sedan : public Car
 		// Variables
 		bool NeedsCleaning;
 		bool HasTowbar;
+		int LastCleanedAtKm;
 };
 #endif

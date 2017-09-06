@@ -21,12 +21,12 @@ void addTestDataToAdministration(RentalAdministration* administration)
 
     for (int i = 0; i < 4; i++)
     {
-        Car* sedan = new Sedan("BMW", "535d", 2012 + i, licencePlates[i], false);
+        Car* sedan = new Sedan("BMW", "535d", 2012 + i, licencePlates[i], false, 6.9);
         administration->Add(sedan);
     }
     for (int i = 4; i < 6; i++)
     {
-        Car* limousine = new Limousine("Rolls Roys", "Phantom Extended Wheelbase", 2015, licencePlates[i], true);
+        Car* limousine = new Limousine("Rolls Roys", "Phantom Extended Wheelbase", 2015, licencePlates[i], true, 5.2);
         administration->Add(limousine);
     }
 }

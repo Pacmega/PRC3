@@ -18,5 +18,6 @@ class Limousine : public Car
 		// Variables
 		bool NeedsCleaning;	
 		bool HasMinibar;
+		int LastCleanedAtKm;
 };
 #endif

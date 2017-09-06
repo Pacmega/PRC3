@@ -13,7 +13,7 @@ class Car
 		// Functions
 		bool Rent();
 		double Return(int kilometers);
-		virtual void Clean() = 0;
+		virtual void Clean(int kilometers) = 0;
 		const std::string ToString();
 
 		// Get functions
@@ -35,7 +35,6 @@ class Car
 		int Kilometers;
 		bool IsAvailable;
 		double PricePerKm;
-		int LastCleanedAtKm;
 };
 
 #endif

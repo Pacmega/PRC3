@@ -6,6 +6,7 @@ Limousine::Limousine(std::string manufacturer, std::string model, int buildYear,
 {
 	HasMinibar = hasMinibar;
 	NeedsCleaning = 1;
+	LastCleanedAtKm = 0;
 }
 
 double Limousine::Return(int kilometers)

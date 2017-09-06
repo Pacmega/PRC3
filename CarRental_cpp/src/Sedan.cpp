@@ -10,6 +10,7 @@ Sedan::Sedan(std::string manufacturer, std::string model, int buildYear, std::st
 {
 	HasTowbar = hasTowbar;
 	NeedsCleaning = true;
+	LastCleanedAtKm = 0;
 }
 
 void Sedan::Clean(int kilometers)
