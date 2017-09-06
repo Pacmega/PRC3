@@ -12,12 +12,12 @@ class Limousine : public Car
 		double Return(int kilometers);
 		void Clean();
 		const bool GetNeedsCleaning();
-
-		// Variables
-		bool HasMinibar;
-		bool NeedsCleaning;	
+		const bool GetHasMinibar();
 
 	private:
+		// Variables
 		double pricePerKm;
+		bool NeedsCleaning;	
+		bool HasMinibar;
 };
 #endif

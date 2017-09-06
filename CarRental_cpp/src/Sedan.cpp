@@ -21,3 +21,8 @@ const bool Sedan::GetNeedsCleaning()
 {
 	return NeedsCleaning;
 }
+
+const bool Sedan::GetHasTowbar()
+{
+	return HasTowbar;
+}

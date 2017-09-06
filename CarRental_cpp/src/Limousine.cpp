@@ -24,3 +24,8 @@ const bool Limousine::GetNeedsCleaning()
 {
 	return NeedsCleaning;
 }
+
+const bool Limousine::GetHasMinibar()
+{
+	return HasMinibar;
+}

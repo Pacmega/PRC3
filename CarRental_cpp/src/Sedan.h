@@ -8,11 +8,12 @@ class Sedan : public Car
 		~Sedan();
 		void Clean();
 		const bool GetNeedsCleaning();
-
-		bool HasTowbar;
-		bool NeedsCleaning;
+		const bool GetHasTowbar();
 
 	private:
+		// Variables
 		double pricePerKm;
+		bool NeedsCleaning;
+		bool HasTowbar;
 };
 #endif
