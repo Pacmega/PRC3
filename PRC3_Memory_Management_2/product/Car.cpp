@@ -4,7 +4,7 @@ Car::Car(const std::string& model, const std::string& material, int diameter, in
 {
 	if (diameter > 0 && nrWheels > 2)
 	{
-
+		
 	}
 }
 
