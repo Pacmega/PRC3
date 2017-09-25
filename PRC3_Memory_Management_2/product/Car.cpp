@@ -12,6 +12,10 @@ Car::Car(const std::string& model, const std::string& material, int diameter, in
 			addWheel(diameter, material);
 		}
 	}
+	else
+	{
+		throw std::out_of_range("One or more values outside of valid range");
+	}
 }
 
 Car::Car(const Car& otherCar)
@@ -107,7 +111,7 @@ const Wheel* Car::getWheel(int index) const
 	}
 	else
 	{
-		return NULL;
+		throw std::out_of_range("There is no wheel with that index");
 	}
 }
 
@@ -130,5 +134,9 @@ void Car::addWheel(int diameter, const std::string& material)
 	{
 		Wheel newWheel = Wheel(diameter, material);
 		wheels.push_back(&newWheel);
+	}
+	else
+	{
+		throw std::invalid_argument("Impossible diameter");
 	}
 }

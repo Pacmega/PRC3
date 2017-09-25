@@ -1,4 +1,5 @@
 #include "Wheel.h"
+#include <stdexcept>
 
 Wheel::Wheel(int diameter, const std::string& material)
 {
@@ -6,6 +7,10 @@ Wheel::Wheel(int diameter, const std::string& material)
 	{
 		this->diameter = diameter;
 		this->material = material;
+	}
+	else
+	{
+		throw std::invalid_argument("Impossible diameter");
 	}
 }
 

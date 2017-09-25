@@ -1,15 +1,29 @@
 #include "Truck.h"
+#include <stdexcept>
 
 Truck::Truck(const std::string& model, const std::string& material, int diameter, int nrWheels, int power)
 	: Car(model, material, diameter, nrWheels)
 {
-	// TODO
+	if(power > 0) // Everything else is checked by the Car constructor.
+	{
+		*power = power;
+	}
+	else
+	{
+		throw std::invalid_argument("Impossible power");
+	}
 }
 
 Truck::Truck(const Truck& myTruck)
 	: Car(myTruck)
 {
-	// TODO
+	*power = *(myTruck.power);
+}
+
+Truck::~Truck()
+{
+	delete power;
+	power = NULL;
 }
 
 Truck& Truck::operator=(const Truck& myTruck)
@@ -30,12 +44,6 @@ Truck& Truck::operator=(const Truck& myTruck)
 	}
 
 	return *this;
-}
-
-Truck::~Truck()
-{
-	delete power;
-	power = NULL;
 }
 
 int Truck::getPower() const
