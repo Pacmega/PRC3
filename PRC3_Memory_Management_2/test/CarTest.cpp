@@ -7,6 +7,7 @@ TEST(TestingTest, TestedTest) // TestingTest is a test_case_name and TestedTest 
 	EXPECT_TRUE( add(2,2) == 4 );
 }
 
+/*
 TEST(Construct, TestRealisticInput)
 {
 	Car TestCar = new Car("Henk 500", "Hout", 2, 4);
@@ -27,8 +28,7 @@ TEST(Construct, TestWheelsLessThanTwo)
 
 	EXPECT_THROW(nrWheels, out_of_range);
 }
-
-
+*/
 
 int main(int argc, char const *argv[])
 {
