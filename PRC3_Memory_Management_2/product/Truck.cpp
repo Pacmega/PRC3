@@ -7,7 +7,7 @@ Truck::Truck(const std::string& model, const std::string& material, int diameter
 }
 
 Truck::Truck(const Truck& myTruck)
-	: Car(myTruck.model, myTruck.material, myTruck.diameter, myTruck.nrWheels)
+	: Car(myTruck)
 {
 	// TODO
 }
@@ -16,9 +16,20 @@ Truck& Truck::operator=(const Truck& myTruck)
 {
 	if (&myTruck == this) return *this; // Avoid changing yourself using yourself, that breaks everything
 	
-	model = myTruck.model;
+	//model = myTruck.model;
 
-	// TODO: remove wheels & add new wheels
+	for (int i = 0; i < getNrWheels(); i++)
+	{
+		removeWheel(i);
+	}
+
+	for (int i = 0; i < (int)myTruck.getNrWheels(); i++)
+	{
+		const Wheel* newWheel = (myTruck.getWheel(i));
+		addWheel(newWheel->getDiameter(), newWheel->getMaterial());
+	}
+
+	return *this;
 }
 
 Truck::~Truck()
@@ -27,7 +38,7 @@ Truck::~Truck()
 	power = NULL;
 }
 
-int Truck::getPower()
+int Truck::getPower() const
 {
 	return *power;
 }

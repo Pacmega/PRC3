@@ -19,12 +19,12 @@ Car::Car(const Car& otherCar)
 	licencePlate = otherCar.licencePlate;
 	model = otherCar.model;
 
-	deleteAllWheels();
+	removeAllWheels();
 
-	for (int i = 0; i < (int)otherCar.wheels.size(); i++)
+	for (int i = 0; i < (int)otherCar.getNrWheels(); i++)
 	{
-		Wheel *newWheel = new Wheel(*(otherCar.wheels[i]));
-		wheels.push_back(newWheel);
+		const Wheel* newWheel = (otherCar.getWheel(i));
+		addWheel(newWheel->getDiameter(), newWheel->getMaterial());
 	}
 }
 
@@ -34,17 +34,12 @@ Car& Car::operator=(const Car &otherCar)
 
 	model = otherCar.model;
 
-	for (int i = 0; i < (int)wheels.size(); i++)
-	{
-		delete wheels[i];
-	}
+	removeAllWheels();
 
-	wheels.clear();
-
-	for (int i = 0; i < (int)otherCar.wheels.size(); i++)
+	for (int i = 0; i < (int)otherCar.getNrWheels(); i++)
 	{
-		Wheel *newWheel = new Wheel(*(otherCar.wheels[i]));
-		wheels.push_back(newWheel);
+		const Wheel* newWheel = (otherCar.getWheel(i));
+		addWheel(newWheel->getDiameter(), newWheel->getMaterial());
 	}
 
 	return *this;
@@ -52,18 +47,12 @@ Car& Car::operator=(const Car &otherCar)
 
 Car::~Car()
 {
-	deleteAllWheels();
+	removeAllWheels();
 }
 
 // Private functions
 
-void Car::deleteWheel(int position)
-{
-	delete wheels[position]; // Delete the wheel itself,
-	wheels[position] = NULL; // and set the pointer to it to NULL to avoid messing with released memory.
-}
-
-bool Car::indexInRange(int index)
+bool Car::indexInRange(int index) const
 {
 	int actualWheels = getNrWheels();
 
@@ -78,17 +67,19 @@ bool Car::indexInRange(int index)
 	}
 }
 
-void Car::deleteAllWheels()
+void Car::removeAllWheels()
 {
 	for (int i = 0; i < getNrWheels(); i++)
 	{
-		deleteWheel(i);
+		delete wheels[i]; // Delete the wheel itself,
+		wheels[i] = NULL; // and set the pointer to it to NULL to avoid messing with released memory.
 	}
 }
 
+
 // Public functions
 
-const std::string& Car::getModel()
+const std::string& Car::getModel() const
 {
 	return model;
 }
@@ -98,17 +89,17 @@ void Car::setLicencePlate(const std::string& licence)
 	licencePlate = licence;
 }
 
-const std::string& Car::getLicencePlate()
+const std::string& Car::getLicencePlate() const
 {
 	return licencePlate;
 }
 
-int Car::getNrWheels()
+int Car::getNrWheels() const
 {
 	return wheels.size();
 }
 
-const Wheel* Car::getWheel(int index)
+const Wheel* Car::getWheel(int index) const
 {
 	if (0 <= index && index < getNrWheels())
 	{
@@ -124,7 +115,8 @@ void Car::removeWheel(int index)
 {
 	if (0 <= index && index < getNrWheels())
 	{
-		deleteWheel(index);
+		delete wheels[index]; // Delete the wheel itself,
+		wheels[index] = NULL; // and set the pointer to it to NULL to avoid messing with released memory.
 	}
 	else
 	{

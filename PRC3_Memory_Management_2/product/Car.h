@@ -19,12 +19,12 @@ private:
     std::string licencePlate;
     std::string model;
 
-    bool indexInRange(int index);
+    bool indexInRange(int index) const;
     /* pre : -
      * post: returns if wheels[index] is valid
      */
     
-    void deleteAllWheels();
+    void removeAllWheels();
     /* pre : -
      * post: all wheels in this car are deleted
      */
@@ -33,8 +33,6 @@ private:
     /* pre : -
      * post: all otherCar fields are deep copied into this
      */
-
-    void deleteWheel(int position);
 
 public:
     void removeWheel(int index);
@@ -60,7 +58,7 @@ public:
 	     post: the Car object is destroyed including all allocated memory
   	*/
 
-    const std::string& getModel();
+    const std::string& getModel() const;
     /* pre : -
        post: getModel()= <Car> model
     */
@@ -70,17 +68,17 @@ public:
        post: <Car>'s licence plate is licence
     */
 
-    const std::string& getLicencePlate();
+    const std::string& getLicencePlate() const;
     /* pre : -
        post: getLicencePlate()= <Car>'s licence plate
     */
 
-    int getNrWheels();
+    int getNrWheels() const;
     /* pre : -
        post: getNrWheels()= <Car>'s nr wheels
     */
 
-    const Wheel* getWheel(int index);
+    const Wheel* getWheel(int index) const;
     /* pre : 0 <= index < nr wheels in <Car>
        post: getWheel(i) = Wheel nr index of <Car>
     */
