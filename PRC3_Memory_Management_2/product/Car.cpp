@@ -5,7 +5,8 @@ Car::Car(const std::string& model, const std::string& material, int diameter, in
 {
 	if (diameter > 0 && nrWheels > 2)
 	{
-		model = model;
+		this->model = model;
+
 		for (int i = 0; i < nrWheels; i++)
 		{
 			addWheel(diameter, material);
@@ -123,8 +124,6 @@ void Car::removeWheel(int index)
 {
 	if (0 <= index && index < getNrWheels())
 	{
-		// Should probably delete the one, then move everything after it back 1 spot to fill the hole
-		// TODO
 		deleteWheel(index);
 	}
 	else
