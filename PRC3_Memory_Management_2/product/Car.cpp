@@ -1,4 +1,5 @@
 #include "Car.h"
+#include <stdexcept>
 
 Car::Car(const std::string& model, const std::string& material, int diameter, int nrWheels)
 {
@@ -8,12 +9,20 @@ Car::Car(const std::string& model, const std::string& material, int diameter, in
 	}
 }
 
+// TODO: Copy constructor
+
 Car::~Car()
 {
-
+	deleteAllWheels();
 }
 
 // Private functions
+
+void deleteWheel(int position)
+{
+	delete wheels[i]; // Delete the wheel itself,
+	wheels[i] = NULL; // and set the pointer to it to NULL to avoid messing with released memory.
+}
 
 bool Car::indexInRange(int index)
 {
@@ -30,6 +39,28 @@ bool Car::indexInRange(int index)
 	}
 }
 
+void Car::deleteAllWheels()
+{
+	for (int i = 0; i < wheels.size(); i++)
+	{
+		deleteWheel(i);
+	}
+}
+
+void copyCar(const Car& otherCar)
+{
+	this.licencePlate = otherCar.licencePlate;
+	this.model = otherCar.model;
+
+	deleteAllWheels();
+
+	for (int i = 0; i < otherCar.wheels.size(); i++)
+	{
+		Wheel *newWheel;
+		newWheel = new Wheel(*(otherCar.wheels[i]));
+		wheels.push_back(newWheel);
+	}
+}
 
 // Public functions
 
@@ -57,10 +88,32 @@ const Wheel* Car::getWheel(int index)
 {
 	if (0 <= index && index < (int)wheels.size())
 	{
-		return NULL;
+		return wheels[index];
 	}
 	else
 	{
 		return NULL;
+	}
+}
+
+void Car::removeWheel(int index)
+{
+	if (0 <= index && index < (int)wheels.size())
+	{
+		// Should probably delete the one, then move everything after it back 1 spot to fill the hole
+		// TODO
+		deleteWheel(index);
+	}
+	else
+	{
+		throw std::invalid_argument("Illegal index")
+	}
+}
+
+void addWheel(int diameter, const std::string& material)
+{
+	if (diameter > 0)
+	{
+		// TODO
 	}
 }
