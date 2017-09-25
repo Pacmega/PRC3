@@ -4,7 +4,7 @@
 #include <string>
 
 /*
- *  Tip: destructor, copy constructor en assignment operator overloading is not
+ *  Tip: destructor, copy constructor and assignment operator overloading is not
  *       needed as this class does not contain allocated memory
 */
 

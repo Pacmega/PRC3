@@ -34,7 +34,21 @@ private:
      * post: all otherCar fields are deep copied into this
      */
 
+    void deleteWheel(int position);
+
 public:
+    void removeWheel(int index);
+    /* pre : -
+       post: if 0 <= index < nr wheels in <Car>
+             then wheel nr index is removed from <Car>
+             else out_of_range exception with text: "illegal index" is thrown
+    */
+
+    void addWheel(int diameter, const std::string& material);
+    /* pre : diameter > 0
+       post: a wheel with given diameter and material is added to <Car>
+    */
+
     Car(const std::string& model, const std::string& material, int diameter, int nrWheels);
     /* pre : diameter > 0 and nrWheels > 2
        post: A Car object is created that contains nrWheels Wheel objects
@@ -71,19 +85,7 @@ public:
        post: getWheel(i) = Wheel nr index of <Car>
     */
 
-    void removeWheel(int index);
-    /* pre : -
-       post: if 0 <= index < nr wheels in <Car>
-             then wheel nr index is removed from <Car>
-             else out_of_range exception with text: "illegal index" is thrown
-    */
-
-  	void addWheel(int diameter, const std::string& material);
-  	/* pre : diameter > 0
-  	   post: a wheel with given diameter and material is added to <Car>
-  	*/
-
-  	Car(const Car& myCar);
+    Car(const Car& myCar);
       /* pre : -
   	     post: a Car object is created with all properties of myCar, a deep copy is performed
       */
