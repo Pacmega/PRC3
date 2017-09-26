@@ -7,7 +7,7 @@ TEST(Construct, CorrectWheel)
 {
 	int diameter = 5;
 	std::string material = "Aluminium";
-	Wheel TestWiel = new Wheel(diameter, material);
+	Wheel* TestWiel = new Wheel(diameter, material);
 
 	EXPECT_TRUE(TestWiel->getMaterial() == material);
 	EXPECT_TRUE(TestWiel->getDiameter() == diameter);
@@ -42,7 +42,7 @@ TEST(SetAndGetMaterial, SetAndGetMaterialCorrect)
 	std::string material = "Aluminium";	
 	std::string newMaterial = "Staal";
 
-	Wheel TestWiel = new Wheel(diameter, material);
+	Wheel* TestWiel = new Wheel(diameter, material);
 
 	EXPECT_TRUE(TestWiel->getMaterial() == material);
 	TestWiel->setMaterial(newMaterial);

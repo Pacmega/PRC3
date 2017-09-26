@@ -94,14 +94,7 @@ const std::string& Car::getModel() const
 
 void Car::setLicencePlate(const std::string& licence)
 {
-	if (licencePlate != "")
-	{
-		licencePlate = licence;
-	}
-	else
-	{
-		throw std::out_of_range("No new licence plate given");
-	}
+	licencePlate = licence;
 }
 
 const std::string& Car::getLicencePlate() const
