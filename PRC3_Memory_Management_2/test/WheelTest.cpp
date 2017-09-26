@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 #include "Wheel.h"
 #include <string>
-//------------------------------------Constructor tests: --------------------------------
 
+//------------------------------------Constructor tests: --------------------------------
 TEST(Construct, CorrectWheel)
 {
 	int diameter = 5;
@@ -39,8 +39,8 @@ TEST(Construct, NoMaterial)
 TEST(SetAndGetMaterial, SetAndGetMaterialCorrect)
 {
 	int diameter = 5;
-	std::string material = "Aluminium";	
-	std::string newMaterial = "Staal";
+	std::string material = "Aluminium";
+	std::string newMaterial = "Steel";
 
 	Wheel* TestWiel = new Wheel(diameter, material);
 

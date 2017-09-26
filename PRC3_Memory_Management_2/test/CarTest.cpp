@@ -203,13 +203,14 @@ TEST(copyCar, CopyingACar)
 	std::string model = "Henk 9000";
 	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
 
-	Car * CopyCar = TestCar;
+	//Car * CopyCar = TestCar;
+	Car * CopyCar = new Car(*TestCar);
 
 	EXPECT_TRUE(CopyCar->getNrWheels() == TestCar->getNrWheels());
 	EXPECT_TRUE(CopyCar->getModel() == TestCar->getModel());
 
 	delete TestCar;
-	delete CopyCar;
+	//delete CopyCar;
 }
 
 //------------------------------------AssignmentOperator tests: --------------------------------
@@ -222,13 +223,16 @@ TEST(AssignmentOperator, CorrectAssignmentOperator)
 	std::string model = "Henk 9000";
 	Car * TestCar = new Car(model, "Hout", diameter, nrWheels); 
 
-	Car * OperatorCar(TestCar);
+	Car * OperatorCar = TestCar;
 
 	EXPECT_TRUE(TestCar->getModel() == OperatorCar->getModel());
 	EXPECT_TRUE(TestCar->getNrWheels() == OperatorCar->getNrWheels());
 
 	delete TestCar;
-	delete OperatorCar;
+
+	// Since OperatorCar is a reference to TestCar, there is no need to delete it.
+	// Everything it had that contained allocated memory was cleared by deleting TestCar,
+	// deleting OperatorCar as well would cause invalid reads to occur.
 }
 
 int main(int argc, char *argv[])

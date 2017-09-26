@@ -1,5 +1,6 @@
 #include "Car.h"
 #include <stdexcept>
+#include <iostream>
 
 Car::Car(const std::string& model, const std::string& material, int diameter, int nrWheels)
 {
@@ -28,6 +29,7 @@ Car::Car(const Car& otherCar)
 	for (int i = 0; i < (int)otherCar.getNrWheels(); i++)
 	{
 		const Wheel* newWheel = (otherCar.getWheel(i));
+		std::cout << newWheel->getDiameter();
 		addWheel(newWheel->getDiameter(), newWheel->getMaterial());
 	}
 }
