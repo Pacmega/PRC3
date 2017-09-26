@@ -10,7 +10,7 @@ Wheel::Wheel(int diameter, const std::string& material)
 	}
 	else
 	{
-		throw std::invalid_argument("Impossible diameter");
+		throw std::out_of_range("Impossible diameter");
 	}
 }
 

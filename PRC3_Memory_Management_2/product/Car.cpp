@@ -75,8 +75,12 @@ void Car::removeAllWheels()
 {
 	for (int i = 0; i < getNrWheels(); i++)
 	{
-		delete wheels[i]; // Delete the wheel itself,
-		wheels[i] = NULL; // and set the pointer to it to NULL to avoid messing with released memory.
+		wheels.erase(wheels.begin() + i);
+		
+		/* Beta
+		delete wheels[index]; // Delete the wheel itself,
+		wheels[index] = NULL; // and set the pointer to it to NULL to avoid messing with released memory.
+		*/
 	}
 }
 
@@ -90,6 +94,11 @@ const std::string& Car::getModel() const
 
 void Car::setLicencePlate(const std::string& licence)
 {
+	if (licencePlate == "")
+	{
+		throw std::out_of_range("No new licence plate given");
+	}
+
 	licencePlate = licence;
 }
 
@@ -119,12 +128,16 @@ void Car::removeWheel(int index)
 {
 	if (0 <= index && index < getNrWheels())
 	{
+		wheels.erase(wheels.begin() + index);
+		
+		/* Beta
 		delete wheels[index]; // Delete the wheel itself,
 		wheels[index] = NULL; // and set the pointer to it to NULL to avoid messing with released memory.
+		*/
 	}
 	else
 	{
-		throw std::invalid_argument("Illegal index");
+		throw std::out_of_range("Illegal index");
 	}
 }
 
@@ -137,6 +150,6 @@ void Car::addWheel(int diameter, const std::string& material)
 	}
 	else
 	{
-		throw std::invalid_argument("Impossible diameter");
+		throw std::out_of_range("Diameter of 0 or below isn't possible");
 	}
 }

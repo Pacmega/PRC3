@@ -10,7 +10,7 @@ Truck::Truck(const std::string& model, const std::string& material, int diameter
 	}
 	else
 	{
-		throw std::invalid_argument("Impossible power");
+		throw std::out_of_range("Impossible power");
 	}
 }
 
