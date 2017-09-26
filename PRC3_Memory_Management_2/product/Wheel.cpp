@@ -3,7 +3,7 @@
 
 Wheel::Wheel(int diameter, const std::string& material)
 {
-	if (diameter > 0)
+	if (diameter > 0 && material != "")
 	{
 		this->diameter = diameter;
 		this->material = material;
