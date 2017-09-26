@@ -195,7 +195,7 @@ TEST(getNrWheels, TestFor3WheelsCorrect)
 }
 
 //------------------------------------CopyCar tests: --------------------------------
-/*
+
 TEST(copyCar, CopyingACar)
 {
 	int diameter = 2;
@@ -203,22 +203,34 @@ TEST(copyCar, CopyingACar)
 	std::string model = "Henk 9000";
 	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
 
-	Car * CopyCar = new Car(TestCar);
+	Car * CopyCar = TestCar;
 
 	EXPECT_TRUE(CopyCar->getNrWheels() == TestCar->getNrWheels());
 	EXPECT_TRUE(CopyCar->getModel() == TestCar->getModel());
+
+	delete TestCar;
+	delete CopyCar;
 }
 
-TEST(copyCar, CopyingAnEmptyCar)
+//------------------------------------AssignmentOperator tests: --------------------------------
+
+
+TEST(AssignmentOperator, CorrectAssignmentOperator)
 {
-	Car * TestCar;
+	int diameter = 2;
+	int nrWheels = 4;
+	std::string model = "Henk 9000";
+	Car * TestCar = new Car(model, "Hout", diameter, nrWheels); 
 
-	Car * CopyCar = new Car(TestCar);
+	Car * OperatorCar(TestCar);
 
-	EXPECT_TRUE(CopyCar->getNrWheels() == TestCar->getNrWheels());
-	EXPECT_TRUE(CopyCar->getModel() == TestCar->getModel());
+	EXPECT_TRUE(TestCar->getModel() == OperatorCar->getModel());
+	EXPECT_TRUE(TestCar->getNrWheels() == OperatorCar->getNrWheels());
+
+	delete TestCar;
+	delete OperatorCar;
 }
-*/
+
 int main(int argc, char *argv[])
 {
 	::testing::InitGoogleTest(&argc, argv);

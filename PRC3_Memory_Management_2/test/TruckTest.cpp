@@ -20,6 +20,16 @@ TEST(Construct, CreateTruckCorrect)
 
 }
 
+TEST(Construct, CreateTruckNotPossiblePower)
+{
+	std::string model = "Burger on Wheels";
+	std::string material = "Rubber";
+	int diameter = 15;
+	int nrWheels = 6;
+	int power = -10;
+
+	EXPECT_THROW(new Truck(model, material, diameter, nrWheels, power), std::out_of_range);
+}
 
 int main(int argc, char *argv[])
 {
