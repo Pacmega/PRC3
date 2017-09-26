@@ -13,7 +13,7 @@ TEST(removeWheel, removeWheelFromEnd)
 	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
 
 	EXPECT_TRUE(TestCar->getNrWheels() == 4);
-	TestCar->removeWheel(4);
+	TestCar->removeWheel(3);
 	EXPECT_TRUE(TestCar->getNrWheels() == 3);
 }
 // Remove wheel from the middle
@@ -25,7 +25,7 @@ TEST(removeWheel, removeWheelFromMiddle)
 	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
 
 	EXPECT_TRUE(TestCar->getNrWheels() == 4);
-	//TestCar->removeWheel(2);
+	TestCar->removeWheel(2);
 	EXPECT_TRUE(TestCar->getNrWheels() == 3);
 }
 // Check if removeWheel outputs an error when you do give an index that is out of range

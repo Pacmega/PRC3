@@ -49,11 +49,6 @@ TEST(SetAndGetMaterial, SetAndGetMaterialCorrect)
 	EXPECT_TRUE(TestWiel->getMaterial() = newMaterial);
 }
 
-TEST(SetAndGetMaterial, SetAndGetMaterialCorrect)
-{
-
-}
-
 int main(int argc, char *argv[])
 {
 	::testing::InitGoogleTest(&argc, argv);

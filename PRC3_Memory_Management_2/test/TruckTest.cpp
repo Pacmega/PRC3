@@ -1,6 +1,12 @@
 #include <gtest/gtest.h>
 #include "Truck.h"
-//------------------------------------ tests: --------------------------------
+#include <string>
+//------------------------------------Construct tests: --------------------------------
+TEST(Construct, CreateTruckCorrect)
+{
+	std::string model = "Burger on Wheels";
+	
+}
 
 int main(int argc, char *argv[])
 {
