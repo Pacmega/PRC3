@@ -210,7 +210,6 @@ TEST(copyCar, CopyingACar)
 	EXPECT_TRUE(CopyCar->getModel() == TestCar->getModel());
 
 	delete TestCar;
-	//delete CopyCar;
 }
 
 //------------------------------------AssignmentOperator tests: --------------------------------
