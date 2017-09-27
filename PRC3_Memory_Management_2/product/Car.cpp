@@ -99,11 +99,6 @@ const std::string& Car::getModel() const
 	return model;
 }
 
-void Car::setModel(const std::string& newmodel)
-{
-	
-}
-
 void Car::setLicencePlate(const std::string& licence)
 {
 	licencePlate = licence;
@@ -154,6 +149,9 @@ void Car::addWheel(int diameter, const std::string& material)
 	{
 		Wheel *newWheel = new Wheel(diameter, material);
 		wheels.push_back(newWheel);
+
+		delete newWheel;
+		newWheel = NULL;
 	}
 	else
 	{
