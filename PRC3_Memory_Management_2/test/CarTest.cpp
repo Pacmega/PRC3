@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "Car.h"
 #include <string>
+#include <iostream>
 
 //------------------------------------removeWheel tests: --------------------------------
 // Check if removeWheel works correctly when you use it properly
@@ -176,20 +177,22 @@ TEST(getNrWheels, TestFor3WheelsCorrect)
 
 //------------------------------------CopyCar tests: --------------------------------
 
-// TEST(copyCar, CopyingACar)
-// {
-// 	int diameter = 2;
-// 	int nrWheels = 4;
-// 	std::string model = "Henk 9000";
-// 	Car TestCar = Car(model, "Hout", diameter, nrWheels);
+TEST(copyCar, CopyingACar)
+{
+	int diameter = 2;
+	int nrWheels = 4;
+	std::string model = "Henk 9000";
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
+	std::cout << TestCar.getWheel(0) << std::endl;
+	throw std::out_of_range("STOOOOOOP");
 
 // 	//Car * CopyCar = TestCar;
-// 	Car CopyCar = Car(TestCar);
+	Car CopyCar = Car(TestCar);
 
 // 	EXPECT_TRUE(CopyCar.getNrWheels() == TestCar.getNrWheels());
 // 	EXPECT_TRUE(CopyCar.getModel() == TestCar.getModel());
 
-// }
+}
 
 //------------------------------------AssignmentOperator tests: --------------------------------
 

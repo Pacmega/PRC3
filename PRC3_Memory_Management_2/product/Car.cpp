@@ -1,8 +1,11 @@
 #include "Car.h"
+#include <iostream>
 #include <stdexcept>
 
 Car::Car(const std::string& model, const std::string& material, int diameter, int nrWheels)
 {
+	std::cout << diameter << std::endl;
+	std::cout << material << std::endl;
 	if (diameter > 0 && nrWheels > 2)
 	{
 		this->model = model;
@@ -23,8 +26,8 @@ Car::Car(const Car& otherCar)
 	licencePlate = otherCar.licencePlate;
 	model = otherCar.model;
 
-	removeAllWheels();
-	wheels.clear();
+	// removeAllWheels();
+	// wheels.clear();
 
 	for (int i = 0; i < (int)otherCar.getNrWheels(); i++)
 	{
@@ -83,6 +86,7 @@ void Car::removeAllWheels()
 	for (int i = 0; i < getNrWheels(); i++)
 	{
 		wheels.erase(wheels.begin() + i);
+		wheels[i] = NULL;
 		
 		/* Beta
 		delete wheels[index]; // Delete the wheel itself,
