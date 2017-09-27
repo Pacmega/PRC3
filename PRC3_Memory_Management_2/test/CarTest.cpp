@@ -9,13 +9,11 @@ TEST(removeWheel, removeWheelFromEnd)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	EXPECT_TRUE(TestCar->getNrWheels() == 4);
-	TestCar->removeWheel(3);
-	EXPECT_TRUE(TestCar->getNrWheels() == 3);
-
-	delete TestCar;
+	EXPECT_TRUE(TestCar.getNrWheels() == 4);
+	TestCar.removeWheel(3);
+	EXPECT_TRUE(TestCar.getNrWheels() == 3);
 }
 
 // Remove wheel from the middle
@@ -24,13 +22,11 @@ TEST(removeWheel, removeWheelFromMiddle)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	EXPECT_TRUE(TestCar->getNrWheels() == 4);
-	TestCar->removeWheel(2);
-	EXPECT_TRUE(TestCar->getNrWheels() == 3);
-
-	delete TestCar;
+	EXPECT_TRUE(TestCar.getNrWheels() == 4);
+	TestCar.removeWheel(2);
+	EXPECT_TRUE(TestCar.getNrWheels() == 3);
 }
 
 // Check if removeWheel outputs an error when you do give an index that is out of range
@@ -39,12 +35,10 @@ TEST(removeWheel, removeWheelNotExistingIndex)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	EXPECT_TRUE(TestCar->getNrWheels() == 4);
-	EXPECT_THROW(TestCar->removeWheel(5), std::out_of_range);
-
-	delete TestCar;
+	EXPECT_TRUE(TestCar.getNrWheels() == 4);
+	EXPECT_THROW(TestCar.removeWheel(5), std::out_of_range);
 }
 
 //------------------------------------addWheel tests: --------------------------------
@@ -54,13 +48,11 @@ TEST(AddingWheel, AddWheelCorrectly)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	EXPECT_TRUE(TestCar->getNrWheels() == 4);
-	TestCar->addWheel(5, "Aluminium");
-	EXPECT_TRUE(TestCar->getNrWheels() == 5);
-
-	delete TestCar;
+	EXPECT_TRUE(TestCar.getNrWheels() == 4);
+	TestCar.addWheel(5, "Aluminium");
+	EXPECT_TRUE(TestCar.getNrWheels() == 5);
 }
 
 // When giving a diameter that's zero
@@ -69,12 +61,10 @@ TEST(AddingWheel, AddWheelZeroDiameter)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	EXPECT_TRUE(TestCar->getNrWheels() == 4);
-	EXPECT_THROW(TestCar->addWheel(0, "Aluminium"), std::out_of_range);
-
-	delete TestCar;
+	EXPECT_TRUE(TestCar.getNrWheels() == 4);
+	EXPECT_THROW(TestCar.addWheel(0, "Aluminium"), std::out_of_range);
 }
 
 // When giving a diameter that's below zero
@@ -83,12 +73,10 @@ TEST(AddingWheel, AddWheelBelowZeroDiameter)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	EXPECT_TRUE(TestCar->getNrWheels() == 4);
-	EXPECT_THROW(TestCar->addWheel(-1, "Aluminium"), std::out_of_range);
-
-	delete TestCar;
+	EXPECT_TRUE(TestCar.getNrWheels() == 4);
+	EXPECT_THROW(TestCar.addWheel(-1, "Aluminium"), std::out_of_range);
 }
 
 // When giving a weird material
@@ -97,12 +85,10 @@ TEST(AddingWheel, addWheelSpaceAsMaterial)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	EXPECT_TRUE(TestCar->getNrWheels() == 4);
-	EXPECT_THROW(TestCar->addWheel(-1, " "), std::out_of_range);
-
-	delete TestCar;
+	EXPECT_TRUE(TestCar.getNrWheels() == 4);
+	EXPECT_THROW(TestCar.addWheel(-1, " "), std::out_of_range);
 }
 
 //------------------------------------Constructor tests: --------------------------------
@@ -112,10 +98,12 @@ TEST(Construct, TestRealisticInput)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar;
+	Car* TestCar;
 
 	EXPECT_NO_THROW(TestCar = new Car(model, "Hout", diameter, nrWheels));
 
+	// Because we need to check no errors are thrown, we need to use a pointer. This means it needs to be
+	// deleted when we're done with it.
 	delete TestCar;
 }
 
@@ -125,7 +113,7 @@ TEST(Construct, TestZeroDiameter)
 	int diameter = 0;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	EXPECT_THROW(new Car(model, "Hout", diameter, nrWheels), std::out_of_range);
+	EXPECT_THROW(Car(model, "Hout", diameter, nrWheels), std::out_of_range);
 }
 
 // Less wheels than recommended
@@ -134,7 +122,7 @@ TEST(Construct, TestWheelsLessThanTwo)
 	int diameter = 2;
 	int nrWheels = 1;
 	std::string model = "Henk 9000";
-	EXPECT_THROW(new Car(model, "Hout", diameter, nrWheels), std::out_of_range);
+	EXPECT_THROW(Car(model, "Hout", diameter, nrWheels), std::out_of_range);
 }
 
 //------------------------------------getModel tests: --------------------------------
@@ -145,11 +133,9 @@ TEST(GetModel, getModelNormal)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	EXPECT_TRUE(TestCar->getModel() == model);
-
-	delete TestCar;
+	EXPECT_TRUE(TestCar.getModel() == model);
 }
 
 //------------------------------------setLicencePlate tests: --------------------------------
@@ -160,12 +146,10 @@ TEST(SetAndGetLicencePlate, SetLicencePlateCorrect)
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
 	std::string Plate = "AABBCC11";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	TestCar->setLicencePlate(Plate);
-	EXPECT_TRUE(TestCar->getLicencePlate() == Plate);
-
-	delete TestCar;
+	TestCar.setLicencePlate(Plate);
+	EXPECT_TRUE(TestCar.getLicencePlate() == Plate);
 }
 
 //------------------------------------getNrWheels tests: --------------------------------
@@ -175,11 +159,9 @@ TEST(getNrWheels, TestFor4WheelsCorrect)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	EXPECT_TRUE(TestCar->getNrWheels() == 4);
-
-	delete TestCar;
+	EXPECT_TRUE(TestCar.getNrWheels() == 4);
 }
 
 TEST(getNrWheels, TestFor3WheelsCorrect)
@@ -187,11 +169,9 @@ TEST(getNrWheels, TestFor3WheelsCorrect)
 	int diameter = 2;
 	int nrWheels = 3;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
-	EXPECT_TRUE(TestCar->getNrWheels() == 3);
-
-	delete TestCar;
+	EXPECT_TRUE(TestCar.getNrWheels() == 3);
 }
 
 //------------------------------------CopyCar tests: --------------------------------
@@ -201,15 +181,15 @@ TEST(copyCar, CopyingACar)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels);
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
 
 	//Car * CopyCar = TestCar;
-	Car * CopyCar = new Car(*TestCar);
+	Car CopyCar = Car(TestCar);
 
-	EXPECT_TRUE(CopyCar->getNrWheels() == TestCar->getNrWheels());
-	EXPECT_TRUE(CopyCar->getModel() == TestCar->getModel());
+	EXPECT_TRUE(CopyCar.getNrWheels() == TestCar.getNrWheels());
+	EXPECT_TRUE(CopyCar.getModel() == TestCar.getModel());
 
-	delete TestCar;
+	//
 	//delete CopyCar;
 }
 
@@ -221,14 +201,14 @@ TEST(AssignmentOperator, CorrectAssignmentOperator)
 	int diameter = 2;
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
-	Car * TestCar = new Car(model, "Hout", diameter, nrWheels); 
+	Car TestCar = Car(model, "Hout", diameter, nrWheels); 
 
-	Car * OperatorCar = TestCar;
+	Car OperatorCar = TestCar;
 
-	EXPECT_TRUE(TestCar->getModel() == OperatorCar->getModel());
-	EXPECT_TRUE(TestCar->getNrWheels() == OperatorCar->getNrWheels());
+	EXPECT_TRUE(TestCar.getModel() == OperatorCar.getModel());
+	EXPECT_TRUE(TestCar.getNrWheels() == OperatorCar.getNrWheels());
 
-	delete TestCar;
+	
 
 	// Since OperatorCar is a reference to TestCar, there is no need to delete it.
 	// Everything it had that contained allocated memory was cleared by deleting TestCar,

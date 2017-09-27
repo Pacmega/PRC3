@@ -31,7 +31,7 @@ clean:
 	@rm -rf CarTest TruckTest WheelTest
 
 car: CarTest
-	@valgrind ./CarTest
+	@valgrind --leak-check=full ./CarTest
 
 truck: TruckTest
 	@valgrind ./TruckTest
