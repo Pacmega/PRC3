@@ -31,7 +31,7 @@ TEST(Construct, NoMaterial)
 {
 	int diameter = 5;
 	std::string material = "";
-	EXPECT_THROW( Wheel(diameter, material), std::invalid_argument);
+	EXPECT_THROW( Wheel(diameter, material), std::out_of_range);
 }
 
 //------------------------------------SetAndGetMaterial tests: --------------------------------
