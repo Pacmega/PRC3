@@ -28,7 +28,8 @@ private:
     /* pre : -
      * post: all wheels in this car are deleted
      */
-    
+
+    // This looks a lot like a private copy constructor... What?    
     void copyCar(const Car& otherCar);
     /* pre : -
      * post: all otherCar fields are deep copied into this

@@ -4,9 +4,12 @@
 Truck::Truck(const std::string& model, const std::string& material, int diameter, int nrWheels, int power)
 	: Car(model, material, diameter, nrWheels)
 {
+	delete this->power;
+	this->power = new int(power);
+	
 	if(power > 0) // Everything else is checked by the Car constructor.
 	{
-		this->power = &power;
+		*(this->power) = power;
 	}
 	else
 	{
@@ -17,13 +20,8 @@ Truck::Truck(const std::string& model, const std::string& material, int diameter
 Truck::Truck(const Truck& myTruck)
 	: Car(myTruck)
 {
-	*power = *(myTruck.power);
-}
-
-Truck::~Truck()
-{
-	delete power;
-	power = NULL;
+	delete this->power;
+	this->power = myTruck.power;
 }
 
 Truck& Truck::operator=(const Truck& myTruck)
@@ -44,6 +42,12 @@ Truck& Truck::operator=(const Truck& myTruck)
 	}
 
 	return *this;
+}
+
+Truck::~Truck()
+{
+	delete power;
+	power = NULL;
 }
 
 int Truck::getPower() const

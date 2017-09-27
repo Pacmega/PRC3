@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "Truck.h"
 #include <string>
-/*
+
 //------------------------------------Construct tests: --------------------------------
 TEST(Construct, CreateTruckCorrect)
 {
@@ -67,7 +67,7 @@ TEST(AssignmentOperator, CorrectAssignmentOperator)
 	// Everything it had that contained allocated memory was cleared by deleting TestCar,
 	// deleting OperatorCar as well would cause invalid reads to occur.
 }
-*/
+
 int main(int argc, char *argv[])
 {
 	::testing::InitGoogleTest(&argc, argv);
