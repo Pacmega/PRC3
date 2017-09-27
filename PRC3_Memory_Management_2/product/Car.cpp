@@ -1,6 +1,5 @@
 #include "Car.h"
 #include <stdexcept>
-#include <iostream>
 
 Car::Car(const std::string& model, const std::string& material, int diameter, int nrWheels)
 {
@@ -25,12 +24,15 @@ Car::Car(const Car& otherCar)
 	model = otherCar.model;
 
 	removeAllWheels();
+	wheels.clear();
 
 	for (int i = 0; i < (int)otherCar.getNrWheels(); i++)
 	{
 		const Wheel* newWheel = (otherCar.getWheel(i));
-		std::cout << newWheel->getDiameter();
 		addWheel(newWheel->getDiameter(), newWheel->getMaterial());
+
+		delete newWheel;
+		newWheel = NULL;
 	}
 }
 
@@ -46,6 +48,9 @@ Car& Car::operator=(const Car &otherCar)
 	{
 		const Wheel* newWheel = (otherCar.getWheel(i));
 		addWheel(newWheel->getDiameter(), newWheel->getMaterial());
+
+		delete newWheel;
+		newWheel = NULL;
 	}
 
 	return *this;
@@ -92,6 +97,11 @@ void Car::removeAllWheels()
 const std::string& Car::getModel() const
 {
 	return model;
+}
+
+void Car::setModel(const std::string& newmodel)
+{
+	
 }
 
 void Car::setLicencePlate(const std::string& licence)
@@ -142,8 +152,8 @@ void Car::addWheel(int diameter, const std::string& material)
 {
 	if (diameter > 0)
 	{
-		Wheel newWheel = Wheel(diameter, material);
-		wheels.push_back(&newWheel);
+		Wheel *newWheel = new Wheel(diameter, material);
+		wheels.push_back(newWheel);
 	}
 	else
 	{
