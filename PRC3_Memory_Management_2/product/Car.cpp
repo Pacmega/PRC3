@@ -39,6 +39,7 @@ Car& Car::operator=(const Car &otherCar)
 {
 	if (&otherCar == this) return *this; // Avoid changing yourself using yourself, that breaks everything
 
+	licencePlate = otherCar.licencePlate;
 	model = otherCar.model;
 
 	removeAllWheels();
