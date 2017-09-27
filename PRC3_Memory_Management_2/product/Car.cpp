@@ -6,6 +6,7 @@ Car::Car(const std::string& model, const std::string& material, int diameter, in
 {
 	std::cout << diameter << std::endl;
 	std::cout << material << std::endl;
+	
 	if (diameter > 0 && nrWheels > 2)
 	{
 		this->model = model;
@@ -26,16 +27,15 @@ Car::Car(const Car& otherCar)
 	licencePlate = otherCar.licencePlate;
 	model = otherCar.model;
 
-	// removeAllWheels();
-	// wheels.clear();
+	removeAllWheels();
+	wheels.clear();
 
-	for (int i = 0; i < (int)otherCar.getNrWheels(); i++)
+	int nrWheels = (int)otherCar.getNrWheels();
+
+	for (int i = 0; i < nrWheels; i++)
 	{
 		const Wheel* newWheel = (otherCar.getWheel(i));
 		addWheel(newWheel->getDiameter(), newWheel->getMaterial());
-
-		delete newWheel;
-		newWheel = NULL;
 	}
 }
 
@@ -46,14 +46,14 @@ Car& Car::operator=(const Car &otherCar)
 	model = otherCar.model;
 
 	removeAllWheels();
+	wheels.clear();
 
-	for (int i = 0; i < (int)otherCar.getNrWheels(); i++)
+	int nrWheels = (int)otherCar.getNrWheels();
+
+	for (int i = 0; i < nrWheels; i++)
 	{
-		const Wheel* newWheel = (otherCar.getWheel(i));
+		const Wheel* newWheel = otherCar.getWheel(i);
 		addWheel(newWheel->getDiameter(), newWheel->getMaterial());
-
-		delete newWheel;
-		newWheel = NULL;
 	}
 
 	return *this;
@@ -85,13 +85,8 @@ void Car::removeAllWheels()
 {
 	for (int i = 0; i < getNrWheels(); i++)
 	{
-		wheels.erase(wheels.begin() + i);
-		wheels[i] = NULL;
-		
-		/* Beta
-		delete wheels[index]; // Delete the wheel itself,
-		wheels[index] = NULL; // and set the pointer to it to NULL to avoid messing with released memory.
-		*/
+		delete wheels[i];
+		wheels.erase(wheels.begin());
 	}
 }
 
@@ -134,12 +129,8 @@ void Car::removeWheel(int index)
 {
 	if (0 <= index && index < getNrWheels())
 	{
+		delete wheels[index];
 		wheels.erase(wheels.begin() + index);
-		
-		/* Beta
-		delete wheels[index]; // Delete the wheel itself,
-		wheels[index] = NULL; // and set the pointer to it to NULL to avoid messing with released memory.
-		*/
 	}
 	else
 	{
@@ -153,9 +144,6 @@ void Car::addWheel(int diameter, const std::string& material)
 	{
 		Wheel *newWheel = new Wheel(diameter, material);
 		wheels.push_back(newWheel);
-
-		delete newWheel;
-		newWheel = NULL;
 	}
 	else
 	{

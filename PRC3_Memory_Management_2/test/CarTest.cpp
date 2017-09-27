@@ -183,32 +183,29 @@ TEST(copyCar, CopyingACar)
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
 	Car TestCar = Car(model, "Hout", diameter, nrWheels);
-	std::cout << TestCar.getWheel(0) << std::endl;
-	throw std::out_of_range("STOOOOOOP");
 
-// 	//Car * CopyCar = TestCar;
 	Car CopyCar = Car(TestCar);
 
-// 	EXPECT_TRUE(CopyCar.getNrWheels() == TestCar.getNrWheels());
-// 	EXPECT_TRUE(CopyCar.getModel() == TestCar.getModel());
+ 	EXPECT_TRUE(CopyCar.getNrWheels() == TestCar.getNrWheels());
+ 	EXPECT_TRUE(CopyCar.getModel() == TestCar.getModel());
 
 }
 
 //------------------------------------AssignmentOperator tests: --------------------------------
 
 
-// TEST(AssignmentOperator, CorrectAssignmentOperator)
-// {
-// 	int diameter = 2;
-// 	int nrWheels = 4;
-// 	std::string model = "Henk 9000";
-// 	Car TestCar = Car(model, "Hout", diameter, nrWheels); 
+TEST(AssignmentOperator, CorrectAssignmentOperator)
+{
+	int diameter = 2;
+	int nrWheels = 4;
+	std::string model = "Henk 9000";
+	Car TestCar = Car(model, "Hout", diameter, nrWheels); 
 
-// 	Car OperatorCar = TestCar;
+	Car OperatorCar = TestCar;
 
-// 	EXPECT_TRUE(TestCar.getModel() == OperatorCar.getModel());
-// 	EXPECT_TRUE(TestCar.getNrWheels() == OperatorCar.getNrWheels());
-// }
+	EXPECT_TRUE(TestCar.getModel() == OperatorCar.getModel());
+	EXPECT_TRUE(TestCar.getNrWheels() == OperatorCar.getNrWheels());
+}
 
 int main(int argc, char *argv[])
 {
