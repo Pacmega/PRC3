@@ -7,7 +7,6 @@ Truck::Truck(const std::string& model, const std::string& material, int diameter
 	if(power > 0) // Everything else is checked by the Car constructor.
 	{
 		this->power = &power;
-		std::cout << "\n" << *(this->power) << "\n";
 	}
 	else
 	{
@@ -31,7 +30,7 @@ Truck& Truck::operator=(const Truck& myTruck)
 {
 	if (&myTruck == this) return *this; // Avoid changing yourself using yourself, that breaks everything
 	
-	model = myTruck.model;
+	//this->setModel() = myTruck.getModel();
 
 	for (int i = 0; i < getNrWheels(); i++)
 	{

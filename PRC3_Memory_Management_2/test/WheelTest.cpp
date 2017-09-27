@@ -46,7 +46,7 @@ TEST(SetAndGetMaterial, SetAndGetMaterialCorrect)
 
 	EXPECT_TRUE(TestWiel->getMaterial() == material);
 	TestWiel->setMaterial(newMaterial);
-	EXPECT_TRUE(TestWiel->getMaterial() = newMaterial);
+	EXPECT_TRUE(TestWiel->getMaterial() == newMaterial);
 }
 
 int main(int argc, char *argv[])
