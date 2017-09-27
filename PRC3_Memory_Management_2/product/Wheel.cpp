@@ -3,14 +3,15 @@
 
 Wheel::Wheel(int diameter, const std::string& material)
 {
-	if (diameter > 0 && material != "")
+	// Diameter is already checked in car
+	if (material != "")
 	{
 		this->diameter = diameter;
 		setMaterial(material);
 	}
 	else
 	{
-		throw std::out_of_range("Impossible diameter");
+		throw std::out_of_range("Impossible material");
 	}
 }
 

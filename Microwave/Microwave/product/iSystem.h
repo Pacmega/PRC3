@@ -7,6 +7,7 @@ public:
     virtual ~iSystem() {};
 
     virtual void SetTimer(int ms) = 0;
+    virtual void Ping() = 0;
 };
 
 #endif

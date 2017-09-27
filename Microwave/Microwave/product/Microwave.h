@@ -14,7 +14,9 @@ public:
     Microwave(iLight& light, iMotor& motor, iSystem& system, iUserInterface& ui);
 
     void HandleEvent(Events ev);
-    States HandleIdleState(Events ev);
+    States HandleStandbyState(Events ev);
+    States HandleOperatingState(Events ev);
+    States HandleDoorOpenState(Events ev);
 
 private:
     States currentState;
@@ -23,6 +25,8 @@ private:
     iSystem& system;
     iUserInterface& ui;
 
+    int power;
+    int setTime;
 };
 
 #endif
