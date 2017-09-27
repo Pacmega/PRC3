@@ -40,7 +40,6 @@ TEST(copyTruck, CopyingATruck)
 	int power = 50;
 	Truck * TestTruck = new Truck(model, "Hout", diameter, nrWheels, power);
 
-	//Car * CopyCar = TestCar;
 	Truck * CopyTruck = new Truck(*TestTruck);
 
 	EXPECT_TRUE(CopyTruck->getNrWheels() == TestTruck->getNrWheels());
@@ -48,7 +47,6 @@ TEST(copyTruck, CopyingATruck)
 	EXPECT_TRUE(CopyTruck->getPower() == TestTruck->getPower());
 
 	delete TestTruck;
-	//delete CopyCar;
 }
 
 //------------------------------------AssignmentOperator tests: --------------------------------
@@ -60,7 +58,7 @@ TEST(AssignmentOperator, CorrectAssignmentOperator)
 	int nrWheels = 4;
 	std::string model = "Henk 9000";
 	int power = 50;
-	Truck * TestTruck = new Car(model, "Hout", diameter, nrWheels, power);
+	Truck * TestTruck = new Truck(model, "Hout", diameter, nrWheels, power);
 
 	Truck * OperatorTruck = TestTruck;
 
