@@ -30,7 +30,7 @@ Truck& Truck::operator=(const Truck& myTruck)
 {
 	if (&myTruck == this) return *this; // Avoid changing yourself using yourself, that breaks everything
 	
-	//this->setModel() = myTruck.getModel();
+	model = myTruck.model;
 
 	for (int i = 0; i < getNrWheels(); i++)
 	{
