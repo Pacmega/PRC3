@@ -1,4 +1,5 @@
 #include "Truck.h"
+#include "Car.h"
 #include <stdexcept>
 
 Truck::Truck(const std::string& model, const std::string& material, int diameter, int nrWheels, int power)
@@ -7,7 +8,6 @@ Truck::Truck(const std::string& model, const std::string& material, int diameter
 	
 	if(power > 0) // Everything else is checked by the Car constructor.
 	{
-		
 		this->power = &power;
 	}
 	else
@@ -16,7 +16,7 @@ Truck::Truck(const std::string& model, const std::string& material, int diameter
 	}
 }
 
-Truck::Truck(const Truck& myTruck)
+Truck::Truck(const Truck& myTruck) 
 : Car(myTruck)
 {
 	this->power = myTruck.power;
@@ -33,7 +33,7 @@ Truck& Truck::operator=(const Truck& myTruck)
 
 Truck::~Truck()
 {
-	delete power;
+	
 }
 
 int Truck::getPower() 
