@@ -94,11 +94,6 @@ void Car::removeAllWheels()
 
 // Public functions
 
-void Car::setModel(const std::string& newModel)
-{
-	model = newModel;
-}
-
 const std::string& Car::getModel() const
 {
 	return model;
