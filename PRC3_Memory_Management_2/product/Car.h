@@ -64,8 +64,6 @@ public:
        post: getModel()= <Car> model
     */
 
-    void setModel(const std::string& newmodel);
-
     void setLicencePlate(const std::string& licence);
     /* pre : -
        post: <Car>'s licence plate is licence

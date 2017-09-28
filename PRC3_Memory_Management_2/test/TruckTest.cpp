@@ -5,17 +5,11 @@
 //------------------------------------Construct tests: --------------------------------
 TEST(Construct, CreateTruckCorrect)
 {
-	std::string model = "Burger on Wheels";
-	std::string material = "Rubber";
-	int diameter = 15;
-	int nrWheels = 6;
-	int power = 9000;
+	Truck TestTruck = Truck("Burger on Wheels", "Rubber", 5, 4, 90);
 
-	Truck TestTruck = Truck(model, material, diameter, nrWheels, power);
-
-	EXPECT_TRUE(TestTruck.getModel() == model);
-	EXPECT_TRUE(TestTruck.getNrWheels()== nrWheels);	
-	EXPECT_TRUE(TestTruck.getPower() == power);
+	ASSERT_EQ(TestTruck.getModel(), "Burger on Wheels");
+	ASSERT_EQ(TestTruck.getNrWheels(), 4);	
+	ASSERT_EQ(TestTruck.getPower(), 90);
 }
 
 // One test to see if the car corrector still handles incorrect input properly
@@ -50,9 +44,8 @@ TEST(copyTruck, CopyingATruck)
 
 	Truck CopyTruck = Truck(TestTruck);
 
-	EXPECT_EQ(CopyTruck.getNrWheels(), TestTruck.getNrWheels());
-	EXPECT_EQ(CopyTruck.getModel(), TestTruck.getModel());
-	EXPECT_EQ(CopyTruck.getPower(), TestTruck.getPower());
+	ASSERT_EQ(CopyTruck.getNrWheels(), TestTruck.getNrWheels());
+	ASSERT_EQ(CopyTruck.getModel(), TestTruck.getModel());
 }
 
 //------------------------------------AssignmentOperator tests: --------------------------------
@@ -68,13 +61,8 @@ TEST(AssignmentOperator, CorrectAssignmentOperator)
 
 	Truck OperatorTruck = TestTruck;
 
-	EXPECT_EQ(TestTruck.getModel(), OperatorTruck.getModel());
-	EXPECT_EQ(TestTruck.getNrWheels(), OperatorTruck.getNrWheels());
-	EXPECT_EQ(TestTruck.getPower(), OperatorTruck.getPower());
-
-	// Since OperatorCar is a reference to TestCar, there is no need to delete it.
-	// Everything it had that contained allocated memory was cleared by deleting TestCar,
-	// deleting OperatorCar as well would cause invalid reads to occur.
+	ASSERT_EQ(TestTruck.getModel(), OperatorTruck.getModel());
+	ASSERT_EQ(TestTruck.getNrWheels(), OperatorTruck.getNrWheels());
 }
 
 int main(int argc, char *argv[])

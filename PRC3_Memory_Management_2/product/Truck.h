@@ -20,7 +20,7 @@ public:
 	   post: the Truck object is destroyed including all allocated memory
 	*/
 
-	int getPower() const;
+	int getPower();
 	/* pre : -
 	   post: returns power
 	*/
