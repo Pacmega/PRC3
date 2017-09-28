@@ -12,6 +12,15 @@ TEST(Construct, CreateTruckCorrect)
 	ASSERT_EQ(TestTruck.getPower(), 90);
 }
 
+// One test to see if the car corrector still handles incorrect input properly
+TEST(Construct, CreateTruckIncorrect)
+{
+	int diameter = 0;
+	int nrWheels = 4;
+	std::string model = "Henk 9000";
+	EXPECT_THROW(Car(model, "Hout", diameter, nrWheels), std::out_of_range);
+}
+
 TEST(Construct, CreateTruckNotPossiblePower)
 {
 	std::string model = "Burger on Wheels";

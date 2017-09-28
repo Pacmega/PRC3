@@ -7,7 +7,7 @@ public:
     virtual ~iUserInterface() {};
 
     virtual void Ping() const = 0;
-    virtual int GetRequestedPower() const = 0;
+    virtual int GetReqPower() const = 0;
     virtual void StartClock() = 0;
     virtual void StopClock() = 0;
 };
