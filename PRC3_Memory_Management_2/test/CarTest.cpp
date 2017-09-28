@@ -92,6 +92,18 @@ TEST(AddingWheel, addWheelSpaceAsMaterial)
 	EXPECT_THROW(TestCar.addWheel(-1, " "), std::out_of_range);
 }
 
+// When giving no material
+TEST(AddingWheel, addWheelBlankAsMaterial)
+{
+	int diameter = 2;
+	int nrWheels = 4;
+	std::string model = "Henk 9000";
+	Car TestCar = Car(model, "Hout", diameter, nrWheels);
+
+	EXPECT_TRUE(TestCar.getNrWheels() == 4);
+	EXPECT_THROW(TestCar.addWheel(-1, ""), std::out_of_range);
+}
+
 //------------------------------------Constructor tests: --------------------------------
 // Normal input in the constructor
 TEST(Construct, TestRealisticInput)
