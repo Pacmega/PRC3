@@ -8,7 +8,7 @@ class mUserInterface : public iUserInterface
 {
     public:
         MOCK_CONST_METHOD0(Ping, void());
-        MOCK_CONST_METHOD0(GetRequestedPower, int());
+        MOCK_CONST_METHOD0(GetReqPower, int());
         MOCK_METHOD0(StartClock, void());
         MOCK_METHOD0(StopClock, void());
 };

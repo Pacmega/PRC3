@@ -8,7 +8,7 @@ Microwave::Microwave(iLight& light, iMotor& motor, iSystem& system, iUserInterfa
     , system(system)
     , ui(ui)
 {
-    
+    power = 0;
 }
 
 States Microwave::HandleStandbyState(Events ev)
@@ -24,7 +24,7 @@ States Microwave::HandleStandbyState(Events ev)
             break;
 
         case EV_OPENDOOR:
-            result = STATE_STANDBY;
+            // State doesn't change
             light.LightOn();
             break;
 
@@ -50,6 +50,7 @@ States Microwave::HandleOperatingState(Events ev)
         case EV_TIME_UP:
             result = STATE_STANDBY;
             motor.SetPower(0);
+            ui.Ping();
             break;
 
         case EV_OPENDOOR:
@@ -79,9 +80,11 @@ States Microwave::HandleDoorOpenState(Events ev)
             if (setTime > 0)
             {
                 result = STATE_OPERATING;
+                power = ui.GetReqPower();
                 motor.SetPower(power);
+                ui.StartClock();
             }
-            else if (setTime == 0)
+            else
             {
                 result = STATE_STANDBY;
                 light.LightOff();

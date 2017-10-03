@@ -8,7 +8,6 @@ class mSystem : public iSystem
 {
     public:
         MOCK_METHOD1(SetTimer, void(int));
-        MOCK_METHOD0(Ping, void());
 };
 
 #endif

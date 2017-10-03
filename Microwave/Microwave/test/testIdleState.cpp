@@ -8,16 +8,16 @@
 using ::testing::Return;
 using ::testing::_;
 
-class TestIdleState : public ::testing::Test 
+class TestStates : public ::testing::Test 
 {
   protected:
 
-    TestIdleState() 
+    TestStates() 
     {
         microwave = new Microwave(light, motor, system, ui);
     }
 
-    virtual ~TestIdleState() 
+    virtual ~TestStates() 
     {
         delete microwave;
         microwave = NULL;
@@ -30,10 +30,32 @@ class TestIdleState : public ::testing::Test
     Microwave* microwave;
 };
 
-TEST_F(TestIdleState, test_start_event)
+TEST_F(TestStates, standby_test_start_event)
 {
-    // EXPECT_CALL(ui, GetRequestedPower()).WillOnce(Return(800));
-    // EXPECT_CALL(motor, SetPower(800));
+    EXPECT_CALL(light, LightOn())
+                .Times(1);
+    
+    // After being created, the microwave has a default power of 0.
+    EXPECT_CALL(motor, SetPower(0))
+                .Times(1);
+
     EXPECT_EQ(STATE_OPERATING, microwave->HandleStandbyState(EV_START));
 }
 
+TEST_F(TestStates, standby_test_change_power_event)
+{
+    EXPECT_CALL(ui, GetReqPower())
+                .Times(1);
+
+    // State should not be changed
+    EXPECT_EQ(STATE_STANDBY, microwave->HandleStandbyState(EV_CHANGEPOWER));
+}
+
+TEST_F(TestStates, standby_test_open_door_event)
+{
+    EXPECT_CALL(light, LightOn())
+                .Times(1);
+
+    // State should not be changed
+    EXPECT_EQ(STATE_STANDBY, microwave->HandleStandbyState(EV_OPENDOOR));
+}
