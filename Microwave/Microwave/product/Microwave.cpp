@@ -8,6 +8,7 @@ Microwave::Microwave(iLight& light, iMotor& motor, iSystem& system, iUserInterfa
     , system(system)
     , ui(ui)
 {
+    
 }
 
 States Microwave::HandleStandbyState(Events ev)

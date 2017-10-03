@@ -8,14 +8,17 @@
 using ::testing::Return;
 using ::testing::_;
 
-class TestIdleState : public ::testing::Test {
+class TestIdleState : public ::testing::Test 
+{
   protected:
 
-    TestIdleState() {
+    TestIdleState() 
+    {
         microwave = new Microwave(light, motor, system, ui);
     }
 
-    virtual ~TestIdleState() {
+    virtual ~TestIdleState() 
+    {
         delete microwave;
         microwave = NULL;
     }
@@ -31,6 +34,6 @@ TEST_F(TestIdleState, test_start_event)
 {
     // EXPECT_CALL(ui, GetRequestedPower()).WillOnce(Return(800));
     // EXPECT_CALL(motor, SetPower(800));
-    EXPECT_EQ(STATE_HEATING, microwave->HandleIdleState(EV_START));
+    EXPECT_EQ(STATE_OPERATING, microwave->HandleStandbyState(EV_START));
 }
 
