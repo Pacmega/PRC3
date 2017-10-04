@@ -1,0 +1,22 @@
+// No way available to get the current timer state, so no way available to set the local timer (private variable & SetTimer is skipped because it's "uninteresting")
+TEST_F(TestDoorOpenState, operating_test_opened_door_is_closed_with_time_above_zero_event)
+{
+    EXPECT_CALL(ui, GetReqPower())
+                .WillOnce(Return(325));
+
+    EXPECT_CALL(motor, SetPower(ui.GetReqPower()))
+                .Times(1);
+
+    EXPECT_CALL(ui, StartClock())
+    			.Times(1);
+
+    EXPECT_EQ(STATE_OPERATING, microwave->HandleDoorOpenState(EV_CLOSEDOOR));
+}
+
+TEST_F(TestDoorOpenState, operating_test_opened_door_change_power_event)
+{
+    EXPECT_CALL(ui, GetReqPower())
+                .Times(1);
+
+    EXPECT_EQ(STATE_DOOROPEN, microwave->HandleDoorOpenState(EV_CHANGEPOWER));
+}

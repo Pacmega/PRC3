@@ -80,9 +80,7 @@ States Microwave::HandleDoorOpenState(Events ev)
             if (setTime > 0)
             {
                 result = STATE_OPERATING;
-                power = ui.GetReqPower();
-                motor.SetPower(power);
-                ui.StartClock();
+                motor.SetPower(ui.GetReqPower());
             }
             else
             {

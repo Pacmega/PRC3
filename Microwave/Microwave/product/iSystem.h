@@ -7,7 +7,6 @@ public:
     virtual ~iSystem() {};
 
     virtual void SetTimer(int ms) = 0;
-    virtual int GetTimer() = 0;
 };
 
 #endif
