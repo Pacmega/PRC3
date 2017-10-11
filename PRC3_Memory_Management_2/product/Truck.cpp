@@ -8,7 +8,7 @@ Truck::Truck(const std::string& model, const std::string& material, int diameter
 	
 	if(power > 0) // Everything else is checked by the Car constructor.
 	{
-		this->power = &power;
+		this->power = new int (power);
 	}
 	else
 	{
