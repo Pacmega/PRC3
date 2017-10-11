@@ -19,6 +19,20 @@ ScanList::~ScanList()
     }
 }
 
+int ScanList::getNrElements()
+{
+    Scan* temp = head;
+    int nrElements = 0;
+
+    while (temp != NULL)
+    {
+        nrElements++;
+        temp = temp->getNext();
+    }
+
+    return nrElements;
+}
+
 /* Commented so we can make use of this later to display everything
 void ScanList::show()
 {
@@ -35,7 +49,10 @@ void ScanList::show()
 
 void addScan(int serialNumber)
 {
-    
+    if (serialNumber < 0)
+    {
+
+    }
 }
 
 Scan* ScanList::getScanByNr(int nr)
@@ -52,6 +69,7 @@ Scan* ScanList::getScanByNr(int nr)
         i++;
         temp = temp->getNext();
     }
+
     return temp;
 }
 
@@ -90,7 +108,20 @@ bool ScanList::removeScan(Scan* scanToRemove)
     return false;
 }
 
-int getTImesRecycled(int serialNumber)
+int getTimesRecycled(int serialNumber)
 {
-    return -1;
+    if (serialNumber >= 0 && serialNumber < getNrElements())
+    {
+        int timesRecycled = 0;
+        Scan* temp = getScanByNr(serialNumber);
+
+        if (temp != NULL)
+        {
+            timesRecycled = temp.getTimesRecycled();
+        }
+
+        return timesRecycled;
+    }
+
+    return 0;
 }

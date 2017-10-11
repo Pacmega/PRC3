@@ -8,6 +8,8 @@ class ScanList
 private:
     Scan* head; // pointer to linked list of Scans
 
+    int getNrElements(); // returns the number of elements present in the list.
+
 public:
 	ScanList();
 	//	pre : -
