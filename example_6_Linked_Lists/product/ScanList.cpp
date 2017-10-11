@@ -37,7 +37,26 @@ void ScanList::addScan(int serialNumber)
 {
     if (serialNumber < 0)
     {
+        Scan* temp = head;
 
+        while (temp != NULL)
+        {
+            if (temp->getSerialNumber() == serialNumber)
+            {
+                temp->recycle();
+            }
+            else if (temp->getNext()->getSerialNumber() > serialNumber)
+            {
+                // If the next scan has a larger serialNumber,
+                // the new scan should go just in front of it.
+
+                Scan* newScan = new Scan(serialNumber);
+                newScan->setNext(temp->getNext());
+                temp->setNext(newScan);
+            }
+
+            temp = temp->getNext();
+        }
     }
 }
 
