@@ -34,6 +34,12 @@ public:
 	// THEN return a pointer to the scan at that position
 	// ELSE return NULL
 
+	Scan* getScanBySerialNr(int serialNumber);
+	// pre: -
+	// post: IF a scan in the list has the given serialNumber
+	// THEN return a pointer to the scan with that serialNumber
+	// ELSE return NULL
+
 	bool removeScan (int serialNumber);
 	// pre:  serialNumbers are in ascending order in linked list scans
 	// post: IF serialNumber is present in the list

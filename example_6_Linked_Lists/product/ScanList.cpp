@@ -33,20 +33,6 @@ int ScanList::getNrElements()
     return nrElements;
 }
 
-/* Commented so we can make use of this later to display everything
-void ScanList::show()
-{
-    Scan* temp = head;
-    std::cout << "\ncurrent scanlist: ";
-    while (temp != NULL)
-    {
-        std::cout << temp->getValue() << " -> ";
-        temp = temp->getNext();
-    }
-    std::cout << "NULL" << std::endl;
-}
-*/
-
 void ScanList::addScan(int serialNumber)
 {
     if (serialNumber < 0)
@@ -73,18 +59,33 @@ Scan* ScanList::getScanByNr(int nr)
     return temp;
 }
 
-bool ScanList::removeScan(int serialNumber)
+Scan* ScanList::getScanBySerialNr(int serialNumber)
 {
-    return false;
+    Scan* temp = head;
+
+    while (temp != NULL)
+    {
+        if (temp->getSerialNumber() == serialNumber)
+        {
+            return temp;
+        }
+        else
+        {
+            temp = temp->getNext();
+        }
+    }
+
+    return temp;
 }
 
-/*
-bool ScanList::removeScan(Scan* scanToRemove)
+bool ScanList::removeScan(int serialNumber)
 {
-    if (scanToRemove == NULL)
+    if (serialNumber < 0 || serialNumber >= getNrElements())
     {
         return false;
     }
+
+    Scan* scanToRemove = getScanBySerialNr(serialNumber);
 
     if (scanToRemove == head)
     {
@@ -104,7 +105,7 @@ bool ScanList::removeScan(Scan* scanToRemove)
     {
         // temp is now pointing at the scan before scanToRemove
         temp->setNext(scanToRemove->getNext());
-        // scanToRemove has been "cut out of the list"
+        // scanToRemove has been cut out of the list
         delete scanToRemove;
         scanToRemove = NULL;
         return true;
@@ -113,14 +114,13 @@ bool ScanList::removeScan(Scan* scanToRemove)
     // scanToRemove is not in the list
     return false;
 }
-*/
 
 int ScanList::getTimesRecycled(int serialNumber)
 {
     if (serialNumber >= 0 && serialNumber < getNrElements())
     {
         int timesRecycled = 0;
-        Scan* temp = getScanByNr(serialNumber);
+        Scan* temp = getScanBySerialNr(serialNumber);
 
         if (temp != NULL)
         {
