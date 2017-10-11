@@ -3,12 +3,12 @@
 
 #include "ScanList.h"
 
-ScanList::ScanList(void)
+ScanList::ScanList()
     : head(NULL)
 {
 }
 
-ScanList::~ScanList(void)
+ScanList::~ScanList()
 {
     while (head != NULL)
     {
@@ -19,6 +19,7 @@ ScanList::~ScanList(void)
     }
 }
 
+/* Commented so we can make use of this later to display everything
 void ScanList::show()
 {
     Scan* temp = head;
@@ -30,10 +31,11 @@ void ScanList::show()
     }
     std::cout << "NULL" << std::endl;
 }
+*/
 
-Scan* ScanList::getFirstScan(void)
+void addScan(int serialNumber)
 {
-    return head;
+    
 }
 
 Scan* ScanList::getScanByNr(int nr)
@@ -51,64 +53,6 @@ Scan* ScanList::getScanByNr(int nr)
         temp = temp->getNext();
     }
     return temp;
-}
-
-bool ScanList::insertAfter(Scan* newScan, Scan* scanToInsertAfter)
-{
-    if (newScan == NULL || scanToInsertAfter == NULL)
-    {
-        return false;
-    }
-
-    // look for scanToInsertAfter in list
-    Scan* temp = head;
-    while (temp != scanToInsertAfter && temp != NULL)
-    {
-        temp = temp->getNext();
-    }
-
-    if (temp != NULL)
-    {
-        // scanToInsertAfter was found in linked list, insert newScan
-        newScan->setNext(scanToInsertAfter->getNext());
-        scanToInsertAfter->setNext(newScan);
-        return true;
-    }
-
-    // scanToInsertAfter was not found in linked list
-    return false;
-}
-
-bool ScanList::insertBefore(Scan* newScan, Scan* scanToInsertBefore)
-{
-    if (scanToInsertBefore == head)
-    {
-        newScan->setNext(head);
-        head = newScan;
-        return true;
-    }
-
-    if (newScan == NULL || scanToInsertBefore == NULL)
-    {
-        return false;
-    }
-
-    Scan* temp = head;
-    while (temp->getNext() != scanToInsertBefore && temp->getNext() != NULL)
-    {
-        temp = temp->getNext();
-    }
-
-    if (temp->getNext() == scanToInsertBefore)
-    {
-        // temp is now pointing at the scan before scanToInsertBefore
-        newScan->setNext(scanToInsertBefore);
-        temp->setNext(newScan);
-        return true;
-    }
-
-    // scanToInsertBefore was not found in linked list
-    return false;
 }
 
 bool ScanList::removeScan(Scan* scanToRemove)
@@ -144,4 +88,9 @@ bool ScanList::removeScan(Scan* scanToRemove)
 
     // scanToRemove is not in the list
     return false;
+}
+
+int getTImesRecycled(int serialNumber)
+{
+    return -1;
 }
