@@ -47,7 +47,7 @@ void ScanList::show()
 }
 */
 
-void addScan(int serialNumber)
+void ScanList::addScan(int serialNumber)
 {
     if (serialNumber < 0)
     {
@@ -73,6 +73,12 @@ Scan* ScanList::getScanByNr(int nr)
     return temp;
 }
 
+bool ScanList::removeScan(int serialNumber)
+{
+    return false;
+}
+
+/*
 bool ScanList::removeScan(Scan* scanToRemove)
 {
     if (scanToRemove == NULL)
@@ -107,8 +113,9 @@ bool ScanList::removeScan(Scan* scanToRemove)
     // scanToRemove is not in the list
     return false;
 }
+*/
 
-int getTimesRecycled(int serialNumber)
+int ScanList::getTimesRecycled(int serialNumber)
 {
     if (serialNumber >= 0 && serialNumber < getNrElements())
     {
@@ -117,7 +124,7 @@ int getTimesRecycled(int serialNumber)
 
         if (temp != NULL)
         {
-            timesRecycled = temp.getTimesRecycled();
+            timesRecycled = temp->getTimesRecycled();
         }
 
         return timesRecycled;
