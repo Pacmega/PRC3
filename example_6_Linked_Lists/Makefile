@@ -26,7 +26,7 @@ testScan: $(SCAN_SOURCES) Makefile product/Scan.h
 	@$(GCC) $(CFLAGS) $(SCAN_SOURCES) $(TEST_LIBS) -o $@
 
 clean:
-	@rm -rf $(PROJECT_NAME) testScanlist testScan
+	@rm -rf $(PROJECT_NAME) testScanList testScan
 
 scanlist: testScanlist
 	@valgrind ./testScanlist
