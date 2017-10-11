@@ -5,7 +5,8 @@ CFLAGS=-Wall -Werror -ggdb -O0 -Iproduct
 MAIN_SOURCES=product/*.cpp
 
 SCANLIST_SOURCES=product/ScanList.cpp \
-				 test/testScanList.cpp
+				 product/Scan.cpp \
+				 test/testScanList.cpp \
 
 SCAN_SOURCES=product/Scan.cpp \
 			 test/testScan.cpp
