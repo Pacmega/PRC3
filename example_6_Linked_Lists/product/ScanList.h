@@ -45,3 +45,5 @@ public:
 	// ELSE return 0
 
 };
+
+#endif
