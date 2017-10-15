@@ -5,8 +5,8 @@ CFLAGS=-Wall -Werror -ggdb -O0 -Iproduct
 MAIN_SOURCES=product/*.cpp
 
 SCANLIST_SOURCES=product/ScanList.cpp \
+				 product/Scan.cpp \
 				 test/testScanList.cpp \
-				 product/Scan.cpp
 
 SCAN_SOURCES=product/Scan.cpp \
 			 test/testScan.cpp
@@ -26,14 +26,11 @@ testScanlist: $(SCANLIST_SOURCES) Makefile product/ScanList.h
 testScan: $(SCAN_SOURCES) Makefile product/Scan.h
 	@$(GCC) $(CFLAGS) $(SCAN_SOURCES) $(TEST_LIBS) -o $@
 
+clean:
+	@rm -rf $(PROJECT_NAME) testScanList testScan
+
 scanlist: testScanlist
 	@valgrind ./testScanlist
 
 scan: testScan
 	@valgrind ./testScan
-
-war: scanlist scan $(PROJECT_NAME)
-	@valgrind $(PROJECT_NAME)
-
-clean:
-	@rm -rf $(PROJECT_NAME) scanlist scan testScanlist testScan
