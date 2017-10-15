@@ -32,6 +32,8 @@ TEST(NextScanSetGet, CorrectInput)
 	Scan secondScan = Scan(123);
 
 	firstScan.setNext(&secondScan);
+
+	EXPECT_EQ(firstScan.getNext().getSerialNumber(), secondScan.getSerialNumber());
 }
 
 int main(int argc, char *argv[])
