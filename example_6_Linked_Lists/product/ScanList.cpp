@@ -37,6 +37,10 @@ void ScanList::addScan(int serialNumber)
 {
     if (serialNumber < 0)
     {
+        throw std::out_of_range("Invalid serial number");
+    }
+    else
+    {
         Scan* temp = head;
 
         while (temp != NULL)

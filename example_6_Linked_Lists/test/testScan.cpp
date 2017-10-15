@@ -19,12 +19,6 @@ TEST(constructor, NumberBelowZero)
 	EXPECT_THROW(Scan(-200), std::out_of_range);
 }
 
-TEST(constructor, VeryBigNumber)
-{
-	// Should be too much for an integer to handle
-	EXPECT_THROW(Scan(2147483658), std::out_of_range);
-}
-
 TEST(NextScanSetGet, CorrectInput)
 {
 	Scan firstScan = Scan(145616);
@@ -33,7 +27,7 @@ TEST(NextScanSetGet, CorrectInput)
 
 	firstScan.setNext(&secondScan);
 
-	EXPECT_EQ(firstScan.getNext().getSerialNumber(), secondScan.getSerialNumber());
+	EXPECT_EQ(firstScan.getNext()->getSerialNumber(), secondScan.getSerialNumber());
 }
 
 int main(int argc, char *argv[])
