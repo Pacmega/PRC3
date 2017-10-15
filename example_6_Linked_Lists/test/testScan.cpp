@@ -19,13 +19,7 @@ TEST(constructor, NumberBelowZero)
 	EXPECT_THROW(Scan(-200), std::out_of_range);
 }
 
-TEST(constructor, VeryBigNumber)
-{
-	// Should be too much for an integer to handle
-	EXPECT_THROW(Scan(2147483658), std::out_of_range);
-}
-
-TEST(NextScanSetGet, CorrectInput)
+TEST(nextScanSetGet, CorrectInput)
 {
 	Scan firstScan = Scan(145616);
 
@@ -33,7 +27,25 @@ TEST(NextScanSetGet, CorrectInput)
 
 	firstScan.setNext(&secondScan);
 
-	EXPECT_EQ(firstScan.getNext().getSerialNumber(), secondScan.getSerialNumber());
+	EXPECT_EQ(firstScan.getNext()->getSerialNumber(), secondScan.getSerialNumber());
+}
+
+TEST(nextScanSetGet, NoSetBeforeGet)
+{
+	Scan firstScan = Scan(6353);
+
+	EXPECT_THROW(firstScan.getNext(), std::invalid_argument);
+}
+
+TEST(recycle, recycleCorrect)
+{
+	// Recycling a few times to be sure
+	Scan firstScan = Scan(5134);
+	EXPECT_EQ(firstScan.getTimesRecycled(), 0);
+	firstScan.recycle();
+	EXPECT_EQ(firstScan.getTimesRecycled(), 1);
+	firstScan.recycle();
+	EXPECT_EQ(firstScan.getTimesRecycled(), 2);
 }
 
 int main(int argc, char *argv[])
@@ -41,5 +53,3 @@ int main(int argc, char *argv[])
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
 }
-
-// This is just a test
