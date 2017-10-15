@@ -1,9 +1,3 @@
-/*
- * Scan.h
- *
- *  Created on: Sep 25, 2013
- *  Author: P. Lambooij
- */
 
 #ifndef SCAN_H
 #define SCAN_H

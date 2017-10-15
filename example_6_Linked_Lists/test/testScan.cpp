@@ -22,12 +22,16 @@ TEST(constructor, NumberBelowZero)
 TEST(constructor, VeryBigNumber)
 {
 	// Should be too much for an integer to handle
-	EXPECT_THROW(Scan(2147483658), std::out_of_range)
+	EXPECT_THROW(Scan(2147483658), std::out_of_range);
 }
 
-TEST()
+TEST(NextScanSetGet, CorrectInput)
 {
-	
+	Scan firstScan = Scan(145616);
+
+	Scan secondScan = Scan(123);
+
+	firstScan.setNext(&secondScan);
 }
 
 int main(int argc, char *argv[])
