@@ -2,22 +2,137 @@
 #include "ScanList.h"
 #include "Scan.h"
 
-TEST(getNrElements, correctInput)
+TEST(addScan, correctInput)
 {
 	ScanList List = ScanList();
-	// Test to see if it will work with 0 elements
-	EXPECT_EQ(List.getNrElements(), 0);
 
-	Scan firstScan = Scan(10);
-	List.addScan(firstScan.getSerialNumber());
+	List.addScan(10);
+	List.addScan(45);
+	List.addScan(50);
+	List.addScan(10);
+	List.addScan(50);
+	List.addScan(50);
 
-	EXPECT_EQ(List.getNrElements(), 1);
-
-	Scan secondScan = Scan(645354);
-	List.addScan(secondScan.getSerialNumber());
-
-	EXPECT_EQ(List.getNrElements(), 2);
+	EXPECT_EQ(List.getTimesRecycled(10), 1);
+	EXPECT_EQ(List.getTimesRecycled(45), 0);
+	EXPECT_EQ(List.getTimesRecycled(50), 2);
 }
+
+TEST(addScan, serialNumberBelowZero)
+{
+	ScanList List = ScanList();
+
+	EXPECT_THROW(List.addScan(-10), std::out_of_range);
+	EXPECT_THROW(List.addScan(-1000), std::out_of_range);
+	EXPECT_THROW(List.addScan(-3847), std::out_of_range);
+}
+
+
+// Work in progress (currently segmentation fault)
+/*TEST(getScanByNr, correctInput)
+{
+	ScanList List = ScanList();
+
+	List.addScan(10);
+	List.addScan(45);
+	List.addScan(50);
+	List.addScan(10);
+	List.addScan(50);
+	List.addScan(50);
+
+	Scan* firstScan = List.getScanByNr(1);
+
+	EXPECT_EQ(firstScan->getSerialNumber(), 10);
+}*/
+
+TEST(getScanByNr, NotExistingSpot)
+{
+	ScanList List = ScanList();
+
+	List.addScan(10);
+	List.addScan(45);
+	List.addScan(50);
+	List.addScan(10);
+	List.addScan(50);
+	List.addScan(50);
+
+	Scan *ptr = NULL;
+
+	EXPECT_EQ(List.getScanByNr(5), ptr);
+	EXPECT_EQ(List.getScanByNr(10), ptr);
+	EXPECT_EQ(List.getScanByNr(1000), ptr);	
+}
+
+TEST(getScanByNr, BelowZero)
+{
+	ScanList List = ScanList();
+
+	List.addScan(10);
+	List.addScan(45);
+	List.addScan(50);
+	List.addScan(10);
+	List.addScan(50);
+	List.addScan(50);
+
+	Scan *ptr = NULL;
+
+	EXPECT_EQ(List.getScanByNr(-10), ptr);
+	EXPECT_EQ(List.getScanByNr(-150), ptr);
+}
+
+// Work in progress (currently segmentation fault)
+/*TEST(getScanBySerialNr, correctInput)
+{
+	ScanList List = ScanList();
+
+	List.addScan(10);
+	List.addScan(45);
+	List.addScan(50);
+	List.addScan(10);
+	List.addScan(50);
+	List.addScan(50);
+
+	Scan* firstScan = List.getScanBySerialNr(10);
+
+	EXPECT_EQ(firstScan->getSerialNumber(), 10);
+	EXPECT_EQ(firstScan->getTimesRecycled(), 1);
+}*/
+
+TEST(getScanBySerialNr, NotExistingSpot)
+{
+	ScanList List = ScanList();
+
+	List.addScan(10);
+	List.addScan(45);
+	List.addScan(50);
+	List.addScan(10);
+	List.addScan(50);
+	List.addScan(50);
+
+	Scan *ptr = NULL;
+
+	EXPECT_EQ(List.getScanBySerialNr(5), ptr);
+	EXPECT_EQ(List.getScanBySerialNr(10), ptr);
+	EXPECT_EQ(List.getScanBySerialNr(1000), ptr);	
+}
+
+TEST(getScanBySerialNr, BelowZero)
+{
+	ScanList List = ScanList();
+
+	List.addScan(10);
+	List.addScan(45);
+	List.addScan(50);
+	List.addScan(10);
+	List.addScan(50);
+	List.addScan(50);
+
+	Scan *ptr = NULL;
+
+	EXPECT_EQ(List.getScanBySerialNr(-10), ptr);
+	EXPECT_EQ(List.getScanBySerialNr(-150), ptr);
+}
+
 
 int main(int argc, char *argv[])
 {
