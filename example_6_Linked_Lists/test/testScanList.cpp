@@ -133,6 +133,55 @@ TEST(getScanBySerialNr, BelowZero)
 	EXPECT_EQ(List.getScanBySerialNr(-150), ptr);
 }
 
+TEST(removeScan, correctInput)
+{
+	ScanList List = ScanList();
+
+	List.addScan(10);
+	List.addScan(45);
+	List.addScan(50);
+	List.addScan(10);
+	List.addScan(50);
+	List.addScan(50);
+
+	EXPECT_EQ(List.removeScan(10), true);
+
+	Scan *ptr = NULL;
+
+	EXPECT_EQ(List.getScanBySerialNr(10), ptr);
+}
+
+TEST(removeScan, NotExistingNumbers)
+{
+	ScanList List = ScanList();
+
+	List.addScan(10);
+	List.addScan(45);
+	List.addScan(50);
+	List.addScan(10);
+	List.addScan(50);
+	List.addScan(50);
+
+	EXPECT_EQ(List.removeScan(15), false);
+	EXPECT_EQ(List.removeScan(-30), false);
+	EXPECT_EQ(List.removeScan(2000), false);
+}
+
+TEST(getTimesRecycled, NotExistingNumbers)
+{
+	ScanList List = ScanList();
+
+	List.addScan(10);
+	List.addScan(45);
+	List.addScan(50);
+	List.addScan(10);
+	List.addScan(50);
+	List.addScan(50);
+
+	EXPECT_EQ(List.getTimesRecycled(4552), 0);
+	EXPECT_EQ(List.getTimesRecycled(-10), 0);
+	EXPECT_EQ(List.getTimesRecycled(2), 0);
+}
 
 int main(int argc, char *argv[])
 {
