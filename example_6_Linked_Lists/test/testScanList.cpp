@@ -28,8 +28,7 @@ TEST(addScan, serialNumberBelowZero)
 }
 
 
-// Work in progress (currently segmentation fault)
-/*TEST(getScanByNr, correctInput)
+TEST(getScanByNr, correctInput)
 {
 	ScanList List = ScanList();
 
@@ -42,8 +41,8 @@ TEST(addScan, serialNumberBelowZero)
 
 	Scan* firstScan = List.getScanByNr(1);
 
-	EXPECT_EQ(firstScan->getSerialNumber(), 10);
-}*/
+	EXPECT_EQ(firstScan->getSerialNumber(), 45);
+}
 
 TEST(getScanByNr, NotExistingSpot)
 {
@@ -80,8 +79,7 @@ TEST(getScanByNr, BelowZero)
 	EXPECT_EQ(List.getScanByNr(-150), ptr);
 }
 
-// Work in progress (currently segmentation fault)
-/*TEST(getScanBySerialNr, correctInput)
+TEST(getScanBySerialNr, correctInput)
 {
 	ScanList List = ScanList();
 
@@ -96,7 +94,7 @@ TEST(getScanByNr, BelowZero)
 
 	EXPECT_EQ(firstScan->getSerialNumber(), 10);
 	EXPECT_EQ(firstScan->getTimesRecycled(), 1);
-}*/
+}
 
 TEST(getScanBySerialNr, NotExistingSpot)
 {
@@ -112,7 +110,7 @@ TEST(getScanBySerialNr, NotExistingSpot)
 	Scan *ptr = NULL;
 
 	EXPECT_EQ(List.getScanBySerialNr(5), ptr);
-	EXPECT_EQ(List.getScanBySerialNr(10), ptr);
+	EXPECT_EQ(List.getScanBySerialNr(100), ptr);
 	EXPECT_EQ(List.getScanBySerialNr(1000), ptr);	
 }
 
@@ -178,8 +176,8 @@ TEST(getTimesRecycled, NotExistingNumbers)
 	List.addScan(50);
 	List.addScan(50);
 
+	EXPECT_THROW(List.getTimesRecycled(-10), std::out_of_range);
 	EXPECT_EQ(List.getTimesRecycled(4552), 0);
-	EXPECT_EQ(List.getTimesRecycled(-10), 0);
 	EXPECT_EQ(List.getTimesRecycled(2), 0);
 }
 

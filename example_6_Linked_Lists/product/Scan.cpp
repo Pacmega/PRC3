@@ -18,11 +18,7 @@ Scan::Scan(int number)
 	}
 }
 
-Scan::~Scan()
-{
-	//delete next;
-	//next = NULL;
-}
+Scan::~Scan() {}
 
 int Scan::getSerialNumber() const
 {
@@ -36,7 +32,14 @@ Scan* Scan::getNext()
 
 void Scan::setNext(Scan* nextScan)
 {
-	next = nextScan;
+	if (nextScan != NULL)
+	{
+		next = nextScan;
+	}
+	else
+	{
+		throw std::invalid_argument("Invalid next Scan.");
+	}
 }
 
 void Scan::recycle()

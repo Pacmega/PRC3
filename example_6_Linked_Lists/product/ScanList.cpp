@@ -41,25 +41,52 @@ void ScanList::addScan(int serialNumber)
     }
     else
     {
-        Scan* temp = head;
-
-        while (temp != NULL)
+        if (head == NULL)
         {
-            if (temp->getSerialNumber() == serialNumber)
-            {
-                temp->recycle();
-            }
-            else if (temp->getNext()->getSerialNumber() > serialNumber)
-            {
-                // If the next scan has a larger serialNumber,
-                // the new scan should go just in front of it.
+            Scan* newScan = new Scan(serialNumber);
+            head = newScan;
+            // std::cout << "Created new head with " << serialNumber << std::endl;
+        }
+        else
+        {
+            Scan* temp = head;
 
-                Scan* newScan = new Scan(serialNumber);
-                newScan->setNext(temp->getNext());
-                temp->setNext(newScan);
-            }
+            while (temp != NULL)
+            {
+                if (temp->getSerialNumber() == serialNumber)
+                {
+                    // Found the scan in the list
+                    
+                    temp->recycle();
+                    // std::cout << "Recycled serial number " << serialNumber << std::endl;
+                    
+                    break; // Don't continue iterating through the list and waste resources
+                }
+                else if (temp->getNext() == NULL)
+                {
+                    // Reached the end of the list, scan does not exist yet
 
-            temp = temp->getNext();
+                    Scan* newScan = new Scan(serialNumber);
+                    temp->setNext(newScan);
+                    // std::cout << "Added serial number " << serialNumber << " last in line" << std::endl;
+
+                    break; // Don't continue iterating through the list and waste resources
+                }
+                else if (temp->getNext()->getSerialNumber() > serialNumber)
+                {
+                    // If the next scan has a larger serialNumber,
+                    // the new scan should go just in front of it.
+
+                    Scan* newScan = new Scan(serialNumber);
+                    newScan->setNext(temp->getNext());
+                    temp->setNext(newScan);
+                    // std::cout << "Added serial number " << serialNumber << " just before " << temp->getNext()->getSerialNumber() << std::endl;
+
+                    break; // Don't continue iterating through the list and waste resources
+                }
+
+                temp = temp->getNext();
+            }
         }
     }
 }
@@ -85,9 +112,12 @@ Scan* ScanList::getScanByNr(int nr)
 Scan* ScanList::getScanBySerialNr(int serialNumber)
 {
     Scan* temp = head;
+    // std::cout << "serialNumber to find: " << serialNumber << std::endl;
 
     while (temp != NULL)
     {
+        // std::cout << "serialNumber of this temp: " << temp->getSerialNumber() << std::endl;
+
         if (temp->getSerialNumber() == serialNumber)
         {
             return temp;
@@ -103,12 +133,17 @@ Scan* ScanList::getScanBySerialNr(int serialNumber)
 
 bool ScanList::removeScan(int serialNumber)
 {
-    if (serialNumber < 0 || serialNumber >= getNrElements())
+    if (serialNumber < 0)
     {
         return false;
     }
 
     Scan* scanToRemove = getScanBySerialNr(serialNumber);
+
+    if (scanToRemove == NULL)
+    {
+        return false;
+    }
 
     if (scanToRemove == head)
     {
@@ -140,7 +175,7 @@ bool ScanList::removeScan(int serialNumber)
 
 int ScanList::getTimesRecycled(int serialNumber)
 {
-    if (serialNumber >= 0 && serialNumber < getNrElements())
+    if (serialNumber >= 0)
     {
         int timesRecycled = 0;
         Scan* temp = getScanBySerialNr(serialNumber);
@@ -152,6 +187,8 @@ int ScanList::getTimesRecycled(int serialNumber)
 
         return timesRecycled;
     }
-
-    return 0;
+    else
+    {
+        throw std::out_of_range("Invalid serial number");
+    }
 }

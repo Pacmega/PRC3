@@ -34,7 +34,9 @@ TEST(nextScanSetGet, NoSetBeforeGet)
 {
 	Scan firstScan = Scan(6353);
 
-	EXPECT_THROW(firstScan.getNext(), std::invalid_argument);
+	Scan *ptr = NULL;
+
+	EXPECT_EQ(firstScan.getNext(), ptr);
 }
 
 TEST(recycle, recycleCorrect)
