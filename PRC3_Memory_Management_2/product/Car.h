@@ -19,22 +19,35 @@ private:
     std::string licencePlate;
     std::string model;
 
-    bool indexInRange(int index);
+    bool indexInRange(int index) const;
     /* pre : -
      * post: returns if wheels[index] is valid
      */
     
-    void deleteAllWheels();
+    void removeAllWheels();
     /* pre : -
      * post: all wheels in this car are deleted
      */
-    
+
+    // This looks a lot like a private copy constructor... What?    
     void copyCar(const Car& otherCar);
     /* pre : -
      * post: all otherCar fields are deep copied into this
      */
 
 public:
+    void removeWheel(int index);
+    /* pre : -
+       post: if 0 <= index < nr wheels in <Car>
+             then wheel nr index is removed from <Car>
+             else out_of_range exception with text: "illegal index" is thrown
+    */
+
+    void addWheel(int diameter, const std::string& material);
+    /* pre : diameter > 0
+       post: a wheel with given diameter and material is added to <Car>
+    */
+
     Car(const std::string& model, const std::string& material, int diameter, int nrWheels);
     /* pre : diameter > 0 and nrWheels > 2
        post: A Car object is created that contains nrWheels Wheel objects
@@ -46,7 +59,7 @@ public:
 	     post: the Car object is destroyed including all allocated memory
   	*/
 
-    const std::string& getModel();
+    const std::string& getModel() const;
     /* pre : -
        post: getModel()= <Car> model
     */
@@ -56,34 +69,22 @@ public:
        post: <Car>'s licence plate is licence
     */
 
-    const std::string& getLicencePlate();
+    const std::string& getLicencePlate() const;
     /* pre : -
        post: getLicencePlate()= <Car>'s licence plate
     */
 
-    int getNrWheels();
+    int getNrWheels() const;
     /* pre : -
        post: getNrWheels()= <Car>'s nr wheels
     */
 
-    const Wheel* getWheel(int index);
+    const Wheel* getWheel(int index) const;
     /* pre : 0 <= index < nr wheels in <Car>
        post: getWheel(i) = Wheel nr index of <Car>
     */
 
-    void removeWheel(int index);
-    /* pre : -
-       post: if 0 <= index < nr wheels in <Car>
-             then wheel nr index is removed from <Car>
-             else out_of_range exception with text: "illegal index" is thrown
-    */
-
-  	void addWheel(int diameter, const std::string& material);
-  	/* pre : diameter > 0
-  	   post: a wheel with given diameter and material is added to <Car>
-  	*/
-
-  	Car(const Car& myCar);
+    Car(const Car& myCar);
       /* pre : -
   	     post: a Car object is created with all properties of myCar, a deep copy is performed
       */

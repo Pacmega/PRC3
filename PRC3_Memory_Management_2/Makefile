@@ -38,3 +38,5 @@ truck: TruckTest
 
 wheel: WheelTest
 	@./WheelTest
+
+# --leak-check=full 
