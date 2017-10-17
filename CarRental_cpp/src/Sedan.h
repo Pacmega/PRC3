@@ -4,15 +4,15 @@
 class Sedan : public Car
 {
 	public:
-		Sedan(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasTowbar);
-		~Sedan();
-		void Clean();
+		Sedan(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasTowbar, double pricePerKm);
+		void Clean(int kilometers);
 		const bool GetNeedsCleaning();
-
-		bool HasTowbar;
-		bool NeedsCleaning;
+		const bool GetHasTowbar();
 
 	private:
-		double pricePerKm;
+		// Variables
+		bool NeedsCleaning;
+		bool HasTowbar;
+		int LastCleanedAtKm;
 };
 #endif

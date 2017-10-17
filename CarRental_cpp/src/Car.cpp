@@ -1,7 +1,6 @@
 #include <stdexcept>
 #include <cstddef>
 #include <string> 	
-using namespace std;
 
 #include "Car.h"
 
@@ -14,7 +13,7 @@ Car::Car(std::string manufacturer, std::string model, int buildYear, std::string
     Kilometers = 0;
     IsAvailable = true;
     PricePerKm = pricePerKm;
-    NeedsCleaning = false; // New cars don't need cleaning.
+    NeedsCleaning = false;
 }
 
 bool Car::Rent()
@@ -39,17 +38,42 @@ double Car::Return(int kilometers)
         throw std::invalid_argument("Car is returned with less kilometers than it had.");
     }
 
+    if (Kilometers + 1000 <= kilometers)
+    {
+        NeedsCleaning = true;
+    }
+
     double cost = PricePerKm * (kilometers - Kilometers);
-    Kilometers = kilometers;
-    IsAvailable = true;
-    return cost;
+
+    if (cost < 0)
+    {
+        return -1;
+    }
+    else
+    {
+        Kilometers = kilometers;
+        IsAvailable = true;
+        return cost;
+    }
 }
 
 const std::string Car::ToString()
 {
-	return Manufacturer +
+    if (IsAvailable == true)
+    {
+        return Manufacturer +
         " - " + Model +
-        ", " + LicencePlate;
+        ", " + LicencePlate +
+        " - Currently available.";
+    }
+    else
+    {
+        return Manufacturer +
+        " - " + Model +
+        ", " + LicencePlate +
+        " - Currently not available.";
+    }
+	
 }
 
 const std::string Car::GetManufacturer()
@@ -71,11 +95,6 @@ const std::string Car::GetLicencePlate()
 {
 	return LicencePlate;
 }
-
-// const bool Car::GetNeedsCleaning()
-// {
-// 	return NeedsCleaning;
-// }
 
 const int Car::GetKilometers()
 {

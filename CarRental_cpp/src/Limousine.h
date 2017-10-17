@@ -7,17 +7,16 @@ class Limousine : public Car
 {
 	public:
 		// Functions
-		Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasMinibar);
-		~Limousine();
+		Limousine(std::string manufacturer, std::string model, int buildYear, std::string licencePlate, bool hasMinibar, double pricePerKm);
 		double Return(int kilometers);
-		void Clean();
+		void Clean(int kilometers);
 		const bool GetNeedsCleaning();
-
-		// Variables
-		bool HasMinibar;
-		bool NeedsCleaning;	
+		const bool GetHasMinibar();
 
 	private:
-		double pricePerKm;
+		// Variables
+		bool NeedsCleaning;	
+		bool HasMinibar;
+		int LastCleanedAtKm;
 };
 #endif

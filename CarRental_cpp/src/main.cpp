@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : menu.cpp
 // Author      : Freddy Hurkmans
-// Version     :
+// Version     : null.8
 // Copyright   : copyright Freddy Hurkmans
 // Description : Assignment 1 example
 //============================================================================
@@ -21,44 +21,121 @@ void addTestDataToAdministration(RentalAdministration* administration)
 
     for (int i = 0; i < 4; i++)
     {
-        Car* sedan = new Sedan("BMW", "535d", 2012 + i, licencePlates[i], false);
+        Car* sedan = new Sedan("BMW", "535d", 2012 + i, licencePlates[i], false, 6.9);
         administration->Add(sedan);
     }
     for (int i = 4; i < 6; i++)
     {
-        Car* limousine = new Limousine("Rolls Roys", "Phantom Extended Wheelbase", 2015, licencePlates[i], true);
+        Car* limousine = new Limousine("Rolls Roys", "Phantom Extended Wheelbase", 2015, licencePlates[i], true, 5.2);
         administration->Add(limousine);
     }
 }
 
 static void printCars(const RentalAdministration* administration)
 {
+<<<<<<< HEAD
     int carCount = administration->Cars.size();
     for (int i = 0; i < carCount; i++)
     {
         cout << (administration->Cars[i].ToString());
+=======
+    int CarCount = administration->Cars.size();
+
+    for (int i = 0; i < CarCount; i++)
+    {
+        cout << "Car " << i << ": " << administration->Cars[i]->ToString() << "\n";
+>>>>>>> 5239c7acf7d15951aecda94e71a32d91f9b47d70
     }
 }
 
 static size_t selectCar(const RentalAdministration* administration)
 {
-    return 0;
+    int choice = '0';
+    printCars(administration);
+    cout << "Select car: ";
+    cin >> choice;
+    cin.ignore();
+
+    // if the chosen number is higher than the size of the vector, the choice will be the last item in the vector
+    if (choice >= (administration->Cars.size()))
+    {
+        choice = administration->Cars.size() -1; 
+    }
+    // if the chosen number is lower than 0, the choice will be 0
+    if (choice < 0)
+    {
+        choice = 0;
+    }
+
+    cout << "Car " << choice << ": " << administration->Cars[choice]->ToString() << "\n";
+    return choice;
 }
 
 static void rentCar(RentalAdministration* administration, size_t carNumber)
 {
+    string plate = administration->Cars[carNumber]->GetLicencePlate();
+
+    if (administration->RentCar(plate))
+    {
+        cout << "Car rented.";
+    }
+    else
+    {
+        cout << "Unable to rent car. Is it already rented?";
+    }
 }
 
-static void returnCar(RentalAdministration* administration, size_t carNumber)
+static void returnCar(RentalAdministration* administration, size_t carNumber, int kilometers)
 {
+    string plate = administration->Cars[carNumber]->GetLicencePlate();
+
+    try
+    {
+        double cost = administration->ReturnCar(plate, kilometers);
+
+        if (cost == -1)
+        {
+            cout << "An error occured while returning the car. Was it not rented out?";
+        }
+        else
+        {
+        	cout << "Car returned. Cost: $" << cost << endl;
+        }
+    }
+    catch (const std::out_of_range& e)
+    {
+        cout << e.what();
+    }
+    catch (const std::invalid_argument& e)
+    {
+        cout << e.what();
+    }
+    
 }
 
 static void printIfCarNeedsCleaning(const RentalAdministration* administration, size_t carNumber)
 {
+    bool needsCleaning = administration->Cars[carNumber]->GetNeedsCleaning();
+    if (needsCleaning)
+    {
+        cout << ("This car is dirty as shit!");
+        return;
+    }
+    cout << ("This car is fine!");
 }
 
 static void cleanCar(RentalAdministration* administration, size_t carNumber)
 {
+    if (administration->Cars[carNumber]->GetNeedsCleaning())
+    {
+        int cleanedAtKilometers = administration->Cars[carNumber]->GetKilometers();
+        administration->Cars[carNumber]->Clean(cleanedAtKilometers);
+        cout << "Car cleaned!";
+    }
+    else
+    {
+        cout << "Car is already clean.";
+    }
 }
 
 
@@ -81,6 +158,7 @@ int main( void )
 {
     bool quit = false;
     size_t carNumber = 0;
+    int kilometers = 0;
 
     RentalAdministration administration;
     addTestDataToAdministration(&administration);
@@ -88,9 +166,11 @@ int main( void )
     while (!quit)
     {
         char choice = '\0';
+        kilometers = 0;
         showMenu();
         cin >> choice;
         cin.ignore();
+        cout << "\n";
 
         switch (choice)
         {
@@ -104,7 +184,10 @@ int main( void )
             rentCar(&administration, carNumber);
             break;
         case '4' :
-            returnCar(&administration, carNumber);
+        	cout << "What is the current amount of kilometers on the meter?" << endl;
+        	cin >> kilometers;
+        	cin.ignore();
+            returnCar(&administration, carNumber, kilometers);
             break;
         case '5' :
             printIfCarNeedsCleaning(&administration, carNumber);
@@ -120,6 +203,14 @@ int main( void )
             cout << "\n\nI did not understand your choice (" << choice << ")" << endl;
             break;
         }
+    }
+    
+    //delete &administration;
+    int CarCount = administration.Cars.size();
+
+    for (int i = 0; i < CarCount; i++)
+    {
+        delete administration.Cars[i];
     }
 
     return 0;
