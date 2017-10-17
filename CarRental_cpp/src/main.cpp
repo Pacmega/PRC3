@@ -33,11 +33,18 @@ void addTestDataToAdministration(RentalAdministration* administration)
 
 static void printCars(const RentalAdministration* administration)
 {
+<<<<<<< HEAD
+    int carCount = administration->Cars.size();
+    for (int i = 0; i < carCount; i++)
+    {
+        cout << (administration->Cars[i].ToString());
+=======
     int CarCount = administration->Cars.size();
 
     for (int i = 0; i < CarCount; i++)
     {
         cout << "Car " << i << ": " << administration->Cars[i]->ToString() << "\n";
+>>>>>>> 5239c7acf7d15951aecda94e71a32d91f9b47d70
     }
 }
 
