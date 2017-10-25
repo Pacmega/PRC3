@@ -45,7 +45,6 @@ void ScanList::addScan(int serialNumber)
         {
             Scan* newScan = new Scan(serialNumber);
             head = newScan;
-            // std::cout << "Created new head with " << serialNumber << std::endl;
         }
         else
         {
@@ -58,7 +57,6 @@ void ScanList::addScan(int serialNumber)
                     // Found the scan in the list
                     
                     temp->recycle();
-                    // std::cout << "Recycled serial number " << serialNumber << std::endl;
                     
                     break; // Don't continue iterating through the list and waste resources
                 }
@@ -68,7 +66,6 @@ void ScanList::addScan(int serialNumber)
 
                     Scan* newScan = new Scan(serialNumber);
                     temp->setNext(newScan);
-                    // std::cout << "Added serial number " << serialNumber << " last in line" << std::endl;
 
                     break; // Don't continue iterating through the list and waste resources
                 }
@@ -80,7 +77,6 @@ void ScanList::addScan(int serialNumber)
                     Scan* newScan = new Scan(serialNumber);
                     newScan->setNext(temp->getNext());
                     temp->setNext(newScan);
-                    // std::cout << "Added serial number " << serialNumber << " just before " << temp->getNext()->getSerialNumber() << std::endl;
 
                     break; // Don't continue iterating through the list and waste resources
                 }
@@ -91,33 +87,12 @@ void ScanList::addScan(int serialNumber)
     }
 }
 
-Scan* ScanList::getScanByNr(int nr)
-{
-    if (nr < 0 || head == NULL)
-    {
-        return NULL;
-    }
-
-    Scan* temp = head;
-    int i = 0;
-    while (i < nr && temp != NULL)
-    {
-        i++;
-        temp = temp->getNext();
-    }
-
-    return temp;
-}
-
-Scan* ScanList::getScanBySerialNr(int serialNumber)
+Scan* ScanList::getScanByNr(int serialNumber)
 {
     Scan* temp = head;
-    // std::cout << "serialNumber to find: " << serialNumber << std::endl;
 
     while (temp != NULL)
     {
-        // std::cout << "serialNumber of this temp: " << temp->getSerialNumber() << std::endl;
-
         if (temp->getSerialNumber() == serialNumber)
         {
             return temp;
@@ -138,7 +113,7 @@ bool ScanList::removeScan(int serialNumber)
         return false;
     }
 
-    Scan* scanToRemove = getScanBySerialNr(serialNumber);
+    Scan* scanToRemove = getScanByNr(serialNumber);
 
     if (scanToRemove == NULL)
     {
@@ -178,7 +153,7 @@ int ScanList::getTimesRecycled(int serialNumber)
     if (serialNumber >= 0)
     {
         int timesRecycled = 0;
-        Scan* temp = getScanBySerialNr(serialNumber);
+        Scan* temp = getScanByNr(serialNumber);
 
         if (temp != NULL)
         {

@@ -27,7 +27,6 @@ TEST(addScan, serialNumberBelowZero)
 	EXPECT_THROW(List.addScan(-3847), std::out_of_range);
 }
 
-
 TEST(getScanByNr, correctInput)
 {
 	ScanList List = ScanList();
@@ -39,9 +38,10 @@ TEST(getScanByNr, correctInput)
 	List.addScan(50);
 	List.addScan(50);
 
-	Scan* firstScan = List.getScanByNr(1);
+	Scan* firstScan = List.getScanByNr(10);
 
-	EXPECT_EQ(firstScan->getSerialNumber(), 45);
+	EXPECT_EQ(firstScan->getSerialNumber(), 10);
+	EXPECT_EQ(firstScan->getTimesRecycled(), 1);
 }
 
 TEST(getScanByNr, NotExistingSpot)
@@ -58,7 +58,7 @@ TEST(getScanByNr, NotExistingSpot)
 	Scan *ptr = NULL;
 
 	EXPECT_EQ(List.getScanByNr(5), ptr);
-	EXPECT_EQ(List.getScanByNr(10), ptr);
+	EXPECT_EQ(List.getScanByNr(100), ptr);
 	EXPECT_EQ(List.getScanByNr(1000), ptr);	
 }
 
@@ -79,58 +79,6 @@ TEST(getScanByNr, BelowZero)
 	EXPECT_EQ(List.getScanByNr(-150), ptr);
 }
 
-TEST(getScanBySerialNr, correctInput)
-{
-	ScanList List = ScanList();
-
-	List.addScan(10);
-	List.addScan(45);
-	List.addScan(50);
-	List.addScan(10);
-	List.addScan(50);
-	List.addScan(50);
-
-	Scan* firstScan = List.getScanBySerialNr(10);
-
-	EXPECT_EQ(firstScan->getSerialNumber(), 10);
-	EXPECT_EQ(firstScan->getTimesRecycled(), 1);
-}
-
-TEST(getScanBySerialNr, NotExistingSpot)
-{
-	ScanList List = ScanList();
-
-	List.addScan(10);
-	List.addScan(45);
-	List.addScan(50);
-	List.addScan(10);
-	List.addScan(50);
-	List.addScan(50);
-
-	Scan *ptr = NULL;
-
-	EXPECT_EQ(List.getScanBySerialNr(5), ptr);
-	EXPECT_EQ(List.getScanBySerialNr(100), ptr);
-	EXPECT_EQ(List.getScanBySerialNr(1000), ptr);	
-}
-
-TEST(getScanBySerialNr, BelowZero)
-{
-	ScanList List = ScanList();
-
-	List.addScan(10);
-	List.addScan(45);
-	List.addScan(50);
-	List.addScan(10);
-	List.addScan(50);
-	List.addScan(50);
-
-	Scan *ptr = NULL;
-
-	EXPECT_EQ(List.getScanBySerialNr(-10), ptr);
-	EXPECT_EQ(List.getScanBySerialNr(-150), ptr);
-}
-
 TEST(removeScan, correctInput)
 {
 	ScanList List = ScanList();
@@ -146,7 +94,7 @@ TEST(removeScan, correctInput)
 
 	Scan *ptr = NULL;
 
-	EXPECT_EQ(List.getScanBySerialNr(10), ptr);
+	EXPECT_EQ(List.getScanByNr(10), ptr);
 }
 
 TEST(removeScan, NotExistingNumbers)
