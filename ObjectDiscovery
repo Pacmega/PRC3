@@ -1,0 +1,13 @@
+sluice
+  cameraSystem
+  light (red or green)
+  startBtn (for moving boats up/down)
+  clearedBtn (allow boats to leave by showing green light)
+  alarmBtn
+  recoverBtn
+  door (x2)
+    motor
+    valve (x3)
+    levelSensor (one on each side)
+  
+boat
