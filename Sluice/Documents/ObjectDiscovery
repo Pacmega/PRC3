@@ -3,7 +3,8 @@ sluice
   light (red or green)
   Button
     startBtn (for moving boats up/down)
-    clearedBtn (allow boats to leave by showing green light)
+    enterBtn
+    leaveBtn
     alarmBtn
     recoverBtn
   door (x2)
