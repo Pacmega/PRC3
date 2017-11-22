@@ -10,11 +10,11 @@ CC=g++
 
 .phony: all clean install submit
 
+all: clean sort
+
 sort: $(MAIN_OBJECTS) Makefile code/FileStructure.h
 	@$(CC) $(CFLAGS) $(MAIN_LIBS) $(MAIN_SOURCES) -o $@ $(LDDFLAGS)
 	
-all: sort
-
 clean:
 	@rm -rf sort code/*.o test/*.o *.bin
 
