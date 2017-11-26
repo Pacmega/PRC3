@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <string.h>
 
 class item
 {
@@ -63,9 +64,62 @@ public:
     }
 };
 
-void merge()
+void merge(List &ItemList, int l, int m, int r)
 {
-    std::cout << "Wait for 3 days, or pay $1 to sort your list now!" << std::endl;
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 = r - m;
+
+    // Create temporary lists (LS = LeftSide)(RS = RightSide)
+
+    List LS, RS;
+
+    // Copy the data to the lists
+    for (i = 0; i < n1; ++i)
+    {
+        LS[i] = ItemList[l + i];
+    }
+    for (j = 0; j < n2; ++j)
+    {
+        RS[j] = ItemList[m + 1 + j];
+    }
+
+    // Merge the temorary lists back into the original list
+    i = 0; // Initial index of first sub-list
+    j = 0; // Initial index of second sub-list
+    k = 1; // Initial index of merged sub-list
+
+    while(i < n1 && j < n2)
+    {
+        if (strcmp(LS[i].word, RS[j].word) <= 0)
+        {
+            ItemList[k] = LS[i]
+            i++;
+        }
+        else
+        {
+            ItemList[k] = RS[j];
+            j++;
+        }
+        k++;
+    }
+
+    // Copy the remaining items from RS (if any)
+    while(i < n1)
+    {
+        ItemList[k] = LS[i];
+        i++;
+        k++;
+    }
+
+        // Copy the remaining items from RS (if any)
+    while(j < n2)
+    {
+        ItemList[k] = RS[j];
+        j++;
+        k++;
+    }
+    // std::cout << "Wait for 3 days, or pay $1 to sort your list now!" << std::endl;
 }
 
 void splitMerge(List &array, int begin, int end)
@@ -82,7 +136,7 @@ void splitMerge(List &array, int begin, int end)
 
         // Array is split up into units of 1
 
-        merge();
+        merge(array, begin, middle, end);
         // Are these args correct?
         // merge(array, begin, middle, end);
     }
