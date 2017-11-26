@@ -6,11 +6,40 @@ class item
 public:
     item* next;
     item* prev;
-    char * word;
+    char* word;
     item(char * constWord)
     {
         word = constWord;
     }
+};
+
+class List
+{
+public:
+    item* head;
+    item* tail;
+    List()
+    {
+        head = NULL;
+    }
+    void additem (char * word)
+    {
+        if(head == NULL)
+        {
+            item* object = new item(word);
+            head = object;
+            tail = object;
+            return;
+        }
+        else
+        {
+            item* object = new item(word);
+            tail->next = object;
+            object->prev = tail;
+            tail = object;
+            return;
+        }
+    }     
 };
 
 void merge(item * array, int leftIndex, int m, int rightIndex)
@@ -52,7 +81,7 @@ void merge(item * array, int leftIndex, int m, int rightIndex)
     int i = 0; // Initial index of first subarray
     int j = 0; // Initial index of second subarray
     int k = leftIndex; // Initial index of merged subarray
-    std::cout << "before while\n";
+    std::cout << "before while" << std::endl;
 
     while (i < n1 && j < n2)
     {
@@ -67,13 +96,12 @@ void merge(item * array, int leftIndex, int m, int rightIndex)
             //array[k] = leftTemp[i];
             temp->prev->next = leftTemp[i];
             i++;
-            std::cout << "mid while\n";
+            std::cout << "mid while" << std::endl;
         }
-
 
         else
         {
-            std::cout << "mid while\n";
+            std::cout << "mid while" << std::endl;
             item* temp = new item(array->word);
             int z = 0;
             for(z = 0; z < k; z++)
@@ -86,8 +114,7 @@ void merge(item * array, int leftIndex, int m, int rightIndex)
         }
         k++;
     }
-    std::cout << "afther while\n";
-
+    std::cout << "after while" << std::endl;
  
     /* Copy the remaining elements of L[], if there
        are any */
@@ -136,47 +163,6 @@ void sort(item * array, int leftIndex, int rightIndex)
         merge(array, leftIndex, m, rightIndex);
     }
 }
-
-
-
-
-
-
-class List
-{
-public:
-    item* head;
-    item* tail;
-    List()
-    {
-        head = NULL;
-    }
-    void additem (char * word)
-    {
-        if(head == NULL)
-        {
-            item* object = new item(word);
-            head = object;
-            tail = object;
-            return;
-        }
-        else
-        {
-            item* object = new item(word);
-            tail->next = object;
-            object->prev = tail;
-            tail = object;
-            return;
-        }
-
-    }
-         
-            
-            
-};
-
-
-
 
 int main(void)
 {
