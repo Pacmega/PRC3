@@ -65,7 +65,8 @@ public:
 void merge(item * array, int leftIndex, int m, int rightIndex)
 {
     std::cout << "Merge params: \narray address: " << &array << "\nleftIndex: " << leftIndex << "\nMiddle point: " << m << "\nrightIndex: " << rightIndex << std::endl;
-	// Merges two subarrays of arr[].
+	
+    // Merges two subarrays of arr[].
 	// First subarray is arr[leftIndex..m]
 	// Second subarray is arr[m+1..rightIndex]
 	//int leftIndexFirstSub, j, k;

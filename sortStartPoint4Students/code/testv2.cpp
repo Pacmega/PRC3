@@ -28,7 +28,7 @@ public:
         tail = NULL;
     }
 
-    void additem (char * word)
+    void addItem (char * word)
     {
         if(head == NULL)
         {
@@ -63,18 +63,81 @@ public:
     }
 };
 
-void populateList(List &list)
+void merge()
 {
-    list.additem((char*)"zaterdag");
-    list.additem((char*)"zondag");
-    list.additem((char*)"maandag");
-    list.additem((char*)"dinsdag");
-    list.additem((char*)"woensdag");
-    list.additem((char*)"donderdag");
-    list.additem((char*)"vrijdag");
-    list.additem((char*)"school");
-    list.additem((char*)"laptop");
-    list.additem((char*)"pc master race");
+    std::cout << "Wait for 3 days, or pay $1 to sort your list now!" << std::endl;
+}
+
+void splitMerge(List &array, int begin, int end)
+{
+    if (begin < end)
+    {
+        // Same as (begin+end)/2, but avoids overflow for
+        // large l and h
+        int middle = begin+(end-begin)/2;
+
+        // splitMerge first and second halves
+        splitMerge(array, begin, middle);
+        splitMerge(array, middle+1, end);
+
+        // Array is split up into units of 1
+
+        merge();
+        // Are these args correct?
+        // merge(array, begin, middle, end);
+    }
+}
+
+void populateList(List &List)
+{
+    List.addItem((char*)"zaterdag");
+    List.addItem((char*)"zondag");
+    List.addItem((char*)"maandag");
+    List.addItem((char*)"dinsdag");
+    List.addItem((char*)"woensdag");
+    List.addItem((char*)"donderdag");
+    List.addItem((char*)"vrijdag");
+    List.addItem((char*)"school");
+    List.addItem((char*)"laptop");
+    List.addItem((char*)"pc master race");
+}
+
+List* deepCopy(List &ListToCopy, int elements)
+{
+    List* newList = new List();
+
+    for(int i = 0; i < elements; i++)
+    {
+        item* temp = ListToCopy.head;
+
+        for(int placeInList = 0; placeInList < i; placeInList++)
+        {
+            if (temp != NULL)
+            {
+                temp = temp->next;
+            }
+        }
+
+        if (temp != NULL)
+        {
+            newList->addItem(temp->word);
+        }
+        else
+        {
+            std::cout << "Temp == NULL? But how?" << std::endl;
+        }
+        
+    }
+}
+
+void topDownMergesort(List &toSplitMerge, int elements)
+{
+    List* workingList = deepCopy(toSplitMerge, elements);
+
+    // Arguments: list to sort, start position of the list
+    // (0 normally, gets changed during recursion) and the initial end position of the list
+    // SplitMerge changes the list in place, so toSplitMerge is sorted after this function.
+    splitMerge(toSplitMerge, 0, elements);
 }
 
 int main(void)
@@ -82,8 +145,8 @@ int main(void)
     List* list = new List();
     populateList(*list);
 
-    // Debugging: check how many items the list contains
-    // std::cout << "Number of elements in list: " << list->nrOfElements() << std::endl;
+    // Debugging: check how many items the List contains
+    // std::cout << "Number of elements in List: " << List->nrOfElements() << std::endl;
 
-    //sort(list->head, 0, list->nrOfElements());//first item, left index, right index(nrOfElements)
+    topDownMergesort(*list, list->nrOfElements());
 }
