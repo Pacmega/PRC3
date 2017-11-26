@@ -64,6 +64,7 @@ public:
 
 void merge(item * array, int leftIndex, int m, int rightIndex)
 {
+    std::cout << "Merge params: \narray address: " << &array << "\nleftIndex: " << leftIndex << "\nMiddle point: " << m << "\nrightIndex: " << rightIndex << std::endl;
 	// Merges two subarrays of arr[].
 	// First subarray is arr[leftIndex..m]
 	// Second subarray is arr[m+1..rightIndex]
@@ -104,31 +105,33 @@ void merge(item * array, int leftIndex, int m, int rightIndex)
     int i = 0; // Initial index of first subarray
     int j = 0; // Initial index of second subarray
     int k = leftIndex; // Initial index of merged subarray
-    std::cout << "before while" << std::endl;
-
+    
     while (i < n1 && j < n2)
     {
-        std::cout << "While loop" << std::endl;
-
         if (leftTemp[i] <= rightTemp[j])
         {
-            std::cout << "leftTemp <= rightTemp" << std::endl;
             item* temp = new item(array->word);
+
+            std::cout << "Temp address == " << &temp << std::endl;
+            std::cout << "Temp ??? == " << temp << std::endl;
+
             int z = 0;
             for(z = 0; z < k; z++)
             {
-                std::cout << "for loop" << std::endl;
                 temp = temp->next;
             }
             //array[k] = leftTemp[i];
+            
+            std::cout << "jfc what?" << std::endl;
+            // This line breaks the program!
             temp->prev->next = leftTemp[i];
+            std::cout << "jfc what?" << std::endl;
+
             i++;
-            std::cout << "if done" << std::endl;
         }
 
         else
         {
-            std::cout << "else" << std::endl;
             item* temp = new item(array->word);
             int z = 0;
             for(z = 0; z < k; z++)
@@ -141,7 +144,6 @@ void merge(item * array, int leftIndex, int m, int rightIndex)
         }
         k++;
     }
-    std::cout << "after while" << std::endl;
  
     /* Copy the remaining elements of L[], if there
        are any */
@@ -181,13 +183,13 @@ void sort(item * array, int leftIndex, int rightIndex)
     {
         // Same as (leftIndex+rightIndex)/2, but avoids overflow for
         // large l and h
-        int m = leftIndex+(rightIndex-leftIndex)/2;
- 
+        int middle = leftIndex+(rightIndex-leftIndex)/2;
+
         // Sort first and second halves
-        sort(array, leftIndex, m);
-        sort(array, m+1, rightIndex);
- 
-        merge(array, leftIndex, m, rightIndex);
+        sort(array, leftIndex, middle);
+        sort(array, middle+1, rightIndex);
+
+        merge(array, leftIndex, middle, rightIndex);
     }
 }
 
