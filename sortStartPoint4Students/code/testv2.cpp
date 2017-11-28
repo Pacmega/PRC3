@@ -4,16 +4,53 @@
 
 class item
 {
-public:
+private:
     item* next;
     item* prev;
     char* word;
 
+public:
     item(char * Word)
     {
         word = Word;
         next = NULL;
         prev = NULL;
+    }
+
+    char* getWord()
+    {
+        return word;
+    }
+
+    char* setWord(char* newWord)
+    {
+        word = newWord;
+    }
+
+    item* getNext()
+    {
+        return next;
+    }
+
+    item* setNext(item* newNext)
+    {
+        if (newNext != NULL && newNext != this)
+        {
+            next = newNext;
+        }
+    }
+
+    item* getPrev()
+    {
+        return prev;
+    }
+
+    item* setPrev(item* newPrev)
+    {
+        if (newPrev != NULL && newPrev != this)
+        {
+            prev = newPrev;
+        }
     }
 };
 
@@ -27,6 +64,25 @@ public:
     {
         head = NULL;
         tail = NULL;
+    }
+
+    item* getItemAtPos (int position)
+    {
+        if (position >= 0 && position <= nrOfElements)
+        {
+            item* temp = head;
+
+            for(int i = 0; i < position; i++)
+            {
+                temp = temp.getNext();
+            }
+
+            return temp;
+        }
+        else
+        {
+            return NULL;
+        }
     }
 
     void addItem (char * word)
@@ -66,16 +122,16 @@ public:
 
 void merge(List &ItemList, int Begin, int Middle, int End, List &sortedList)
 {
-    //Bas
+    // Bas
+    // Thanks to https://en.wikipedia.org/wiki/Merge_sort for helping with programming this
     int begin = Begin;
     int middle = Middle;
  
     // Note that all of the variable that start with a capital letter were parameters, while ones without a capital are local variables.
-    // While there are elements in the left or right runs...
+    
     for (int i = Begin; i < End; i++)
     {
-        // If left run head exists and is <= existing right run head.
-        if (begin < Middle && (middle >= End || A[begin] <= A[middle]))
+        if (begin < Middle && (middle >= End || ItemList.getItem(begin).compare(ItemList.getItem(middle)) <= 0))
         {
             B[i] = A[begin];
             begin++;
