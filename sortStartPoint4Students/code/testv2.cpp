@@ -64,62 +64,83 @@ public:
     }
 };
 
-void merge(List &ItemList, int l, int m, int r)
+void merge(List &ItemList, int Begin, int Middle, int End)
 {
-    int i, j, k;
-    int n1 = m - l + 1;
-    int n2 = r - m;
-
-    // Create temporary lists (LS = LeftSide)(RS = RightSide)
-
-    List LS, RS;
-
-    // Copy the data to the lists
-    for (i = 0; i < n1; ++i)
+    //Bas
+    int begin = Begin;
+    int middle = Middle;
+ 
+    // Note that all of the variable that start with a capital letter were parameters, while ones without a capital are local variables.
+    // While there are elements in the left or right runs...
+    for (int i = Begin; i < End; i++)
     {
-        LS[i] = ItemList[l + i];
-    }
-    for (j = 0; j < n2; ++j)
-    {
-        RS[j] = ItemList[m + 1 + j];
-    }
-
-    // Merge the temorary lists back into the original list
-    i = 0; // Initial index of first sub-list
-    j = 0; // Initial index of second sub-list
-    k = 1; // Initial index of merged sub-list
-
-    while(i < n1 && j < n2)
-    {
-        if (strcmp(LS[i].word, RS[j].word) <= 0)
+        // If left run head exists and is <= existing right run head.
+        if (begin < Middle && (middle >= End || A[begin] <= A[middle]))
         {
-            ItemList[k] = LS[i]
-            i++;
+            B[i] = A[begin];
+            begin++;
         }
         else
         {
-            ItemList[k] = RS[j];
-            j++;
+            B[i] = A[middle];
+            middle++;
         }
-        k++;
     }
 
-    // Copy the remaining items from RS (if any)
-    while(i < n1)
-    {
-        ItemList[k] = LS[i];
-        i++;
-        k++;
-    }
+    // Joran
+    // int i, j, k;
+    // int n1 = m - l + 1;
+    // int n2 = r - m;
 
-        // Copy the remaining items from RS (if any)
-    while(j < n2)
-    {
-        ItemList[k] = RS[j];
-        j++;
-        k++;
-    }
-    // std::cout << "Wait for 3 days, or pay $1 to sort your list now!" << std::endl;
+    // // Create temporary lists (LS = LeftSide)(RS = RightSide)
+
+    // List LS, RS;
+
+    // // Copy the data to the lists
+    // for (i = 0; i < n1; ++i)
+    // {
+    //     LS[i] = ItemList[l + i];
+    // }
+    // for (j = 0; j < n2; ++j)
+    // {
+    //     RS[j] = ItemList[m + 1 + j];
+    // }
+
+    // // Merge the temorary lists back into the original list
+    // i = 0; // Initial index of first sub-list
+    // j = 0; // Initial index of second sub-list
+    // k = 1; // Initial index of merged sub-list
+
+    // while(i < n1 && j < n2)
+    // {
+    //     if (strcmp(LS[i].word, RS[j].word) <= 0)
+    //     {
+    //         ItemList[k] = LS[i]
+    //         i++;
+    //     }
+    //     else
+    //     {
+    //         ItemList[k] = RS[j];
+    //         j++;
+    //     }
+    //     k++;
+    // }
+
+    // // Copy the remaining items from RS (if any)
+    // while(i < n1)
+    // {
+    //     ItemList[k] = LS[i];
+    //     i++;
+    //     k++;
+    // }
+
+    //     // Copy the remaining items from RS (if any)
+    // while(j < n2)
+    // {
+    //     ItemList[k] = RS[j];
+    //     j++;
+    //     k++;
+    // }
 }
 
 void splitMerge(List &array, int begin, int end)
