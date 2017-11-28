@@ -114,9 +114,21 @@ public:
 
     void setItemAtPos(int position, item* newItem)
     {
-        if (position >= 0 && position <= nrOfElements() && newItem != NULL)
+        if (newItem != NULL && position >= 0)
         {
-            //heh
+            if (position == 0)
+            {
+                // Attempting to set head.
+                setHead(newItem);
+            }
+            else if (position = nrOfElements())
+            {
+                
+            }
+            else if (position <= nrOfElements())
+            {
+                
+            }
         }
     }
 
