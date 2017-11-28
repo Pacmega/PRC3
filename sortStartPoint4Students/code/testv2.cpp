@@ -7,22 +7,22 @@ class item
 private:
     item* next;
     item* prev;
-    char* word;
+    std::string word;
 
 public:
-    item(char * Word)
+    item(std::string Word)
     {
         word = Word;
         next = NULL;
         prev = NULL;
     }
 
-    char* getWord()
+    std::string getWord()
     {
         return word;
     }
 
-    char* setWord(char* newWord)
+    void setWord(std::string newWord)
     {
         word = newWord;
     }
@@ -32,7 +32,7 @@ public:
         return next;
     }
 
-    item* setNext(item* newNext)
+    void setNext(item* newNext)
     {
         if (newNext != NULL && newNext != this)
         {
@@ -45,7 +45,7 @@ public:
         return prev;
     }
 
-    item* setPrev(item* newPrev)
+    void setPrev(item* newPrev)
     {
         if (newPrev != NULL && newPrev != this)
         {
@@ -68,13 +68,13 @@ public:
 
     item* getItemAtPos (int position)
     {
-        if (position >= 0 && position <= nrOfElements)
+        if (position >= 0 && position <= nrOfElements())
         {
             item* temp = head;
 
             for(int i = 0; i < position; i++)
             {
-                temp = temp.getNext();
+                temp = temp->getNext();
             }
 
             return temp;
@@ -85,7 +85,7 @@ public:
         }
     }
 
-    void addItem (char * word)
+    void addItem (std::string word)
     {
         if(head == NULL)
         {
@@ -97,8 +97,8 @@ public:
         else
         {
             item* object = new item(word);
-            tail->next = object;
-            object->prev = tail;
+            tail->setNext(object);
+            object->setPrev(tail);
             tail = object;
             return;
         }
@@ -113,7 +113,7 @@ public:
         while (temp != NULL)
         {
             elements++;
-            temp = temp->next;
+            temp = temp->getNext();
         }
 
         return elements;
@@ -131,7 +131,7 @@ void merge(List &ItemList, int Begin, int Middle, int End, List &sortedList)
     
     for (int i = Begin; i < End; i++)
     {
-        if (begin < Middle && (middle >= End || ItemList.getItem(begin).compare(ItemList.getItem(middle)) <= 0))
+        if (begin < Middle && (middle >= End || ItemList.getItemAtPos(begin)->getWord().compare(ItemList.getItemAtPos(middle)->getWord()) <= 0))
         {
             B[i] = A[begin];
             begin++;
@@ -208,8 +208,8 @@ void splitMerge(List &array, int begin, int end, List &sortedList)
         int middle = begin+(end-begin)/2;
 
         // splitMerge first and second halves
-        splitMerge(array, begin, middle);
-        splitMerge(array, middle+1, end);
+        splitMerge(array, begin, middle, sortedList);
+        splitMerge(array, middle+1, end, sortedList);
 
         // Array is split up into units of 1
 
@@ -219,16 +219,16 @@ void splitMerge(List &array, int begin, int end, List &sortedList)
 
 void populateList(List &List)
 {
-    List.addItem((char*)"zaterdag");
-    List.addItem((char*)"zondag");
-    List.addItem((char*)"maandag");
-    List.addItem((char*)"dinsdag");
-    List.addItem((char*)"woensdag");
-    List.addItem((char*)"donderdag");
-    List.addItem((char*)"vrijdag");
-    List.addItem((char*)"school");
-    List.addItem((char*)"laptop");
-    List.addItem((char*)"pc master race");
+    List.addItem((std::string)"zaterdag");
+    List.addItem((std::string)"zondag");
+    List.addItem((std::string)"maandag");
+    List.addItem((std::string)"dinsdag");
+    List.addItem((std::string)"woensdag");
+    List.addItem((std::string)"donderdag");
+    List.addItem((std::string)"vrijdag");
+    List.addItem((std::string)"school");
+    List.addItem((std::string)"laptop");
+    List.addItem((std::string)"pc master race");
 }
 
 void deepCopy(List &ListToCopy, List &newList, int elements)
@@ -241,13 +241,13 @@ void deepCopy(List &ListToCopy, List &newList, int elements)
         {
             if (temp != NULL)
             {
-                temp = temp->next;
+                temp = temp->getNext();
             }
         }
 
         if (temp != NULL)
         {
-            newList.addItem(temp->word);
+            newList.addItem(temp->getWord());
         }
         else
         {
