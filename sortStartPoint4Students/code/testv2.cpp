@@ -64,7 +64,7 @@ public:
     }
 };
 
-void merge(List &ItemList, int Begin, int Middle, int End)
+void merge(List &ItemList, int Begin, int Middle, int End, List &sortedList)
 {
     //Bas
     int begin = Begin;
@@ -143,7 +143,7 @@ void merge(List &ItemList, int Begin, int Middle, int End)
     // }
 }
 
-void splitMerge(List &array, int begin, int end)
+void splitMerge(List &array, int begin, int end, List &sortedList)
 {
     if (begin < end)
     {
@@ -157,9 +157,7 @@ void splitMerge(List &array, int begin, int end)
 
         // Array is split up into units of 1
 
-        merge(array, begin, middle, end);
-        // Are these args correct?
-        // merge(array, begin, middle, end);
+        merge(array, begin, middle, end, sortedList);
     }
 }
 
@@ -177,10 +175,8 @@ void populateList(List &List)
     List.addItem((char*)"pc master race");
 }
 
-List* deepCopy(List &ListToCopy, int elements)
+void deepCopy(List &ListToCopy, List &newList, int elements)
 {
-    List* newList = new List();
-
     for(int i = 0; i < elements; i++)
     {
         item* temp = ListToCopy.head;
@@ -201,18 +197,18 @@ List* deepCopy(List &ListToCopy, int elements)
         {
             std::cout << "Temp == NULL? But how?" << std::endl;
         }
-        
     }
 }
 
 void topDownMergesort(List &toSplitMerge, int elements)
 {
-    List* workingList = deepCopy(toSplitMerge, elements);
+    List* workingList = new List();
+    deepCopy(toSplitMerge, *workingList, elements);
 
     // Arguments: list to sort, start position of the list
     // (0 normally, gets changed during recursion) and the initial end position of the list
     // SplitMerge changes the list in place, so toSplitMerge is sorted after this function.
-    splitMerge(toSplitMerge, 0, elements);
+    splitMerge(toSplitMerge, 0, elements, workingList);
 }
 
 int main(void)
