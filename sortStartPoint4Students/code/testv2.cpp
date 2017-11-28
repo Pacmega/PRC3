@@ -56,14 +56,41 @@ public:
 
 class List
 {
-public:
+private:
     item* head;
     item* tail;
 
+public:
     List()
     {
         head = NULL;
         tail = NULL;
+    }
+
+    item* getHead()
+    {
+        return head;
+    }
+
+    void setHead(item* newHead)
+    {
+        if(newHead != NULL && newHead != head)
+        {
+            head = newHead;
+        }
+    }
+
+    item* getTail()
+    {
+        return tail;
+    }
+
+    void setTail(item* newTail)
+    {
+        if(newTail != NULL && newTail != tail)
+        {
+            tail = newTail;
+        }
     }
 
     item* getItemAtPos (int position)
@@ -85,7 +112,15 @@ public:
         }
     }
 
-    void addItem (std::string word)
+    void setItemAtPos(int position, item* newItem)
+    {
+        if (position >= 0 && position <= nrOfElements() && newItem != NULL)
+        {
+            //heh
+        }
+    }
+
+    void addItem(std::string word)
     {
         if(head == NULL)
         {
@@ -235,7 +270,7 @@ void deepCopy(List &ListToCopy, List &newList, int elements)
 {
     for(int i = 0; i < elements; i++)
     {
-        item* temp = ListToCopy.head;
+        item* temp = ListToCopy.getHead();
 
         for(int placeInList = 0; placeInList < i; placeInList++)
         {
