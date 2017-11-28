@@ -247,7 +247,7 @@ void deepCopy(List &ListToCopy, List &newList, int elements)
 
         if (temp != NULL)
         {
-            newList->addItem(temp->word);
+            newList.addItem(temp->word);
         }
         else
         {
@@ -264,7 +264,7 @@ void topDownMergesort(List &toSplitMerge, int elements)
     // Arguments: list to sort, start position of the list
     // (0 normally, gets changed during recursion) and the initial end position of the list
     // SplitMerge changes the list in place, so toSplitMerge is sorted after this function.
-    splitMerge(toSplitMerge, 0, elements, workingList);
+    splitMerge(toSplitMerge, 0, elements, *workingList);
 }
 
 int main(void)
