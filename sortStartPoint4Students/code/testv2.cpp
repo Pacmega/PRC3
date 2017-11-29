@@ -19,7 +19,7 @@ public:
 
     std::string getWord()
     {
-    	std::cout << "Getting word: " << word << std::endl;
+    	// std::cout << "Getting word: " << word << std::endl;
         return word;
     }
 
@@ -96,7 +96,7 @@ public:
 
     item* getItemAtPos (int position)
     {
-    	std::cout << "Getting item at position " << position << std::endl;
+    	// std::cout << "Getting item at position " << position << std::endl;
 
         if (position >= 0 && position <= nrOfElements())
         {
@@ -177,6 +177,14 @@ public:
     }
 };
 
+void printEntireList(List &ItemList)
+{
+	for (int i = 0; i < ItemList.nrOfElements(); ++i)
+	{
+		std::cout << "Item at position " << i << " of list: " << ItemList.getItemAtPos(i)->getWord() << std::endl;
+	}
+}
+
 void merge(List &ItemList, int Begin, int Middle, int End, List &sortedList)
 {
     // Bas
@@ -186,6 +194,9 @@ void merge(List &ItemList, int Begin, int Middle, int End, List &sortedList)
 
     std::cout << "Local begin = " << begin << std::endl;
     std::cout << "Local middle = " << middle << std::endl;
+
+    std::cout << "Contents of ItemList: " << std::endl;
+    printEntireList(ItemList);
  
     // Note that all of the variable that start with a capital letter were parameters, while ones without a capital are local variables.
     
@@ -283,7 +294,10 @@ void splitMerge(List &array, int begin, int end, List &sortedList)
         // Array is split up into units of 1
 
         std::cout << "Merge called" << std::endl;
-        merge(array, begin, middle, end, sortedList);
+        merge(sortedList, begin, middle, end, array);
+
+		std::cout << "Contents of sortedList" << std::endl;
+		printEntireList(sortedList);
     }
 }
 
