@@ -119,18 +119,25 @@ public:
     {
         if (newItem != NULL && position >= 0)
         {
-            if (position == 0)
+        	if (position == 0)
             {
                 // Attempting to set head.
+                std::cout << "Head is being set. \nBefore change:" << head->getWord() << std::endl;
                 setHead(newItem);
+                std::cout << "After change:" << head->getWord() << std::endl;
             }
             else if (position == nrOfElements())
             {
+            	std::cout << "Item being added as tail." << std::endl;
+            	std::cout << "Tail is being set. \nBefore change:" << tail->getWord() << std::endl;
             	tail->setNext(newItem);
                 newItem->setPrev(tail);
+                tail = newItem;
+                std::cout << "After change:" << tail->getWord() << std::endl;
             }
             else if (position <= nrOfElements())
             {
+            	std::cout << "Item being added in the middle of the list." << std::endl;
                 item* itemBeforeNew = getItemAtPos(position);
                 item* itemAfterNew = getItemAtPos(position+1);
                 
@@ -179,6 +186,7 @@ public:
 
 void printEntireList(List &ItemList)
 {
+	std::cout << ItemList.nrOfElements() << std::endl;
 	for (int i = 0; i < ItemList.nrOfElements(); ++i)
 	{
 		std::cout << "Item at position " << i << " of list: " << ItemList.getItemAtPos(i)->getWord() << std::endl;
@@ -189,91 +197,37 @@ void merge(List &ItemList, int Begin, int Middle, int End, List &sortedList)
 {
     // Bas
     // Thanks to https://en.wikipedia.org/wiki/Merge_sort for helping with programming this
-    int begin = Begin;
-    int middle = Middle;
 
-    std::cout << "Local begin = " << begin << std::endl;
-    std::cout << "Local middle = " << middle << std::endl;
+    // std::cout << "Local begin = " << begin << std::endl;
+    // std::cout << "Local middle = " << middle << std::endl;
+    // std::cout << "Passed end parameter = " << End << std::endl;
 
-    std::cout << "Contents of ItemList: " << std::endl;
-    printEntireList(ItemList);
+    // std::cout << "Contents of ItemList: " << std::endl;
+    // printEntireList(ItemList);
  
     // Note that all of the variable that start with a capital letter were parameters, while ones without a capital are local variables.
     
     for (int i = Begin; i < End; i++)
     {
-    	std::cout << "For loop" << std::endl;
+    	// std::cout << "For loop" << std::endl;
 
-        if (begin < Middle && (middle >= End || ItemList.getItemAtPos(begin)->getWord().compare(ItemList.getItemAtPos(middle)->getWord()) <= 0))
+        if (Begin < Middle && (Middle >= End || ItemList.getItemAtPos(Begin)->getWord().compare(ItemList.getItemAtPos(Middle)->getWord()) <= 0))
         {
-        	std::cout << "If" << std::endl;
-        	sortedList.setItemAtPos(i, ItemList.getItemAtPos(begin));
+        	// std::cout << "If" << std::endl;
+        	// std::cout << "Item at pos to change: " << sortedList.getItemAtPos(i)->getWord();
+        	sortedList.setItemAtPos(i, ItemList.getItemAtPos(Begin));
+        	// std::cout << "Item at pos after change: " << sortedList.getItemAtPos(i)->getWord();
             // B[i] = A[begin];
-            begin++;
+            Begin++;
         }
         else
         {
-        	std::cout << "Else" << std::endl;
-        	sortedList.setItemAtPos(i, ItemList.getItemAtPos(middle));
+        	// std::cout << "Else" << std::endl;
+        	sortedList.setItemAtPos(i, ItemList.getItemAtPos(Middle));
             // B[i] = A[middle];
-            middle++;
+            Middle++;
         }
     }
-
-    // Joran
-    // int i, j, k;
-    // int n1 = m - l + 1;
-    // int n2 = r - m;
-
-    // // Create temporary lists (LS = LeftSide)(RS = RightSide)
-
-    // List LS, RS;
-
-    // // Copy the data to the lists
-    // for (i = 0; i < n1; ++i)
-    // {
-    //     LS[i] = ItemList[l + i];
-    // }
-    // for (j = 0; j < n2; ++j)
-    // {
-    //     RS[j] = ItemList[m + 1 + j];
-    // }
-
-    // // Merge the temorary lists back into the original list
-    // i = 0; // Initial index of first sub-list
-    // j = 0; // Initial index of second sub-list
-    // k = 1; // Initial index of merged sub-list
-
-    // while(i < n1 && j < n2)
-    // {
-    //     if (strcmp(LS[i].word, RS[j].word) <= 0)
-    //     {
-    //         ItemList[k] = LS[i]
-    //         i++;
-    //     }
-    //     else
-    //     {
-    //         ItemList[k] = RS[j];
-    //         j++;
-    //     }
-    //     k++;
-    // }
-
-    // // Copy the remaining items from RS (if any)
-    // while(i < n1)
-    // {
-    //     ItemList[k] = LS[i];
-    //     i++;
-    //     k++;
-    // }
-
-    //     // Copy the remaining items from RS (if any)
-    // while(j < n2)
-    // {
-    //     ItemList[k] = RS[j];
-    //     j++;
-    //     k++;
-    // }
 }
 
 void splitMerge(List &array, int begin, int end, List &sortedList)
@@ -285,19 +239,19 @@ void splitMerge(List &array, int begin, int end, List &sortedList)
         int middle = begin+(end-begin)/2;
 
         // splitMerge first and second halves
-        std::cout << "splitMerge called" << std::endl;
+        // std::cout << "splitMerge called" << std::endl;
         splitMerge(array, begin, middle, sortedList);
 
-        std::cout << "splitMerge called" << std::endl;
+        // std::cout << "splitMerge called" << std::endl;
         splitMerge(array, middle+1, end, sortedList);
 
         // Array is split up into units of 1
 
-        std::cout << "Merge called" << std::endl;
+        // std::cout << "Merge called" << std::endl;
         merge(sortedList, begin, middle, end, array);
 
-		std::cout << "Contents of sortedList" << std::endl;
-		printEntireList(sortedList);
+		// std::cout << "Contents of sortedList" << std::endl;
+		// printEntireList(sortedList);
     }
 }
 
