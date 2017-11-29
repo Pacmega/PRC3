@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <unistd.h>
+
 class item
 {
 private:
@@ -155,13 +157,20 @@ public:
                 std::cout << "Items that should be swapped:\nItem 1 - " << itemA->getWord() << "\nItem 2 - " << itemB->getWord() << std::endl;
 
                 std::cout << "Printing A LOT" << std::endl;
+
+                std::cout << itemA->getPrev()->getWord() << std::endl;
+                std::cout << itemA->getWord() << std::endl;
+                std::cout << itemB->getWord() << std::endl;
+                std::cout << itemB->getNext()->getWord() << std::endl;
+
+                sleep(5);
                 // Change the next and previous of the items AROUND the swapped items
-                itemA->getPrev()->setNext(itemB);
+                // itemA->getPrev()->setNext(itemB);
                 itemB->getNext()->setPrev(itemA);
 
                 itemA->setNext(itemB->getNext());
                 itemB->setNext(itemA);
-                itemB->setPrev(itemA->getPrev());
+                // itemB->setPrev(itemA->getPrev());
                 itemA->setPrev(itemB);
 
                 std::cout << "Items that should be swapped now:\nItem 1 - " << itemA->getWord() << "\nItem 2 - " << itemB->getWord() << std::endl;
