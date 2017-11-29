@@ -19,6 +19,7 @@ public:
 
     std::string getWord()
     {
+    	std::cout << "Getting word: " << word << std::endl;
         return word;
     }
 
@@ -95,6 +96,8 @@ public:
 
     item* getItemAtPos (int position)
     {
+    	std::cout << "Getting item at position " << position << std::endl;
+
         if (position >= 0 && position <= nrOfElements())
         {
             item* temp = head;
@@ -180,19 +183,26 @@ void merge(List &ItemList, int Begin, int Middle, int End, List &sortedList)
     // Thanks to https://en.wikipedia.org/wiki/Merge_sort for helping with programming this
     int begin = Begin;
     int middle = Middle;
+
+    std::cout << "Local begin = " << begin << std::endl;
+    std::cout << "Local middle = " << middle << std::endl;
  
     // Note that all of the variable that start with a capital letter were parameters, while ones without a capital are local variables.
     
     for (int i = Begin; i < End; i++)
     {
+    	std::cout << "For loop" << std::endl;
+
         if (begin < Middle && (middle >= End || ItemList.getItemAtPos(begin)->getWord().compare(ItemList.getItemAtPos(middle)->getWord()) <= 0))
         {
+        	std::cout << "If" << std::endl;
         	sortedList.setItemAtPos(i, ItemList.getItemAtPos(begin));
             // B[i] = A[begin];
             begin++;
         }
         else
         {
+        	std::cout << "Else" << std::endl;
         	sortedList.setItemAtPos(i, ItemList.getItemAtPos(middle));
             // B[i] = A[middle];
             middle++;
