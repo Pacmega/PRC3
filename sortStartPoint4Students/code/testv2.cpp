@@ -121,13 +121,20 @@ public:
                 // Attempting to set head.
                 setHead(newItem);
             }
-            else if (position = nrOfElements())
+            else if (position == nrOfElements())
             {
-                
+            	tail->setNext(newItem);
+                newItem->setPrev(tail);
             }
             else if (position <= nrOfElements())
             {
+                item* itemBeforeNew = getItemAtPos(position);
+                item* itemAfterNew = getItemAtPos(position+1);
                 
+                itemBeforeNew->setNext(newItem);
+                newItem->setPrev(itemBeforeNew);
+                newItem->setNext(itemAfterNew);
+                itemAfterNew->setPrev(newItem);
             }
         }
     }
@@ -180,12 +187,14 @@ void merge(List &ItemList, int Begin, int Middle, int End, List &sortedList)
     {
         if (begin < Middle && (middle >= End || ItemList.getItemAtPos(begin)->getWord().compare(ItemList.getItemAtPos(middle)->getWord()) <= 0))
         {
-            B[i] = A[begin];
+        	sortedList.setItemAtPos(i, ItemList.getItemAtPos(begin));
+            // B[i] = A[begin];
             begin++;
         }
         else
         {
-            B[i] = A[middle];
+        	sortedList.setItemAtPos(i, ItemList.getItemAtPos(middle));
+            // B[i] = A[middle];
             middle++;
         }
     }
@@ -255,11 +264,15 @@ void splitMerge(List &array, int begin, int end, List &sortedList)
         int middle = begin+(end-begin)/2;
 
         // splitMerge first and second halves
+        std::cout << "splitMerge called" << std::endl;
         splitMerge(array, begin, middle, sortedList);
+
+        std::cout << "splitMerge called" << std::endl;
         splitMerge(array, middle+1, end, sortedList);
 
         // Array is split up into units of 1
 
+        std::cout << "Merge called" << std::endl;
         merge(array, begin, middle, end, sortedList);
     }
 }
