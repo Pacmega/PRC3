@@ -77,6 +77,12 @@ public:
     {
         if(newHead != NULL && newHead != head)
         {
+        	if (head != NULL)
+        	{
+        		newHead->setNext(head);
+        		head->setPrev(newHead);
+        	}
+
             head = newHead;
         }
     }
@@ -104,6 +110,7 @@ public:
 
             for(int i = 0; i < position; i++)
             {
+            	std::cout << i << std::endl;
                 temp = temp->getNext();
             }
 
@@ -147,10 +154,17 @@ public:
                 
                 std::cout << "Items that should be swapped:\nItem 1 - " << itemA->getWord() << "\nItem 2 - " << itemB->getWord() << std::endl;
 
-                itemA->setNext(itemB);
-                itemB->setPrev(itemA);
+                std::cout << "Printing A LOT" << std::endl;
+                // Change the next and previous of the items AROUND the swapped items
+                itemA->getPrev()->setNext(itemB);
+                itemB->getNext()->setPrev(itemA);
+
+                itemA->setNext(itemB->getNext());
                 itemB->setNext(itemA);
+                itemB->setPrev(itemA->getPrev());
                 itemA->setPrev(itemB);
+
+                std::cout << "Items that should be swapped now:\nItem 1 - " << itemA->getWord() << "\nItem 2 - " << itemB->getWord() << std::endl;
             }
         }
     }
@@ -183,6 +197,7 @@ public:
         while (temp != NULL)
         {
             elements++;
+            std::cout << temp->getWord() << std::endl;
             temp = temp->getNext();
         }
 
