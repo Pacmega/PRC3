@@ -147,10 +147,23 @@ public:
                 
                 std::cout << "Items that should be swapped:\nItem 1 - " << itemA->getWord() << "\nItem 2 - " << itemB->getWord() << std::endl;
 
-                itemA->setNext(itemB);
-                itemB->setPrev(itemA);
+                std::cout << "Printing A LOT" << std::endl;
+
+                std::cout << itemA->getPrev()->getWord() << std::endl;
+                std::cout << itemA->getWord() << std::endl;
+                std::cout << itemB->getWord() << std::endl;
+                std::cout << itemB->getNext()->getWord() << std::endl;
+                
+                // Change the next and previous of the items AROUND the swapped items
+                // itemA->getPrev()->setNext(itemB);
+                itemB->getNext()->setPrev(itemA);
+
+                itemA->setNext(itemB->getNext());
                 itemB->setNext(itemA);
+                // itemB->setPrev(itemA->getPrev());
                 itemA->setPrev(itemB);
+
+                std::cout << "Items that should be swapped now:\nItem 1 - " << itemA->getWord() << "\nItem 2 - " << itemB->getWord() << std::endl;
             }
         }
     }
@@ -193,23 +206,27 @@ public:
 // ----------------------------------------------------------------------------------------------------------------
 
 
-void printEntireList(List &ItemList)
+void printEntireList(List** ItemList)
 {
-    std::cout << ItemList.nrOfElements() << std::endl;
-    for (int i = 0; i < ItemList.nrOfElements(); ++i)
+    List temp = (*(*ItemList));
+    std::cout << temp.nrOfElements() << std::endl;
+
+    for (int i = 0; i < temp.nrOfElements(); ++i)
     {
-        std::cout << "Item at position " << i << " of list: " << ItemList.getItemAtPos(i)->getWord() << std::endl;
+        std::cout << "Item at position " << i << " of list: " << temp.getItemAtPos(i)->getWord() << std::endl;
     }
 }
 
-void merge(List &ItemList, int Begin, int Middle, int End, List** sortedList)
+void merge(List** ItemList, int Begin, int Middle, int End, List** sortedList)
 {
     // Bas
     // Thanks to https://en.wikipedia.org/wiki/Merge_sort for helping with programming this
 
     std::cout << "Contents of ItemList: " << std::endl;
     printEntireList(ItemList);
+
     List temp = (*(*sortedList));
+    List itemList = (*(*ItemList));
     // Note that all of the variable that start with a capital letter were parameters, while ones without a capital are local variables.
     
     for (int i = Begin; i < End; i++)
@@ -219,15 +236,15 @@ void merge(List &ItemList, int Begin, int Middle, int End, List** sortedList)
         std::cout << "-     Begin: " << Begin << std::endl;
         std::cout << "-     Middle: " << Middle << std::endl;
         std::cout << "-     End: " << End << std::endl;
-        std::cout << "-     ItemList word Begin: " << ItemList.getItemAtPos(Begin)->getWord() << std::endl;
-        std::cout << "-     ItemList word Middle: " << ItemList.getItemAtPos(Middle)->getWord() << std::endl;
+        std::cout << "-     ItemList word Begin: " << itemList.getItemAtPos(Begin)->getWord() << std::endl;
+        std::cout << "-     ItemList word Middle: " << itemList.getItemAtPos(Middle)->getWord() << std::endl;
 
-        if (Begin < Middle && (Middle >= End || ItemList.getItemAtPos(Begin)->getWord().compare(ItemList.getItemAtPos(Middle)->getWord()) <= 0))
+        if (Begin < Middle && (Middle >= End || itemList.getItemAtPos(Begin)->getWord().compare(itemList.getItemAtPos(Middle)->getWord()) <= 0))
         {
             
             std::cout << "If" << std::endl;
             std::cout << "Item at pos to change: " << temp.getItemAtPos(i)->getWord();
-            temp.swapItems(ItemList.getItemAtPos(i), ItemList.getItemAtPos(Begin));
+            temp.swapItems(itemList.getItemAtPos(i), itemList.getItemAtPos(Begin));
             std::cout << "Item at pos after change: " << temp.getItemAtPos(i)->getWord();
             // B[i] = A[begin];
             Begin++;
@@ -235,14 +252,14 @@ void merge(List &ItemList, int Begin, int Middle, int End, List** sortedList)
         else
         {
             std::cout << "Else" << std::endl;
-            temp.swapItems(ItemList.getItemAtPos(i), ItemList.getItemAtPos(Middle));
+            temp.swapItems(itemList.getItemAtPos(i), itemList.getItemAtPos(Middle));
             // B[i] = A[middle];
             Middle++;
         }
     }
 }
 
-void splitMerge(List &array, int begin, int end, List** sortedList)
+void splitMerge(List** array, int begin, int end, List** sortedList)
 {
     if (begin < end)
     {
@@ -282,11 +299,13 @@ void populateList(List &List)
     List.addItem("pc master race");
 }
 
-void deepCopy(List &ListToCopy, List** newList, int elements)
+void deepCopy(List** ListToCopy, List** newList, int elements)
 {
+    List tempList = (*(*newList)); 
+    List listToCopy = (*(*ListToCopy));
     for(int i = 0; i < elements; i++)
     {
-        item* temp = ListToCopy.getHead();
+        item* temp = listToCopy.getHead();
 
         for(int placeInList = 0; placeInList < i; placeInList++)
         {
@@ -298,7 +317,7 @@ void deepCopy(List &ListToCopy, List** newList, int elements)
 
         if (temp != NULL)
         {
-            *newList.addItem(temp->getWord());
+            tempList.addItem(temp->getWord());
         }
         else
         {
@@ -307,7 +326,7 @@ void deepCopy(List &ListToCopy, List** newList, int elements)
     }
 }
 
-void topDownMergesort(List &toSplitMerge, int elements)
+void topDownMergesort(List** toSplitMerge, int elements)
 {
     List* workingList = new List();
 
@@ -327,5 +346,5 @@ int main(void)
     // Debugging: check how many items the List contains
     std::cout << "Number of elements in List: " << list->nrOfElements() << std::endl;
 
-    topDownMergesort(*list, list->nrOfElements());
+    topDownMergesort(&list, list->nrOfElements());
 }
