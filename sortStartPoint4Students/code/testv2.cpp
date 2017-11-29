@@ -19,7 +19,7 @@ public:
 
     std::string getWord()
     {
-    	// std::cout << "Getting word: " << word << std::endl;
+        // std::cout << "Getting word: " << word << std::endl;
         return word;
     }
 
@@ -96,7 +96,7 @@ public:
 
     item* getItemAtPos (int position)
     {
-    	// std::cout << "Getting item at position " << position << std::endl;
+        // std::cout <<  "Getting item at position " << position << std::endl;
 
         if (position >= 0 && position <= nrOfElements())
         {
@@ -115,36 +115,42 @@ public:
         }
     }
 
-    void setItemAtPos(int position, item* newItem)
+    void swapItems(item* itemA, item* itemB)
     {
-        if (newItem != NULL && position >= 0)
+        if (itemA != NULL && itemB != NULL)
         {
-        	if (position == 0)
+            if (itemA == head)
             {
                 // Attempting to set head.
                 std::cout << "Head is being set. \nBefore change:" << head->getWord() << std::endl;
-                setHead(newItem);
+                itemA->setNext(head);
+                head->setPrev(itemA);
+                setHead(itemA);
                 std::cout << "After change:" << head->getWord() << std::endl;
             }
-            else if (position == nrOfElements())
+            else if (itemA == tail)
             {
-            	std::cout << "Item being added as tail." << std::endl;
-            	std::cout << "Tail is being set. \nBefore change:" << tail->getWord() << std::endl;
-            	tail->setNext(newItem);
-                newItem->setPrev(tail);
-                tail = newItem;
+                std::cout << "Item being added as tail." << std::endl;
+                std::cout << "Tail is being set. \nBefore change:" << tail->getWord() << std::endl;
+                tail->setNext(itemA);
+                itemA->setPrev(tail);
+                setTail(itemA);
                 std::cout << "After change:" << tail->getWord() << std::endl;
             }
-            else if (position <= nrOfElements())
+            else if (itemA->getWord() == itemB->getWord())
             {
-            	std::cout << "Item being added in the middle of the list." << std::endl;
-                item* itemBeforeNew = getItemAtPos(position);
-                item* itemAfterNew = getItemAtPos(position+1);
+                std::cout << "Trying to swap item with item of the same name." << std::endl;
+            }
+            else
+            {
+                std::cout << "Items being swapped in the middle of the list." << std::endl;
                 
-                itemBeforeNew->setNext(newItem);
-                newItem->setPrev(itemBeforeNew);
-                newItem->setNext(itemAfterNew);
-                itemAfterNew->setPrev(newItem);
+                std::cout << "Items that should be swapped:\nItem 1 - " << itemA->getWord() << "\nItem 2 - " << itemB->getWord() << std::endl;
+
+                itemA->setNext(itemB);
+                itemB->setPrev(itemA);
+                itemB->setNext(itemA);
+                itemA->setPrev(itemB);
             }
         }
     }
@@ -184,92 +190,99 @@ public:
     }
 };
 
+// ----------------------------------------------------------------------------------------------------------------
+
+
 void printEntireList(List &ItemList)
 {
-	std::cout << ItemList.nrOfElements() << std::endl;
-	for (int i = 0; i < ItemList.nrOfElements(); ++i)
-	{
-		std::cout << "Item at position " << i << " of list: " << ItemList.getItemAtPos(i)->getWord() << std::endl;
-	}
+    std::cout << ItemList.nrOfElements() << std::endl;
+    for (int i = 0; i < ItemList.nrOfElements(); ++i)
+    {
+        std::cout << "Item at position " << i << " of list: " << ItemList.getItemAtPos(i)->getWord() << std::endl;
+    }
 }
 
-void merge(List &ItemList, int Begin, int Middle, int End, List &sortedList)
+void merge(List &ItemList, int Begin, int Middle, int End, List** sortedList)
 {
     // Bas
     // Thanks to https://en.wikipedia.org/wiki/Merge_sort for helping with programming this
 
-    // std::cout << "Local begin = " << begin << std::endl;
-    // std::cout << "Local middle = " << middle << std::endl;
-    // std::cout << "Passed end parameter = " << End << std::endl;
-
-    // std::cout << "Contents of ItemList: " << std::endl;
-    // printEntireList(ItemList);
- 
+    std::cout << "Contents of ItemList: " << std::endl;
+    printEntireList(ItemList);
+    List temp = (*(*sortedList));
     // Note that all of the variable that start with a capital letter were parameters, while ones without a capital are local variables.
     
     for (int i = Begin; i < End; i++)
     {
-    	// std::cout << "For loop" << std::endl;
+
+        std::cout << "For loop :" << std::endl;
+        std::cout << "-     Begin: " << Begin << std::endl;
+        std::cout << "-     Middle: " << Middle << std::endl;
+        std::cout << "-     End: " << End << std::endl;
+        std::cout << "-     ItemList word Begin: " << ItemList.getItemAtPos(Begin)->getWord() << std::endl;
+        std::cout << "-     ItemList word Middle: " << ItemList.getItemAtPos(Middle)->getWord() << std::endl;
 
         if (Begin < Middle && (Middle >= End || ItemList.getItemAtPos(Begin)->getWord().compare(ItemList.getItemAtPos(Middle)->getWord()) <= 0))
         {
-        	// std::cout << "If" << std::endl;
-        	// std::cout << "Item at pos to change: " << sortedList.getItemAtPos(i)->getWord();
-        	sortedList.setItemAtPos(i, ItemList.getItemAtPos(Begin));
-        	// std::cout << "Item at pos after change: " << sortedList.getItemAtPos(i)->getWord();
+            
+            std::cout << "If" << std::endl;
+            std::cout << "Item at pos to change: " << temp.getItemAtPos(i)->getWord();
+            temp.swapItems(ItemList.getItemAtPos(i), ItemList.getItemAtPos(Begin));
+            std::cout << "Item at pos after change: " << temp.getItemAtPos(i)->getWord();
             // B[i] = A[begin];
             Begin++;
         }
         else
         {
-        	// std::cout << "Else" << std::endl;
-        	sortedList.setItemAtPos(i, ItemList.getItemAtPos(Middle));
+            std::cout << "Else" << std::endl;
+            temp.swapItems(ItemList.getItemAtPos(i), ItemList.getItemAtPos(Middle));
             // B[i] = A[middle];
             Middle++;
         }
     }
 }
 
-void splitMerge(List &array, int begin, int end, List &sortedList)
+void splitMerge(List &array, int begin, int end, List** sortedList)
 {
     if (begin < end)
     {
+        
         // Same as (begin+end)/2, but avoids overflow for
         // large l and h
         int middle = begin+(end-begin)/2;
 
         // splitMerge first and second halves
-        // std::cout << "splitMerge called" << std::endl;
+        std::cout << "splitMerge called" << std::endl;
         splitMerge(array, begin, middle, sortedList);
 
-        // std::cout << "splitMerge called" << std::endl;
+        std::cout << "splitMerge called" << std::endl;
         splitMerge(array, middle+1, end, sortedList);
 
         // Array is split up into units of 1
 
-        // std::cout << "Merge called" << std::endl;
+        std::cout << "Merge called" << std::endl;
         merge(sortedList, begin, middle, end, array);
 
-		// std::cout << "Contents of sortedList" << std::endl;
-		// printEntireList(sortedList);
+        std::cout << "Contents of sortedList" << std::endl;
+        printEntireList(sortedList);
     }
 }
 
 void populateList(List &List)
 {
-    List.addItem((std::string)"zaterdag");
-    List.addItem((std::string)"zondag");
-    List.addItem((std::string)"maandag");
-    List.addItem((std::string)"dinsdag");
-    List.addItem((std::string)"woensdag");
-    List.addItem((std::string)"donderdag");
-    List.addItem((std::string)"vrijdag");
-    List.addItem((std::string)"school");
-    List.addItem((std::string)"laptop");
-    List.addItem((std::string)"pc master race");
+    List.addItem("zaterdag");
+    List.addItem("zondag");
+    List.addItem("maandag");
+    List.addItem("dinsdag");
+    List.addItem("woensdag");
+    List.addItem("donderdag");
+    List.addItem("vrijdag");
+    List.addItem("school");
+    List.addItem("laptop");
+    List.addItem("pc master race");
 }
 
-void deepCopy(List &ListToCopy, List &newList, int elements)
+void deepCopy(List &ListToCopy, List** newList, int elements)
 {
     for(int i = 0; i < elements; i++)
     {
@@ -285,7 +298,7 @@ void deepCopy(List &ListToCopy, List &newList, int elements)
 
         if (temp != NULL)
         {
-            newList.addItem(temp->getWord());
+            *newList.addItem(temp->getWord());
         }
         else
         {
@@ -297,12 +310,13 @@ void deepCopy(List &ListToCopy, List &newList, int elements)
 void topDownMergesort(List &toSplitMerge, int elements)
 {
     List* workingList = new List();
-    deepCopy(toSplitMerge, *workingList, elements);
+
+    deepCopy(toSplitMerge, &workingList, elements);
 
     // Arguments: list to sort, start position of the list
     // (0 normally, gets changed during recursion) and the initial end position of the list
     // SplitMerge changes the list in place, so toSplitMerge is sorted after this function.
-    splitMerge(toSplitMerge, 0, elements, *workingList);
+    splitMerge(toSplitMerge, 0, elements, &workingList);
 }
 
 int main(void)
@@ -311,7 +325,7 @@ int main(void)
     populateList(*list);
 
     // Debugging: check how many items the List contains
-    // std::cout << "Number of elements in List: " << List->nrOfElements() << std::endl;
+    std::cout << "Number of elements in List: " << list->nrOfElements() << std::endl;
 
     topDownMergesort(*list, list->nrOfElements());
 }
