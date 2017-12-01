@@ -30,8 +30,6 @@ int main()
     head.addValue("Aardappel");
     */
 
-    head.print();
-
     std::cout << "After mergeSort" << std::endl;
     
     mergeSort(&head);
@@ -51,17 +49,17 @@ Key* Split(Key* keyToSplit)
 {
     Key* tmpKey;
 
-    if (keyToSplit == NULL) // If the key is NULL, there is nothing to be done
+    if (keyToSplit == NULL)                                             // If the key is NULL, there is nothing to be done
         return NULL;
     else 
-        if (keyToSplit->getNext() == NULL) // If the next pointer is NULL, there is nothing to be done either
+        if (keyToSplit->getNext() == NULL)                              // If the next pointer is NULL, there is nothing to be done either
             return NULL;
-    else // There is a pointer for the next key
+    else                                                                // There is a pointer for the next key
     {
-        tmpKey = keyToSplit->getNext(); // Set the temporary key to be the next key of the key in question
-        keyToSplit->setNext(tmpKey->getNext()); // Set the next key, of the key in question, to be the next key of the temporary key
-        tmpKey->setNext(Split(tmpKey->getNext())); // Do this move over and over to make sure the order stays correct
-        return tmpKey; // Finally, return the tmpKey
+        tmpKey = keyToSplit->getNext();                                 // Set the temporary key to be the next key of the key in question
+        keyToSplit->setNext(tmpKey->getNext());                         // Set the next key, of the key in question, to be the next key of the temporary key
+        tmpKey->setNext(Split(tmpKey->getNext()));                      // Do this move over and over to make sure the order stays correct
+        return tmpKey;                                                  // Finally, return the tmpKey
     }
 }
 
@@ -72,15 +70,15 @@ Key* Merge(Key* firstKey, Key* secondKey)
         return secondKey;
     else if(secondKey == NULL)
         return firstKey;
-    else if (firstKey->getText().compare(secondKey->getText()) < 0) // If the firstKey has a textvalue that should be earlier in the alphabetical order:
+    else if (firstKey->getText().compare(secondKey->getText()) < 0)     // If the firstKey has a textvalue that should be earlier in the alphabetical order:
     {
-        firstKey->setNext(Merge(firstKey->getNext(), secondKey)); // setNext on the next key that should be after it in alphabetical order.
-        return firstKey; // Finally, return the firstKey
+        firstKey->setNext(Merge(firstKey->getNext(), secondKey));       // setNext on the next key that should be after it in alphabetical order.
+        return firstKey;                                                // Finally, return the firstKey
     }
     else
     {
-        secondKey->setNext(Merge(firstKey, secondKey->getNext())); // If the secondKey should be in front of the firstKey, it will move the other keys aswell
-        return secondKey; // Finally, return the secondKey
+        secondKey->setNext(Merge(firstKey, secondKey->getNext()));      // If the secondKey should be in front of the firstKey, it will move the other keys aswell
+        return secondKey;                                               // Finally, return the secondKey
     }
 }
 
@@ -89,14 +87,13 @@ Key* mergeSort(Key* keyToSort)
 {
     Key* tmpKey;
 
-    if (keyToSort == NULL) // If the key is NULL, do nothing.
+    if (keyToSort == NULL)                                              // If the key is NULL, do nothing.
         return NULL;
-    else if (keyToSort->getNext() == NULL) // If it has no other keys, do nothing.
+    else if (keyToSort->getNext() == NULL)                              // If it has no other keys, do nothing.
         return keyToSort;
     else
     {
-        tmpKey = Split(keyToSort); // Split the keys into smaller groups
-        return Merge(mergeSort(keyToSort), mergeSort(tmpKey)); // Merge those keys again
+        tmpKey = Split(keyToSort);                                      // Split the keys into smaller groups
+        return Merge(mergeSort(keyToSort), mergeSort(tmpKey));          // Merge those keys again
     }
 }
-
