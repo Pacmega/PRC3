@@ -14,10 +14,21 @@ int main()
     FileStructure f;
     Key head;
     
-    f.loadFile("data/gibberish.bin", head);
+    // f.loadFile("data/gibberish.bin", head);
 
     // next line is only to show what kind of data we're working with
     // remove this line to increase performance!
+    head.addValue("Amandelen");
+    head.addValue("Pannenkoek");
+    head.addValue("Boter");
+    head.addValue("Kaas");
+    head.addValue("Eieren");
+    head.addValue("Aardbei");
+    head.addValue("Handelen");
+
+    head.print();
+
+    std::cout << "After mergeSort" << std::endl;
     
     mergeSort(&head);
 
@@ -55,7 +66,7 @@ Key* Merge(Key* firstKey, Key* secondKey)
         return secondKey;
     else if(secondKey == NULL)
         return firstKey;
-    else if (firstKey->getText().compare(secondKey->getText()))
+    else if (firstKey->getText().compare(secondKey->getText()) < 0)
     {
         firstKey->setNext(Merge(firstKey->getNext(), secondKey));
         return firstKey;
