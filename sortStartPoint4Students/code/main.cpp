@@ -59,8 +59,10 @@ KeyPtr Split(KeyPtr keyToSplit)
     else                                                                // There is a pointer for the next key
     {
         tmpKey = keyToSplit->getNext();                                 // Set the temporary key to be the next key of the key in question
+        std::cout << "keyToSplit->getNext() = " << tmpKey << std::endl;
         keyToSplit->setNext(tmpKey->getNext());                         // Set the next key, of the key in question, to be the next key of the temporary key
         tmpKey->setNext(Split(tmpKey->getNext()));                      // Do this move over and over to make sure the order stays correct
+        std::cout << "setNext(Split(tmpKey->getNext())) = " << tmpKey << std::endl;
         return tmpKey;                                                  // Finally, return the tmpKey
     }
 }
