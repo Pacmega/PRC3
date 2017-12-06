@@ -95,11 +95,17 @@ int main()
     */
     
     head = mergeSort(&head);
+    Key * tmp = head;
 
-    //head->print();
+    while(tmp != NULL)
+    {
+        Value * value = tmp->getValuePtr();
+        tmp->setValuePtr(mergeSort(&value));
+        tmp = tmp->getNext();
+    }
+    
     // sort all data
     // todo: call your sort method(s) here!
-    std::cout << "saving file" << std::endl;
     // save sorted data into a new file called sorted.bin
     f.saveFile(*head, "sorted.bin");
     
