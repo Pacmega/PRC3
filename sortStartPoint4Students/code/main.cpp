@@ -9,7 +9,7 @@ https://stackoverflow.com/questions/5630994/merge-sorting-a-linked-list
 
 typedef struct Key * KeyPtr;
 
-KeyPtr mergeSort(KeyPtr keyToSort);
+KeyPtr mergeSort(KeyPtr *keyToSort);
 KeyPtr Merge(KeyPtr firstKey, KeyPtr secondKey);
 KeyPtr Split(KeyPtr keyToSplit);
 
@@ -88,6 +88,7 @@ KeyPtr Merge(KeyPtr firstKey, KeyPtr secondKey)
 // This method uses both methods above to sort a linked list of keys in alphabetical order.
 KeyPtr mergeSort(KeyPtr *keyToSort)
 {
+    printf("Enter mergesort\n");
     KeyPtr head = *keyToSort;
     KeyPtr tmpKey;
 
@@ -96,6 +97,6 @@ KeyPtr mergeSort(KeyPtr *keyToSort)
     else
     {
         tmpKey = Split(head);                                      // Split the keys into smaller groups
-        return Merge(mergeSort(head), mergeSort(tmpKey));                 // Merge those keys again
+        return Merge(mergeSort(&head), mergeSort(&tmpKey));                 // Merge those keys again
     }
 }
