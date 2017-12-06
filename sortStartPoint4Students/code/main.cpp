@@ -9,23 +9,20 @@ https://stackoverflow.com/questions/5630994/merge-sorting-a-linked-list
 
 typedef struct Key * KeyPtr;
 
-
 // This method releases the nextValue of the key from the linked list:  Current->Next(This one goes out)->After
 template <typename T>
-T * Split(T * keyToSplit)
+T * Split(T * itemToSplit)
 {
     T * tmpKey;
-    if (keyToSplit == NULL)                                             // If the key is NULL, there is nothing to be done
+    if (itemToSplit == NULL)                                             // If the key is NULL, there is nothing to be done
         return NULL;
     else 
-        if (keyToSplit->getNext() == NULL)                              // If the next pointer is NULL, there is nothing to be done either
+        if (itemToSplit->getNext() == NULL)                              // If the next pointer is NULL, there is nothing to be done either
             return NULL;
     else                                                                // There is a pointer for the next key
     {
-        // std::cout << "else" << std::endl;
-        tmpKey = keyToSplit->getNext();                                 // Set the temporary key to be the next key of the key in question
-        // std::cout << "keyToSplit->getNext() = " << tmpKey << std::endl;
-        keyToSplit->setNext(tmpKey->getNext());                         // Set the next key, of the key in question, to be the next key of the temporary key
+        tmpKey = itemToSplit->getNext();                                 // Set the temporary key to be the next key of the key in question
+        itemToSplit->setNext(tmpKey->getNext());                         // Set the next key, of the key in question, to be the next key of the temporary key
         tmpKey->setNext(Split(tmpKey->getNext()));                      // Do this move over and over to make sure the order stays correct
         return tmpKey;                                                  // Finally, return the tmpKey
     }
@@ -33,27 +30,27 @@ T * Split(T * keyToSplit)
 
 // This method checks if the keys are in the correct spot and moves them depending on the alphabetical order
 template <typename T>
-T * Merge(T * firstKey, T * secondKey)
+T * Merge(T * firstItem, T * secondItem)
 {
-    if (firstKey == NULL)
-        return secondKey;
-    else if(secondKey == NULL)
-        return firstKey;
-    else if (firstKey->getText().compare(secondKey->getText()) < 0)     // If the firstKey has a textvalue that should be earlier in the alphabetical order:
+    if (firstItem == NULL)
+        return secondItem;
+    else if(secondItem == NULL)
+        return firstItem;
+    else if (firstItem->getText().compare(secondItem->getText()) < 0)     // If the firstItem has a textvalue that should be earlier in the alphabetical order:
     {
-        firstKey->setNext(Merge(firstKey->getNext(), secondKey));       // setNext on the next key that should be after it in alphabetical order.
-        (firstKey->getNext())->setPrev(firstKey);
-        return firstKey;                                                // Finally, return the firstKey
+        firstItem->setNext(Merge(firstItem->getNext(), secondItem));       // setNext on the next key that should be after it in alphabetical order.
+        (firstItem->getNext())->setPrev(firstItem);
+        return firstItem;                                                // Finally, return the firstItem
     }
     else
     {
-        T * tmpKey = firstKey->getPrev();
-        secondKey->setNext(Merge(firstKey, secondKey->getNext()));      // If the secondKey should be in front of the firstKey, it will move the other keys aswell
+        T * tmpKey = firstItem->getPrev();
+        secondItem->setNext(Merge(firstItem, secondItem->getNext()));      // If the secondItem should be in front of the firstItem, it will move the other keys aswell
 
-        firstKey->setPrev(secondKey);
-        secondKey->setPrev(tmpKey);
+        firstItem->setPrev(secondItem);
+        secondItem->setPrev(tmpKey);
 
-        return secondKey;                                               // Finally, return the secondKey
+        return secondItem;                                               // Finally, return the secondItem
     }
 }
 
@@ -69,7 +66,6 @@ T * mergeSort(T **keyToSort)
         return head; 
     else
     {
-        // std::cout << "else" << std::endl;
         tmpKey = Split(head);                                      // Split the keys into smaller groups
         return Merge(mergeSort(&head), mergeSort(&tmpKey));                 // Merge those keys again
     }
@@ -84,6 +80,7 @@ int main()
     
     // next line is only to show what kind of data we're working with
     // remove this line to increase performance!
+    
     /*
     head->addValue("Pannenkoek");
     head->addValue("Boter");
@@ -106,6 +103,10 @@ int main()
     
     // sort all data
     // todo: call your sort method(s) here!
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 4f2f8f81c99c957b449e1d3d96d5042bfe3899d1
     // save sorted data into a new file called sorted.bin
     f.saveFile(*head, "sorted.bin");
     
