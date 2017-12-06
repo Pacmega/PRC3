@@ -37,7 +37,7 @@ int main()
     //head->print();
     // sort all data
     // todo: call your sort method(s) here!
-
+    std::cout << "saving file" << std::endl;
     // save sorted data into a new file called sorted.bin
     f.saveFile(*head, "sorted.bin");
     
@@ -74,7 +74,7 @@ KeyPtr Merge(KeyPtr firstKey, KeyPtr secondKey)
     else if (firstKey->getText().compare(secondKey->getText()) < 0)     // If the firstKey has a textvalue that should be earlier in the alphabetical order:
     {
         firstKey->setNext(Merge(firstKey->getNext(), secondKey));       // setNext on the next key that should be after it in alphabetical order.
-        
+        (firstKey->getNext())->setPrev(firstKey);
         return firstKey;                                                // Finally, return the firstKey
     }
     else
