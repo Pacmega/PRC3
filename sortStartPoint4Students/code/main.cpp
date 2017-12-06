@@ -13,6 +13,8 @@ KeyPtr mergeSort(KeyPtr *keyToSort);
 KeyPtr Merge(KeyPtr firstKey, KeyPtr secondKey);
 KeyPtr Split(KeyPtr keyToSplit);
 
+unsigned long getal = 0;
+
 int main()
 {
     FileStructure f;
@@ -55,9 +57,7 @@ KeyPtr Split(KeyPtr keyToSplit)
             return NULL;
     else                                                                // There is a pointer for the next key
     {
-        // std::cout << "else" << std::endl;
         tmpKey = keyToSplit->getNext();                                 // Set the temporary key to be the next key of the key in question
-        // std::cout << "keyToSplit->getNext() = " << tmpKey << std::endl;
         keyToSplit->setNext(tmpKey->getNext());                         // Set the next key, of the key in question, to be the next key of the temporary key
         tmpKey->setNext(Split(tmpKey->getNext()));                      // Do this move over and over to make sure the order stays correct
         return tmpKey;                                                  // Finally, return the tmpKey
@@ -67,6 +67,8 @@ KeyPtr Split(KeyPtr keyToSplit)
 // This method checks if the keys are in the correct spot and moves them depending on the alphabetical order
 KeyPtr Merge(KeyPtr firstKey, KeyPtr secondKey)
 {
+    getal++;
+    std::cout << getal << std::endl;
     if (firstKey == NULL)
         return secondKey;
     else if(secondKey == NULL)
@@ -92,15 +94,12 @@ KeyPtr Merge(KeyPtr firstKey, KeyPtr secondKey)
 // This method uses both methods above to sort a linked list of keys in alphabetical order.
 KeyPtr mergeSort(KeyPtr *keyToSort)
 {
-    // std::cout << "Entering mergesort" << std::endl;
     KeyPtr head = *keyToSort;
     KeyPtr tmpKey;
-    // std::cout << "if" << std::endl;
     if (head == NULL || head->getNext() == NULL)                         // If the key or the next key is NULL, there is nothing to sort.
         return head; 
     else
     {
-        // std::cout << "else" << std::endl;
         tmpKey = Split(head);                                      // Split the keys into smaller groups
         return Merge(mergeSort(&head), mergeSort(&tmpKey));                 // Merge those keys again
     }
