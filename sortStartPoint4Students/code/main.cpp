@@ -18,11 +18,11 @@ int main()
     FileStructure f;
     Key * head = new Key();
     
-    // f.loadFile("data/gibberish.bin", *head);
+    f.loadFile("data/gibberish.bin", *head);
     
     // next line is only to show what kind of data we're working with
     // remove this line to increase performance!
-
+    /*
     head->addValue("Pannenkoek");
     head->addValue("Boter");
     head->addValue("Kaas");
@@ -30,8 +30,9 @@ int main()
     head->addValue("Aardbei");
     head->addValue("Handelen");
     head->addValue("Aardappel");
+    */
     
-    mergeSort(&head);
+    head = mergeSort(&head);
 
     head->print();
     // sort all data
@@ -46,9 +47,7 @@ int main()
 // This method releases the nextValue of the key from the linked list:  Current->Next(This one goes out)->After
 KeyPtr Split(KeyPtr keyToSplit)
 {
-    // std::cout << "Splitting" << std::endl;
     KeyPtr tmpKey;
-    // std::cout << "if" << std::endl;
     if (keyToSplit == NULL)                                             // If the key is NULL, there is nothing to be done
         return NULL;
     else 
@@ -61,7 +60,6 @@ KeyPtr Split(KeyPtr keyToSplit)
         // std::cout << "keyToSplit->getNext() = " << tmpKey << std::endl;
         keyToSplit->setNext(tmpKey->getNext());                         // Set the next key, of the key in question, to be the next key of the temporary key
         tmpKey->setNext(Split(tmpKey->getNext()));                      // Do this move over and over to make sure the order stays correct
-        // std::cout << "setNext(Split(tmpKey->getNext())) = " << tmpKey << std::endl;
         return tmpKey;                                                  // Finally, return the tmpKey
     }
 }
@@ -69,22 +67,26 @@ KeyPtr Split(KeyPtr keyToSplit)
 // This method checks if the keys are in the correct spot and moves them depending on the alphabetical order
 KeyPtr Merge(KeyPtr firstKey, KeyPtr secondKey)
 {
-    // std::cout << "Merging" << std::endl;
     if (firstKey == NULL)
         return secondKey;
     else if(secondKey == NULL)
         return firstKey;
     else if (firstKey->getText().compare(secondKey->getText()) < 0)     // If the firstKey has a textvalue that should be earlier in the alphabetical order:
     {
-        // std::cout << "else if" << std::endl;
         firstKey->setNext(Merge(firstKey->getNext(), secondKey));       // setNext on the next key that should be after it in alphabetical order.
         return firstKey;                                                // Finally, return the firstKey
     }
     else
     {
-        // std::cout << "else" << std::endl;
-        // secondKey->setPrev(firstKey->getPrev());
+        Key * tmpKey = firstKey->getPrev();
         secondKey->setNext(Merge(firstKey, secondKey->getNext()));      // If the secondKey should be in front of the firstKey, it will move the other keys aswell
+        if (tmpKey->getPrev() != NULL)
+        {
+            std::cout << "tmpKey is not null" << std::endl;
+            firstKey->setPrev(secondKey);
+            secondKey->setPrev(tmpKey);
+        }
+
         return secondKey;                                               // Finally, return the secondKey
     }
 }
