@@ -34,7 +34,7 @@ int main()
     
     head = mergeSort(&head);
 
-    head->print();
+    //head->print();
     // sort all data
     // todo: call your sort method(s) here!
 
@@ -74,18 +74,16 @@ KeyPtr Merge(KeyPtr firstKey, KeyPtr secondKey)
     else if (firstKey->getText().compare(secondKey->getText()) < 0)     // If the firstKey has a textvalue that should be earlier in the alphabetical order:
     {
         firstKey->setNext(Merge(firstKey->getNext(), secondKey));       // setNext on the next key that should be after it in alphabetical order.
+        
         return firstKey;                                                // Finally, return the firstKey
     }
     else
     {
         Key * tmpKey = firstKey->getPrev();
         secondKey->setNext(Merge(firstKey, secondKey->getNext()));      // If the secondKey should be in front of the firstKey, it will move the other keys aswell
-        if (tmpKey->getPrev() != NULL)
-        {
-            std::cout << "tmpKey is not null" << std::endl;
-            firstKey->setPrev(secondKey);
-            secondKey->setPrev(tmpKey);
-        }
+
+        firstKey->setPrev(secondKey);
+        secondKey->setPrev(tmpKey);
 
         return secondKey;                                               // Finally, return the secondKey
     }
