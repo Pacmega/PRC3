@@ -12,8 +12,13 @@ CC=g++
 
 all: clean sort
 
+profile: clean sortProfile
+
 sort: $(MAIN_OBJECTS) Makefile code/FileStructure.h
 	@$(CC) $(CFLAGS) $(MAIN_LIBS) $(MAIN_SOURCES) -o $@ $(LDDFLAGS)
+
+sortProfile: $(MAIN_OBJECTS) Makefile code/FileStructure.h
+	@$(CC) -pg $(CFLAGS) $(MAIN_LIBS) $(MAIN_SOURCES) -o $@ $(LDDFLAGS)
 	
 clean:
 	@rm -rf sort code/*.o test/*.o *.bin
