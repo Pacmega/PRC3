@@ -92,13 +92,24 @@ int main()
     */
     
     head = mergeSort(&head);
+    Key * tmp = head;
 
-    //head->print();
+    while(tmp != NULL)
+    {
+        Value * value = tmp->getValuePtr();
+        tmp->setValuePtr(mergeSort(&value));
+        tmp = tmp->getNext();
+    }
+    
     // sort all data
     // todo: call your sort method(s) here!
-    
     // save sorted data into a new file called sorted.bin
     f.saveFile(*head, "sorted.bin");
+
+    delete head;
+    head = NULL;
+    delete tmp;
+    tmp = NULL;
     
     return 0;
 }
