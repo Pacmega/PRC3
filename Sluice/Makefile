@@ -5,25 +5,20 @@
 #
 
 TARGET = sluice
+
+FILES = code/*.cpp
+HEADERS = code/*.h
+
 LIBS = -lm
+
+CFLAGS = -Wall -Werror -o
+
 CC = g++
-CFLAGS = -g -Wall
 
 .PHONY: default all clean
 
-default: $(TARGET)
-all: default
-
-OBJECTS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
-HEADERS = $(wildcard *.h)
-
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c -g $< -o $@
-
-.PRECIOUS: $(TARGET) $(OBJECTS)
-
-$(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@
+sluice: $(FILES) Makefile $(HEADERS)
+	@$(CC) $(CFLAGS) $(FILES) $(CFLAGS) $(TARGET)
 
 clean:
 	-rm -f *.o
