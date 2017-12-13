@@ -3,6 +3,12 @@
 
 #include "valveRow.h"
 
+enum doorType
+{
+	doorType1 = 1,
+	doorType2 = 2
+};
+
 class door
 {
 public:

@@ -8,6 +8,22 @@
 
 int main(int argc, char const *argv[])
 {
-	/* code */
+	while (choice != 'q')
+    {
+        printf ("\nMenu\n"
+                "========\n"
+                "   [n]    create new semaphore\n"
+                "   [o]    open existing semaphore\n"
+                "Enter choice: "
+               );
+        fgets (line, sizeof (line), stdin);
+        choice = line[0];
+        printf ("\n");
+        
+        switch (choice)
+        {
+
+        }
+    }
 	return 0;
 }

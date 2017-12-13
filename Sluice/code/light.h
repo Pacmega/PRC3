@@ -1,7 +1,7 @@
-#ifndef LIGHT_H
-#define LIGHT_H
+#ifndef LIGHT_H_
+#define LIGHT_H_
 
-#include <string>
+#include <string.h>
 
 class light
 {
