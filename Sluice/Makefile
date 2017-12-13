@@ -1,23 +1,30 @@
 #
 #	Makefile for Sluice
 #
-#	(c) Fontys 2010, Joris Geurts
+#	© Joran van Teeffelen & Bas Witters
 #
 
-BINARIES = /code/*
-
-FILES = 
-
+TARGET = sluice
+LIBS = -lm
 CC = g++
-CFLAGS = -g3 -Wall -W -Wshadow -Wcast-qual -Wwrite-strings
-LDLIBS = -lrt
-CLIENT_AUX_OBJS = Auxiliary.o CreateTCPClientSocket.o
+CFLAGS = -g -Wall
 
-all:	$(BINARIES)
+.PHONY: default all clean
+
+default: $(TARGET)
+all: default
+
+OBJECTS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
+HEADERS = $(wildcard *.h)
+
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c -g $< -o $@
+
+.PRECIOUS: $(TARGET) $(OBJECTS)
+
+$(TARGET): $(OBJECTS)
+	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@
 
 clean:
-	rm *.o $(BINARIES)
-
-TCPEchoClient: TCPEchoClient.o $(CLIENT_AUX_OBJS)
-
-
+	-rm -f *.o
+	-rm -f $(TARGET)
