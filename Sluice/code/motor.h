@@ -7,14 +7,12 @@ public:
 	motor();
 	~motor();
 
-	int open();
-	int close();
-	int stop();
+	int changePower(int newPower);
 
 private:
 	int power;
 	bool damaged;
-	
+	motorType type;
 };
 
 #endif

@@ -9,12 +9,12 @@ public:
 	trafficLight();
 	~trafficLight();
 
-	int redLight();
-	int greenLight();
+	void redLight();
+	void greenLight();
 
 private:
-	light redLight;
-	light greenLight;
+	light lightRed;
+	light lightGreen;
 	
 };
 

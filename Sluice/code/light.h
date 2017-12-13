@@ -1,20 +1,20 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include <strings.h>
+#include <string>
 
 class light
 {
 public:
 
-	light();
+	light(std::string Colour);
 	~light();
 	
 	void turnOn();
 	void turnOff();
 
 private:
-	string colour;
+	std::string colour;
 	bool burning;
 };
 

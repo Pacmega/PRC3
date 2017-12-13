@@ -1,7 +1,7 @@
 #ifndef BUTTON_H_
 #define BUTTON_H_ 
 
-#include <strings.h>
+#include <string>
 
 class button
 {
@@ -12,7 +12,7 @@ public:
 	bool buttonPressed();
 	
 private:
-	string name;
+	std::string name;
 };
 
 #endif

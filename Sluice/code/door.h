@@ -18,8 +18,8 @@ private:
 	enum doorState {};
 	bool waterLevelEqual;
 	bool locked;
-	valveRow[3] leftValves;
-	valveRow[3] rightValves;
+	valveRow leftValves[3];
+	valveRow rightValves[3];
 };
 
 #endif

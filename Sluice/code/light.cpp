@@ -1,3 +1,5 @@
+#include <string>
+
 #include "light.h"
 
 // TODO: update light ctor in class diagram

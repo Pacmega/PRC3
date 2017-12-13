@@ -1,7 +1,7 @@
 #ifndef NETWORKINTERFACE_H_
 #define NETWORKINTERFACE_H_ 
 
-#include <strings.h>
+#include <string>
 
 class networkInterface
 {
@@ -9,8 +9,8 @@ public:
 	networkInterface();
 	~networkInterface();
 
-	string receiveMessage();
-	void sendMessage(string message);
+	std::string receiveMessage();
+	void sendMessage(std::string message);
 
 private:
 	int port;

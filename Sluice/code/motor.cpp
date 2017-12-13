@@ -19,25 +19,28 @@ int motor::changePower(int newPower)
 		case singleMessage:
 			// Power > 0: open door
 			// Power < 0: close door
-			if (power > 0 && newPower > 0 || power < 0 && newPower < 0)
+			if ((power > 0 && newPower > 0) || (power < 0 && newPower < 0))
 			{
 				power = 0;
 				damaged = true;
+				return -1;
 			}
 			else
 			{
 				power = newPower;
+				return 0;
 			}
-			break;
 		case needsLock:
 			// not sure if this is how this is supposed to work, door causes the damage this way
 			power = newPower;
-			break;
+			return 0;
 		case pulse:
 			power = newPower;
 			// sleep is blocking, should probably be replaced somehow
 			sleep(1);
 			power = 0;
-			break;
+			return 0;
 	}
+
+	return -1;
 }
