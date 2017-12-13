@@ -5,7 +5,9 @@
 
 trafficLight::trafficLight()
 {
-	std::string test = "red";
+	std::string test = "test";
+	// New lights are created, passing the
+	// colour as a string
 	light lightRed = light(test);
 	light lightGreen = light(test);
 }
