@@ -6,8 +6,13 @@
 
 light::light(std::string Colour)
 {
-	colour = Colour;
+	colour = "Colour";
 	burning = false;
+}
+
+light::~light()
+{
+	
 }
 
 void light::turnOn()

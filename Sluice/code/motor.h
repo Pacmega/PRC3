@@ -3,14 +3,14 @@
 
 enum motorType
 {
-	motorType1 = 1,
-	motorType2 = 2
+	continuous = 1,
+	pulse = 2
 };
 
 class motor
 {
 public:
-	motor();
+	motor(motorType Type);
 	~motor();
 
 	int changePower(int newPower);
