@@ -103,12 +103,13 @@ int main()
     
     // sort all data
     // todo: call your sort method(s) here!
-<<<<<<< HEAD
-=======
-    
->>>>>>> 4f2f8f81c99c957b449e1d3d96d5042bfe3899d1
     // save sorted data into a new file called sorted.bin
     f.saveFile(*head, "sorted.bin");
+
+    delete head;
+    head = NULL;
+    delete tmp;
+    tmp = NULL;
     
     return 0;
 }
