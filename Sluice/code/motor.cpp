@@ -17,7 +17,9 @@ int motor::changePower(int newPower)
 	switch(type)
 	{
 		case singleMessage:
-			if (power > 0)
+			// Power > 0: open door
+			// Power < 0: close door
+			if (power > 0 && newPower > 0 || power < 0 && newPower < 0)
 			{
 				power = 0;
 				damaged = true;
@@ -33,13 +35,9 @@ int motor::changePower(int newPower)
 			break;
 		case pulse:
 			power = newPower;
+			// sleep is blocking, should probably be replaced somehow
 			sleep(1);
 			power = 0;
 			break;
 	}
-}
-
-int motor::close(int newPower)
-{
-
 }
