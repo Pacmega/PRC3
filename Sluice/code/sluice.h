@@ -7,7 +7,7 @@ public:
 	Sluice();
 	~Sluice();
 	
-	enum getWaterLevel();
+	//enum getWaterLevel();
 
 };
 
