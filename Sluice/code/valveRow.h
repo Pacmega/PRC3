@@ -14,9 +14,6 @@ public:
 
 private:
 	bool opened;
-	
-	light lightRed;
-	light lightGreen;
 };
 
 #endif
