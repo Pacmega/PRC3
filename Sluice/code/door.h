@@ -3,10 +3,15 @@
 
 #include "valveRow.h"
 
-enum doorType
+enum doorState
 {
-	doorType1 = 1,
-	doorType2 = 2
+	doorLocked = 0,
+	doorClosed = 1,
+	doorOpen = 2,
+	doorClosing = 3,
+	doorOpening = 4,
+	doorStopped = 5,
+	motorDamage = 6
 };
 
 class door
