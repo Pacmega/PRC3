@@ -7,6 +7,14 @@
 #include "cameraSystem.h"
 #include "door.h"
 
+int findSizeOfMessage(char message[])
+{
+	for (int i = 0; i < RCVBUFSIZE; i++)
+	{
+		/* code */
+	}
+}
+
 int main(int argc, char const *argv[])
 {
 	int choice = ' ';

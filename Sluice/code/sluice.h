@@ -1,16 +1,13 @@
 #ifndef SLUICE_H
 #define SLUICE_H 
 
-class Sluice
+class sluice
 {
 public:
-	Sluice();
-	~Sluice();
-	
-	//enum getWaterLevel();
-	// TODO: Properly implement enum
-	// enum getWaterLevel();
+	sluice();
+	~sluice();
 
+	void schutten();
 };
 
 #endif
