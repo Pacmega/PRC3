@@ -5,6 +5,11 @@ valveRow::valveRow()
 	opened = false;
 }
 
+valveRow::~valveRow()
+{
+	
+}
+
 // TODO: update return value in class diagram
 void valveRow::open()
 {

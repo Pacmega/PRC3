@@ -2,10 +2,8 @@
 
 #include "light.h"
 
-light::light(std::string Colour)
+light::light()
 {
-	// Use the given string to set the colour 
-	colour = Colour;
 	burning = false;
 }
 

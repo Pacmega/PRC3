@@ -1,18 +1,15 @@
 #include <unistd.h>
 
-#include "motor.h"
+#include "doorMotor.h"
 
-// TODO: update constructor to add motorType enum (singleMessage, needsLock, pulse)
-motor::motor(motorType Type)
+doorMotor::doorMotor(motorType Type)
 {
 	power = 0;
 	damaged = false;
 	type = Type;
 }
 
-// TODO: change open/close to changePower()
-// TODO: add newPower as parameter in open
-int motor::changePower(int newPower)
+int doorMotor::changePower(int newPower)
 {
 	switch(type)
 	{

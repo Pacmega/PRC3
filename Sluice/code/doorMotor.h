@@ -7,11 +7,11 @@ enum motorType
 	pulse
 };
 
-class motor
+class doorMotor
 {
 public:
-	motor(motorType Type);
-	~motor();
+	doorMotor(motorType Type);
+	~doorMotor();
 
 	int changePower(int newPower);
 
