@@ -1,33 +1,3 @@
-/*
-Commando:										Antwoord:
-SetDoor[Left|Right]:[open|close|stop]			ack
-GetDoor[Left|Right]								door state:
-												- doorLocked
-												- doorClosed
-												- doorOpen
-												- doorClosing
-												- doorOpening
-												- doorStopped
-												- motorDamage
-SetDoor[Left|Right]Valve[1...3]:[open|close]	ack
-GetDoor[Left|Right]Valve[1...3]					[closed|open]
-SetTrafficLight[1..4][Red|Green]:[on|off]		ack
-GetTrafficLight[1..4][Red|Green]				[off|on]
-GetWaterLevel									water level, which is:
-												- low
-												- belowValve2
-												- aboveValve2
-												- aboveValve3
-												- high
-SetDoorLock[Left|Right]:[on|off]				ack
-GetDoorLockState[Left|Right]					[lockWorking|lockDamaged]
-Voorbeelden:
-je verstuurd bericht: “SetDoorLeftValve2:close;”,
- waarop je bericht “ack;” terug krijgt.
-je verstuurd bericht GetTrafficLight2Green;”, 
-waarop je bericht “off;” terug krijgt.
-*/
-
 #ifndef COMMANDS_H_
 #define COMMANDS_H_ 
 
@@ -43,8 +13,6 @@ static const char GetDoorLeft[] = "GetDoorLeft;\0";
 static const char GetDoorRight[] = "GetDoorRight;\0";
 
 // Open left door valves
-// TODO: replace Close Open
-// TODO: replace close open
 static const char DoorLeftOpenValve1[] = "SetDoorLeftValve1:open;\0";
 static const char DoorLeftOpenValve2[] = "SetDoorLeftValve2:open;\0";
 static const char DoorLeftOpenValve3[] = "SetDoorLeftValve3:open;\0";
@@ -55,8 +23,6 @@ static const char DoorLeftCloseValve2[] = "SetDoorLeftValve2:close;\0";
 static const char DoorLeftCloseValve3[] = "SetDoorLeftValve3:close;\0";
 
 // Open right door valves
-// TODO: replace Close Open
-// TODO: replace close open
 static const char DoorRightOpenValve1[] = "SetDoorRightValve1:open;\0";
 static const char DoorRightOpenValve2[] = "SetDoorRightValve2:open;\0";
 static const char DoorRightOpenValve3[] = "SetDoorRightValve3:open;\0";
