@@ -3,17 +3,23 @@
 
 #include <string>
 
+#include "/lib/Auxiliary.h"					// Used to handle arguments in the terminal
+#include "/lib/CreateTCPClientSocket.h"		// Used to create the TCP client socket
+
+#define RCVBUFSIZE 32   /* Size of receive buffer */
+
 class networkInterface
 {
 public:
-	networkInterface();
+	networkInterface(int argc, char const *argv[]);
 	~networkInterface();
 
-	std::string receiveMessage();
-	void sendMessage(char message[]);
+	char* receiveMessage();
+	void sendMessage(char message[], int size);
 
 private:
-	int port;
+	// int port; <- Maybe not used since the auxiliary handles this?
+	int sock; // Socket descriptor
 };
 
 #endif

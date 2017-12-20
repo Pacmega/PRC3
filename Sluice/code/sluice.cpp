@@ -33,7 +33,9 @@ int main(int argc, char const *argv[])
         	case '2':
         	std::cout << "Vrijgeven voor uitvaren ingedrukt.\n";
         	break;
-
+            default:
+            std::cout << "Onjuiste keuze, probeer het opnieuw. \n";
+            break;
         }
     }
     return 0;

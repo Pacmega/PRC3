@@ -4,7 +4,7 @@
 
 light::light(std::string Colour)
 {
-	// Use the given string to set the colour
+	// Use the given string to set the colour 
 	colour = Colour;
 	burning = false;
 }

@@ -13,7 +13,7 @@ public:
 	void turnOff();
 
 private:
-	std::string colour;
+	std::string colour; //<- Note: Are we going to use colour?
 	bool burning;
 };
 

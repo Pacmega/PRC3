@@ -31,4 +31,6 @@ waarop je bericht “off;” terug krijgt.
 #ifndef COMMANDS_H_
 #define COMMANDS_H_ 
 
+
+
 #endif
