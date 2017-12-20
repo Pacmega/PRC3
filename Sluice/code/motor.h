@@ -3,8 +3,8 @@
 
 enum motorType
 {
-	continuous = 0,
-	pulse = 1
+	continuous,
+	pulse
 };
 
 class motor

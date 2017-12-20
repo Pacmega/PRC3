@@ -5,13 +5,13 @@
 
 enum doorState
 {
-	doorLocked = 0,
-	doorClosed = 1,
-	doorOpen = 2,
-	doorClosing = 3,
-	doorOpening = 4,
-	doorStopped = 5,
-	motorDamage = 6
+	doorLocked,
+	doorClosed,
+	doorOpen,
+	doorClosing,
+	doorOpening,
+	doorStopped,
+	motorDamage
 };
 
 class door

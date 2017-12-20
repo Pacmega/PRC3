@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
              << "   [2]    Vrijgeven voor uitvaren\n"
              << "   [q]	   Afsluiten\n\n"
              << "Ctrl+C    Noodstop\n"
-             << "Ctrl+C    Herstellen (als de noodstop is ingedrukt \n"
+             << "Ctrl+C    Herstellen (als de noodstop is ingedrukt)\n"
              << "Voer uw keuze in: ";
         std::cin >> line;
         choice = line[0];

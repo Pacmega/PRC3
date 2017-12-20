@@ -10,12 +10,10 @@ public:
 	~networkInterface();
 
 	std::string receiveMessage();
-	void sendMessage(std::string message);
+	void sendMessage(char message[]);
 
 private:
 	int port;
-
-	
 };
 
 #endif
