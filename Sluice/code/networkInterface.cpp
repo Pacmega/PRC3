@@ -1,6 +1,11 @@
+#include <unistd.h>
+#include <iostream>
+#include <sys/types.h>
+#include <sys/socket.h>
+
 #include "networkInterface.h"
 
-networkInterface::networkInterface(int argc, char const *argv[])
+networkInterface::networkInterface(int argc, char *argv[])
 {
 	parse_args (argc, argv);
 
@@ -14,7 +19,10 @@ networkInterface::~networkInterface()
 
 char* networkInterface::receiveMessage()
 {
-	char echoBuffer[RCVBUFSIZE];
+	for (int j = 0; j < RCVBUFSIZE; ++j)
+	{
+		echoBuffer[j] = '\0';
+	}
 
 	if (recv(sock, echoBuffer, RCVBUFSIZE, 0) >= 0)
 	{
@@ -23,14 +31,14 @@ char* networkInterface::receiveMessage()
 	return '\0';
 }
 
-void networkInterface::sendMessage(char message[], int size)
+void networkInterface::sendMessage(char message[])
 {
-	if(send(sock, message, size, 0) >= 0)
+	if(send(sock, message, sizeof(*message), 0) >= 0)
 	{
 		info_s("verbose mode", message);
 	}
 	else
 	{
-		printf("Error sending message \n");
+		std::cout << "Error sending message \n";
 	}
 }

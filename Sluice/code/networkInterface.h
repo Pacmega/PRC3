@@ -3,23 +3,24 @@
 
 #include <string>
 
-#include "/lib/Auxiliary.h"					// Used to handle arguments in the terminal
-#include "/lib/CreateTCPClientSocket.h"		// Used to create the TCP client socket
+#include "lib/auxiliary.h"					// Used to handle arguments in the terminal
+#include "lib/createTCPClientSocket.h"		// Used to create the TCP client socket
 
 #define RCVBUFSIZE 32   /* Size of receive buffer */
 
 class networkInterface
 {
 public:
-	networkInterface(int argc, char const *argv[]);
+	networkInterface(int argc, char *argv[]);
 	~networkInterface();
 
 	char* receiveMessage();
-	void sendMessage(char message[], int size);
+	void sendMessage(char message[]);
 
 private:
 	// int port; <- Maybe not used since the auxiliary handles this?
 	int sock; // Socket descriptor
+	char echoBuffer[RCVBUFSIZE];
 };
 
 #endif
