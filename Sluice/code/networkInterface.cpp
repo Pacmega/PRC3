@@ -5,11 +5,9 @@
 
 #include "networkInterface.h"
 
-networkInterface::networkInterface(int argc, char *argv[])
+networkInterface::networkInterface(int port)
 {
-	parse_args (argc, argv);
-
-	sock = CreateTCPClientSocket (argv_ip, argv_port);
+	sock = CreateTCPClientSocket (port);
 }
 
 networkInterface::~networkInterface()
@@ -28,10 +26,10 @@ char* networkInterface::receiveMessage()
 	{
 		return echoBuffer;
 	}
-	return '\0';
+	return NULL;
 }
 
-void networkInterface::sendMessage(char message[], int size)
+void networkInterface::sendMessage(const char message[], int size)
 {
 	if(send(sock, message, size, 0) >= 0)
 	{

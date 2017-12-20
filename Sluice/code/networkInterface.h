@@ -11,11 +11,11 @@
 class networkInterface
 {
 public:
-	networkInterface(int argc, char *argv[]);
+	networkInterface(int port);
 	~networkInterface();
 
 	char* receiveMessage();
-	void sendMessage(char message[], int size);
+	void sendMessage(const char message[], int size);
 
 private:
 	// int port; <- Maybe not used since the auxiliary handles this?

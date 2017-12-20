@@ -8,7 +8,7 @@ TARGET = sluice
 
 FILES = code/*.cpp
 HEADERS = code/*.h
-LIB = code/lib/*.h
+LIB = code/lib/*.c
 
 LIBS = -lm
 LDLIBS = -lrt

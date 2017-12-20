@@ -4,8 +4,10 @@
 #include "auxiliary.h"
 #include "createTCPClientSocket.h"
 
-int CreateTCPClientSocket (const char * servIP, unsigned short port)
+int CreateTCPClientSocket (unsigned short port)
 {
+    const char * servIP = "127.0.0.1";
+
     int                 sock;         /* Socket descriptor */
     struct sockaddr_in  echoServAddr; /* Echo server address */
 

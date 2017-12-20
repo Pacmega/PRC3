@@ -7,7 +7,7 @@
 #include <time.h>       // for time()
 #include <unistd.h>     // for sleep(), close()
 
-#include "Auxiliary.h"
+#include "auxiliary.h"
 
 #define MAX_DATA       10
 

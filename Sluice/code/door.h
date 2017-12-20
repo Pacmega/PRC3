@@ -14,6 +14,12 @@ enum doorState
 	motorDamage
 };
 
+enum doorSide
+{
+	left,
+	right
+};
+
 class door
 {
 public:
