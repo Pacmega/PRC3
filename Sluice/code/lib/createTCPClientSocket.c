@@ -1,8 +1,8 @@
 #include <memory.h>     // for memset()
 #include <arpa/inet.h>  /* for sockaddr_in and inet_ntoa() */
 
-#include "Auxiliary.h"
-#include "CreateTCPClientSocket.h"
+#include "auxiliary.h"
+#include "createTCPClientSocket.h"
 
 int CreateTCPClientSocket (const char * servIP, unsigned short port)
 {
