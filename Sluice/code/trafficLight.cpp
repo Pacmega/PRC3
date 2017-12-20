@@ -4,12 +4,10 @@
 #include "light.h"
 
 trafficLight::trafficLight()
+	: lightRed(light("red"))
+	, lightGreen(light("green"))
 {
 	std::string test = "test";
-	// New lights are created, passing the
-	// colour as a string
-	light lightRed = light(test);
-	light lightGreen = light(test);
 }
 
 // TODO: update return value in class diagram
