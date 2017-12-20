@@ -9,10 +9,21 @@
 
 int findSizeOfMessage(char message[])
 {
+    int sizeOfMsg = 0;
 	for (int i = 0; i < RCVBUFSIZE; i++)
 	{
-		/* code */
+		if (message[i] == '\0')
+        {
+            return sizeOfMsg;
+        }
+        else
+        {
+            sizeOfMsg++;
+        }
 	}
+    
+    // Message was not NULL terminated correctly, return error
+    return -1;
 }
 
 int main(int argc, char const *argv[])
