@@ -27,9 +27,11 @@ int main(int argc, char const *argv[])
         
         switch (choice)
         {
-        	case 1:															
+        	case 1:	
+        	std::cout << "Startknop ingedrukt. \n";														
         	break;
         	case 2:
+        	std::cout << "Vrijgeven voor uitvaren ingedrukt.\n";
         	break;
 
         }

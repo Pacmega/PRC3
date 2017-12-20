@@ -5,15 +5,16 @@
 
 trafficLight::trafficLight()
 {
-	light lightRed = light("red");
-	light lightGreen = light("green");
+	std::string test = "test";
+	// New lights are created, passing the
+	// colour as a string
+	light lightRed = light(test);
+	light lightGreen = light(test);
 }
 
 // TODO: update return value in class diagram
 void trafficLight::redLight()
 {
-	// TODO: change name of either light redLight or function redLight
-	
 	lightRed.turnOn();
 	lightGreen.turnOff();
 }
@@ -21,8 +22,6 @@ void trafficLight::redLight()
 // TODO: update return value in class diagram
 void trafficLight::greenLight()
 {
-	// TODO: change name of either light greenLight or function greenLight
-	
 	lightGreen.turnOn();
 	lightRed.turnOff();
 }

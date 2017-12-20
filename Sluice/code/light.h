@@ -1,12 +1,11 @@
 #ifndef LIGHT_H_
 #define LIGHT_H_
 
-#include <string.h>
+#include <string>
 
 class light
 {
 public:
-
 	light(std::string Colour);
 	~light();
 	

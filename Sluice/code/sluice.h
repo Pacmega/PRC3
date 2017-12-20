@@ -8,6 +8,8 @@ public:
 	~Sluice();
 	
 	//enum getWaterLevel();
+	// TODO: Properly implement enum
+	// enum getWaterLevel();
 
 };
 
