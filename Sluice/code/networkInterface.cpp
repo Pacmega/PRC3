@@ -31,9 +31,9 @@ char* networkInterface::receiveMessage()
 	return '\0';
 }
 
-void networkInterface::sendMessage(char message[])
+void networkInterface::sendMessage(char message[], int size)
 {
-	if(send(sock, message, sizeof(*message), 0) >= 0)
+	if(send(sock, message, size, 0) >= 0)
 	{
 		info_s("verbose mode", message);
 	}
