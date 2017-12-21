@@ -6,14 +6,14 @@
 class light
 {
 public:
-	light(std::string Colour);
+	light();
 	~light();
 	
 	void turnOn();
 	void turnOff();
 
 private:
-	std::string colour; //<- Note: Are we going to use colour?
+	// We do not need to store the colour, it has no purpose as the lights only exist for communication purposes.
 	bool burning;
 };
 

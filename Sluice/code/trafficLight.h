@@ -3,6 +3,7 @@
 
 #include "light.h"
 
+//TODO: shouldn't this be a struct instead?
 class trafficLight
 {
 public:
@@ -15,7 +16,6 @@ public:
 private:
 	light lightRed;
 	light lightGreen;
-	
 };
 
 #endif

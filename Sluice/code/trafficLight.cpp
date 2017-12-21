@@ -4,8 +4,8 @@
 #include "light.h"
 
 trafficLight::trafficLight()
-	: lightRed(light("red"))
-	, lightGreen(light("green"))
+	: lightRed(light())
+	, lightGreen(light())
 {
 	std::string test = "test";
 }

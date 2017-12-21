@@ -2,6 +2,7 @@
 #define DOOR_H_ 
 
 #include "valveRow.h"
+#include "doorMotor.h"
 
 enum doorState
 {
@@ -11,7 +12,7 @@ enum doorState
 	doorClosing,
 	doorOpening,
 	doorStopped,
-	motorDamage
+	doorMotorDamage
 };
 
 enum doorSide
@@ -23,7 +24,7 @@ enum doorSide
 class door
 {
 public:
-	door();
+	door(doorSide side, motorType Type);
 	~door();
 	
 	int openDoor();
@@ -32,11 +33,12 @@ public:
 	void lock();
 
 private:
-	enum doorState {};
 	bool waterLevelEqual;
 	bool locked;
+	doorSide side;
 	valveRow leftValves[3];
 	valveRow rightValves[3];
+	doorMotor motor;
 };
 
 #endif
