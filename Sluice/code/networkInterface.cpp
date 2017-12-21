@@ -29,8 +29,10 @@ char* networkInterface::receiveMessage()
 	return NULL;
 }
 
-void networkInterface::sendMessage(const char message[], int size)
+char* networkInterface::sendMessage(const char message[])
 {
+	int size = sizeOfMessage(message);
+
 	if(send(sock, message, size, 0) >= 0)
 	{
 		info_s("verbose mode", message);
@@ -39,4 +41,24 @@ void networkInterface::sendMessage(const char message[], int size)
 	{
 		std::cout << "Error sending message \n";
 	}
+	return receiveMessage();
+}
+
+int sizeOfMessage(const char message[])
+{
+    int sizeOfMsg = 0;
+    for (int i = 0; i < RCVBUFSIZE; i++)
+    {
+        if (message[i] == '\0')
+        {
+            return sizeOfMsg;
+        }
+        else
+        {
+            sizeOfMsg++;
+        }
+    }
+
+    // Message was not NULL terminated correctly, return error
+    return -1;
 }

@@ -14,13 +14,15 @@ public:
 	networkInterface(int port);
 	~networkInterface();
 
-	char* receiveMessage();
-	void sendMessage(const char message[], int size);
+	char* sendMessage(const char message[]);
 
 private:
 	// int port; <- Maybe not used since the auxiliary handles this?
 	int sock; // Socket descriptor
 	char echoBuffer[RCVBUFSIZE];
+
+	int sizeOfMessage(const char message[]);
+	char* receiveMessage();
 };
 
 #endif

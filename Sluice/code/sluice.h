@@ -5,21 +5,32 @@
 #include "trafficLight.h"
 #include "networkInterface.h"
 
+enum waterLevel
+{
+	low,
+	belowValve2,
+	aboveValve2,
+	aboveValve3,
+	high
+};
+
 class sluice
 {
 public:
 	// Note: if port 5557, doors start off as locked
-	sluice(int port);
+	sluice(int port, doorType dt, motorType mt);
 	~sluice();
 
+	int start();
+	int vrijgeven();
 private:
 	door leftDoor;
 	door rightDoor;
-	trafficLight left1;
-	trafficLight left2;
-	trafficLight right1;
-	trafficLight right2;
+	waterLevel wLevel;
+
 	networkInterface interface;
+
+	waterLevel getWaterLevel();
 };
 
 #endif

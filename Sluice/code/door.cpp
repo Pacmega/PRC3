@@ -2,10 +2,9 @@
 #include "valveRow.h"
 #include "doorMotor.h"
 
-door::door(doorSide Side, motorType Type)
-	: motor(doorMotor(Type))
+door::door(doorType dt, side Side, motorType mt)
+	: motor(doorMotor(mt))
 {
-	//TODO: For waterLevelEqual, we need to check. Can't assume anything.
-	
-	side = Side;
+	Type = dt;
+	dSide = Side;
 }
