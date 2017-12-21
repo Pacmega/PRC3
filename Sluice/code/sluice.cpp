@@ -76,5 +76,4 @@ int sluice::vrijgeven()
             break;
     }
     return -1; // something went wrong
-}
 
