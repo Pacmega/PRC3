@@ -11,7 +11,8 @@ enum waterLevel
 	belowValve2,
 	aboveValve2,
 	aboveValve3,
-	high
+	high,
+	error
 };
 
 class sluice
@@ -31,6 +32,7 @@ private:
 	networkInterface interface;
 
 	waterLevel getWaterLevel();
+	waterLevel interpretWaterLevel(char* receivedMessage);
 };
 
 #endif

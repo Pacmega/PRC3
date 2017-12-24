@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "sluice.h"
 #include "button.h"
 // #include "levelSensor.h"
@@ -22,7 +24,41 @@ sluice::~sluice()
 
 waterLevel sluice::getWaterLevel()
 {
-    return interface.sendMessage(GetWaterLevel);
+    char * receivedMessage = interface.sendMessage(GetWaterLevel);
+    return interpretWaterLevel(receivedMessage);
+}
+
+waterLevel sluice::interpretWaterLevel(char* receivedMessage)
+{
+    waterLevel wLevel;
+
+    // A switch case isn't possible for strings or character arrays.
+    if (strcmp(receivedMessage, "low") == 0)
+    {
+        wLevel = low;
+    }
+    else if (strcmp(receivedMessage, "belowValve2") == 0)
+    {
+        wLevel = belowValve2;
+    }
+    else if (strcmp(receivedMessage, "aboveValve2") == 0)
+    {
+        wLevel = aboveValve2;
+    }
+    else if (strcmp(receivedMessage, "aboveValve3") == 0)
+    {
+        wLevel = aboveValve3;
+    }
+    else if (strcmp(receivedMessage, "high") == 0)
+    {
+        wLevel = high;
+    }
+    else
+    {
+        wLevel = error;
+    }
+
+    return wLevel;
 }
 
 int sluice::start()
@@ -47,7 +83,7 @@ int sluice::start()
             */
             return 0;
         default:
-            // TODO: alert user: waterlevel not equal to high or low 
+            // TODO: alert user: waterlevel not equal to high or low, or unknown reply
             break;
     }
     return -1; // something went wrong
@@ -76,4 +112,4 @@ int sluice::vrijgeven()
             break;
     }
     return -1; // something went wrong
-
+}
