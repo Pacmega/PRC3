@@ -44,7 +44,7 @@ char* networkInterface::sendMessage(const char message[])
 	return receiveMessage();
 }
 
-int sizeOfMessage(const char message[])
+int networkInterface::sizeOfMessage(const char message[])
 {
     int sizeOfMsg = 0;
     for (int i = 0; i < RCVBUFSIZE; i++)

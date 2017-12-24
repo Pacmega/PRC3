@@ -8,3 +8,8 @@ door::door(doorType dt, side Side, motorType mt)
 	Type = dt;
 	dSide = Side;
 }
+
+door::~door()
+{
+	
+}

@@ -1,3 +1,6 @@
+// Original name: trafficlight.cpp
+// Renamed to keep it out of compilation since the .h was changed to a struct instead
+
 #include <string>
 
 #include "trafficLight.h"

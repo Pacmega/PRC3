@@ -3,17 +3,8 @@
 
 #include "light.h"
 
-//TODO: shouldn't this be a struct instead?
-class trafficLight
+struct trafficLight
 {
-public:
-	trafficLight();
-	~trafficLight();
-
-	void redLight();
-	void greenLight();
-
-private:
 	light lightRed;
 	light lightGreen;
 };

@@ -9,6 +9,11 @@ doorMotor::doorMotor(motorType Type)
 	type = Type;
 }
 
+doorMotor::~doorMotor()
+{
+	
+}
+
 int doorMotor::changePower(int newPower)
 {
 	switch(type)
