@@ -24,6 +24,8 @@ char* networkInterface::receiveMessage()
 
 	if (recv(sock, echoBuffer, RCVBUFSIZE, 0) >= 0)
 	{
+		int size = sizeOfMessage(echoBuffer);
+		echoBuffer[size-1] = '\0'; // Remove the semicolon at the end of the received message
 		return echoBuffer;
 	}
 	return NULL;

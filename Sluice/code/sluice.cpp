@@ -1,4 +1,5 @@
 #include <string.h>
+#include <iostream>
 
 #include "sluice.h"
 #include "button.h"
@@ -24,7 +25,8 @@ sluice::~sluice()
 
 waterLevel sluice::getWaterLevel()
 {
-    char * receivedMessage = interface.sendMessage(GetWaterLevel);
+    char* receivedMessage = interface.sendMessage(GetWaterLevel);
+    std::cout << "[DBG] Sluice::getWaterLevel received message: " << receivedMessage << std::endl;
     return interpretWaterLevel(receivedMessage);
 }
 
@@ -65,7 +67,8 @@ int sluice::start()
 {
     switch(getWaterLevel()) // check the current waterlevel
     {
-        case low:   
+        case low:
+            std::cout << "hmm" << std::endl;   
             /*
              TODO:
              - turn on redlights 
@@ -83,10 +86,11 @@ int sluice::start()
             */
             return 0;
         default:
-            // TODO: alert user: waterlevel not equal to high or low, or unknown reply
+            // TODO: alert user in main: waterlevel not equal to high or low, or unknown reply
+            return -2;
             break;
     }
-    return -1; // something went wrong
+    return -1; // something unexpected went wrong
 }
 
 int sluice::vrijgeven()
