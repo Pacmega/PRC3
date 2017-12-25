@@ -2,11 +2,16 @@
 #include <iostream>
 
 #include "sluice.h"
+<<<<<<< HEAD
 #include "button.h"
 #include "lib/enums.h"
+=======
+// #include "button.h"
+// #include "levelSensor.h"
+>>>>>>> 7dfa8183e90f1bcdd61b71ed3775b5e8b54b0b6d
 #include "networkInterface.h"
 #include "trafficLight.h"
-#include "cameraSystem.h"
+// #include "cameraSystem.h"
 #include "door.h"
 #include "commands.h"
 

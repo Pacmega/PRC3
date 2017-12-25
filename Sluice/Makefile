@@ -26,3 +26,5 @@ sluice: $(FILES) Makefile $(HEADERS)
 clean:
 	-rm -f *.o
 	-rm -f $(TARGET)
+
+cm: clean sluice

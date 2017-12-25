@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 #include <iostream>
 #include <cstdio>
+=======
+    #include <iostream>
+>>>>>>> 7dfa8183e90f1bcdd61b71ed3775b5e8b54b0b6d
 
 #include "sluice.h"
 #include "door.h"
@@ -135,6 +139,10 @@ int main(int argc, char const *argv[])
             case 'c':
                 std::cout << "Vrijgeven van sluis 4 voor uitvaren ingedrukt.\n";
                 // TODO: This should actually do something
+                break;
+
+            case '0':
+                std::cout << "Afsluiten... \n";
                 break;
             
             // Invalid input
