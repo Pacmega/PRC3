@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 
 #include "sluice.h"
 #include "door.h"
@@ -6,7 +7,7 @@
 
 int main(int argc, char const *argv[])
 {
-	// Create virtual sluices for the program to save 
+	// Create virtual sluices for the program to save the status
 	sluice normalSluice1 = sluice(5555, slowLock, continuous, false);
 	sluice normalSluice2 = sluice(5556, slowLock, continuous, false);
 	sluice fastLockSluice = sluice(5557, fastLock, continuous, true);
@@ -42,8 +43,6 @@ int main(int argc, char const *argv[])
         choice = line[0];
         std::cout << std::endl;
         
-        // TODO: Mate, you forgot a button. I remade the UI to fit it in,
-        // 		 but the switch case needs some work for this to work again.
         switch (choice)
         {
         	// Sluice 1

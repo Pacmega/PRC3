@@ -18,6 +18,8 @@ CC = g++
 
 .PHONY: default all clean
 
+cm: clean sluice
+	
 sluice: $(FILES) Makefile $(HEADERS) 
 	@$(CC) $(CFLAGS) $(FILES) $(LIB) $(CFLAGS) $(TARGET)
 

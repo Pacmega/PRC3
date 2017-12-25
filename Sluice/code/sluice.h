@@ -5,16 +5,6 @@
 #include "trafficLight.h"
 #include "networkInterface.h"
 
-enum waterLevel
-{
-	low,
-	belowValve2,
-	aboveValve2,
-	aboveValve3,
-	high,
-	error
-};
-
 class sluice
 {
 public:
@@ -23,7 +13,8 @@ public:
 	~sluice();
 
 	int start();
-	int vrijgeven();
+	int release();
+
 private:
 	door leftDoor;
 	door rightDoor;

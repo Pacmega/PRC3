@@ -1,26 +1,10 @@
 #ifndef DOOR_H_
 #define DOOR_H_ 
 
+#include "lib/enums.h"
 #include "valveRow.h"
 #include "doorMotor.h"
 #include "trafficLight.h"
-
-enum doorState
-{
-	doorLocked,
-	doorClosed,
-	doorOpen,
-	doorClosing,
-	doorOpening,
-	doorStopped,
-	motorDamage
-};
-
-enum doorType
-{
-	slowLock,
-	fastLock // Has to be locked fast, otherwise it breaks the motor.
-};
 
 class door
 {

@@ -5,6 +5,7 @@
 
 #include "lib/auxiliary.h"					// Used to handle arguments in the terminal
 #include "lib/createTCPClientSocket.h"		// Used to create the TCP client socket
+#include "lib/enums.h"
 
 #define RCVBUFSIZE 32   /* Size of receive buffer */
 
@@ -15,6 +16,11 @@ public:
 	~networkInterface();
 
 	char* sendMessage(const char message[]);
+
+	waterLevel interpretWaterLevel(char* receivedMessage);
+	doorState interpretDoorState(char* receivedMessage);
+	doorType interpretDoorType(char* receivedMessage);
+	motorType interpretMotorType(char* receivedMessage);
 
 private:
 	// int port; <- Maybe not used since the auxiliary handles this?

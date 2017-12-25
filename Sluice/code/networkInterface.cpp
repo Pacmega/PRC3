@@ -1,9 +1,11 @@
 #include <unistd.h>
+#include <string.h>
 #include <iostream>
 #include <sys/types.h>
 #include <sys/socket.h>
 
 #include "networkInterface.h"
+#include "lib/enums.h"
 
 networkInterface::networkInterface(int port)
 {
@@ -63,4 +65,37 @@ int networkInterface::sizeOfMessage(const char message[])
 
     // Message was not NULL terminated correctly, return error
     return -1;
+}
+
+waterLevel networkInterface::interpretWaterLevel(char* receivedMessage)
+{
+    waterLevel wLevel;
+
+    // A switch case isn't possible for strings or character arrays.
+    if (strcmp(receivedMessage, "low") == 0)
+    {
+        wLevel = low;
+    }
+    else if (strcmp(receivedMessage, "belowValve2") == 0)
+    {
+        wLevel = belowValve2;
+    }
+    else if (strcmp(receivedMessage, "aboveValve2") == 0)
+    {
+        wLevel = aboveValve2;
+    }
+    else if (strcmp(receivedMessage, "aboveValve3") == 0)
+    {
+        wLevel = aboveValve3;
+    }
+    else if (strcmp(receivedMessage, "high") == 0)
+    {
+        wLevel = high;
+    }
+    else
+    {
+        wLevel = waterError;
+    }
+
+    return wLevel;
 }
