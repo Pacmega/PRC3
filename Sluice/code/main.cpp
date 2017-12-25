@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 #include <iostream>
-#include <cstdio>
-=======
-    #include <iostream>
->>>>>>> 7dfa8183e90f1bcdd61b71ed3775b5e8b54b0b6d
 
 #include "sluice.h"
 #include "door.h"
