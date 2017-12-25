@@ -10,9 +10,9 @@
 #include "door.h"
 #include "commands.h"
 
-sluice::sluice(int port, doorType dt, motorType mt)
-    :leftDoor(door(dt, left, mt))
-    ,rightDoor(door(dt, right, mt))
+sluice::sluice(int port, doorType dt, motorType mt, bool doorsStartLocked)
+    :leftDoor(door(dt, mt, doorsStartLocked))
+    ,rightDoor(door(dt, mt, doorsStartLocked))
     ,interface(networkInterface(port))
 {
 
@@ -25,8 +25,7 @@ sluice::~sluice()
 
 waterLevel sluice::getWaterLevel()
 {
-    char* receivedMessage = interface.sendMessage(GetWaterLevel);
-    std::cout << "[DBG] Sluice::getWaterLevel received message: " << receivedMessage << std::endl;
+    receivedMessage = interface.sendMessage(GetWaterLevel);
     return interpretWaterLevel(receivedMessage);
 }
 
@@ -71,22 +70,28 @@ int sluice::start()
             std::cout << "hmm" << std::endl;   
             /*
              TODO:
-             - turn on redlights 
-             - close doors
+             - turn on red light on left door's outer traffic light
+             - close left door
              - open valves on right door to adjust water level
+             - continue checking if water level is now high
+             - close valves on right door
+             - open right door
              */
             return 0;
 
         case high:
             /* 
-            TODO: 
-            - turn on redlights
-            - close doors
-            - open valves on left door to adjust water level
+             TODO: 
+             - turn on red light on right door's outer traffic light
+             - close right door
+             - open valves on left door to adjust water level
+             - continue checking if water level is now low
+             - close valves on left door
+             - open left door
             */
             return 0;
         default:
-            // TODO: alert user in main: waterlevel not equal to high or low, or unknown reply
+            // Can't start moving boat, water level isn't at a level that would allow a boat in
             return -2;
             break;
     }

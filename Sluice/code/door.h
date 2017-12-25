@@ -13,13 +13,7 @@ enum doorState
 	doorClosing,
 	doorOpening,
 	doorStopped,
-	doorMotorDamage
-};
-
-enum side
-{
-	left,
-	right
+	motorDamage
 };
 
 enum doorType
@@ -31,7 +25,7 @@ enum doorType
 class door
 {
 public:
-	door(doorType doorType, side Side, motorType motorType);
+	door(doorType doorType, motorType motorType, bool startsLocked);
 	~door();
 	
 	int openDoor();
@@ -42,9 +36,7 @@ public:
 
 private:
 	bool locked;
-	side dSide;
-	valveRow leftValves[3];
-	valveRow rightValves[3];
+	valveRow valves[3];
 	doorMotor motor;
 	doorType Type;
 	trafficLight lightInside;

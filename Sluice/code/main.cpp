@@ -6,37 +6,35 @@
 
 int main(int argc, char const *argv[])
 {
-	sluice normalSluice1 = sluice(5555, slowLock, continuous);
-	sluice normalSluice2 = sluice(5556, slowLock, continuous);
-	sluice fastLockSluice = sluice(5557, fastLock, continuous); // Doors start off locked
-	sluice pulseMotorSluice = sluice(5558, slowLock, pulse);
+	// Create virtual sluices for the program to save 
+	sluice normalSluice1 = sluice(5555, slowLock, continuous, false);
+	sluice normalSluice2 = sluice(5556, slowLock, continuous, false);
+	sluice fastLockSluice = sluice(5557, fastLock, continuous, true);
+	sluice pulseMotorSluice = sluice(5558, slowLock, pulse, false);
     
-    // Create a network interface to communicate with the sluice at post 5556
-    // networkInterface Port1 = networkInterface(5555);
-    // networkInterface Port2 = networkInterface(5556);
-    // networkInterface Port3 = networkInterface(5557); // Different doors: lock it immediately after [opening|closing]
-    // networkInterface Port4 = networkInterface(5558); // Different motors: Only on for 1 sec (restarting a lot)
-
-	int rtnval;
+    int rtnval;
     int choice = ' ';
     char line[80];
-    while (choice != 'q')
+    while (choice != '0')
     {
         std::cout << "\n==Menu==\n"
-        << "========\n"
         << "Sluis 1: \n"
-        << "   [1]    Start\n"
-        << "   [2]    Vrijgeven voor uitvaren\n"
+        << "   [1]    Vrijgeven voor invaren\n"
+        << "   [2]    Start\n"
+        << "   [3]    Vrijgeven voor uitvaren\n"
         << "Sluis 2: \n"
-        << "   [3]    Start\n"
-        << "   [4]    Vrijgeven voor uitvaren\n"
+        << "   [q]    Vrijgeven voor invaren\n"
+        << "   [w]    Start\n"
+        << "   [e]    Vrijgeven voor uitvaren\n"
         << "Sluis 3: \n"
-        << "   [5]    Start\n"
-        << "   [6]    Vrijgeven voor uitvaren\n"
+        << "   [a]    Vrijgeven voor invaren\n"
+        << "   [s]    Start\n"
+        << "   [d]    Vrijgeven voor uitvaren\n"
         << "Sluis 4: \n"
-        << "   [7]    Start\n"
-        << "   [8]    Vrijgeven voor uitvaren\n\n"
-        << "   [q]	  Afsluiten\n"
+        << "   [z]    Vrijgeven voor invaren\n"
+        << "   [x]    Start\n"
+        << "   [c]    Vrijgeven voor uitvaren\n"
+        << "   [0]	  Afsluiten\n"
         << "Ctrl+C    Noodstop\n"
         << "Ctrl+C    Herstellen (als de noodstop is ingedrukt)\n\n"
         << "Voer uw keuze in: ";
@@ -44,46 +42,103 @@ int main(int argc, char const *argv[])
         choice = line[0];
         std::cout << std::endl;
         
+        // TODO: Mate, you forgot a button. I remade the UI to fit it in,
+        // 		 but the switch case needs some work for this to work again.
         switch (choice)
         {
+        	// Sluice 1
         	case '1':
-                std::cout << "Startknop ingedrukt. \n";
-                rtnval = normalSluice1.start();
-                if (rtnval == -1)
-                {
-                	// TODO: needs a better message
-                	std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
-                }
-                else if (rtnval == -2)
-                {
-                	std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
-                }
-                //Port1.sendMessage(TrafficLight1GreenOn, findSizeOfMessage(TrafficLight1GreenOn));
+                std::cout << "Vrijgeven van sluis 1 voor invaren ingedrukt.\n";
+                // TODO: This should actually do something
                 break;
             case '2':
-                std::cout << "Vrijgeven voor uitvaren ingedrukt.\n";
+                std::cout << "Startknop van sluis 1 ingedrukt. \n";
+                rtnval = normalSluice1.start();
+            	if (rtnval == -1)
+            	{
+            		// TODO: needs a better message
+            		std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
+            	}
+            	else if (rtnval == -2)
+            	{
+            		std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
+            	}
                 break;
             case '3':
-                std::cout << "Startknop ingedrukt. \n";
-                //Port2.sendMessage(TrafficLight1GreenOn, findSizeOfMessage(TrafficLight1GreenOn));
+                std::cout << "Vrijgeven van sluis 1 voor uitvaren ingedrukt.\n";
+                // TODO: This should actually do something
                 break;
-            case '4':
-                std::cout << "Vrijgeven voor uitvaren ingedrukt.\n";
+
+            // Sluice 2
+            case 'q':
+                std::cout << "Vrijgeven van sluis 2 voor invaren ingedrukt.\n";
+                // TODO: This should actually do something
                 break;
-            case '5':
-                std::cout << "Startknop ingedrukt. \n";
-                //Port3.sendMessage(TrafficLight1GreenOn, findSizeOfMessage(TrafficLight1GreenOn));
+            case 'w':
+                std::cout << "Startknop van sluis 2 ingedrukt. \n";
+                rtnval = normalSluice2.start();
+            	if (rtnval == -1)
+            	{
+            		// TODO: needs a better message
+            		std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
+            	}
+            	else if (rtnval == -2)
+            	{
+            		std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
+            	}
                 break;
-            case '6':
-                std::cout << "Vrijgeven voor uitvaren ingedrukt.\n";
+            case 'e':
+                std::cout << "Vrijgeven van sluis 2 voor uitvaren ingedrukt.\n";
+                // TODO: This should actually do something
                 break;
-            case '7':
-                std::cout << "Startknop ingedrukt. \n";
-                //Port4.sendMessage(TrafficLight1GreenOn, findSizeOfMessage(TrafficLight1GreenOn));
+
+            // Fast lock sluice
+            case 'a':
+                std::cout << "Vrijgeven van sluis 3 voor invaren ingedrukt.\n";
+                // TODO: This should actually do something
                 break;
-            case '8':
-                std::cout << "Vrijgeven voor uitvaren ingedrukt.\n";
+            case 's':
+                std::cout << "Startknop van sluis 3 ingedrukt. \n";
+                rtnval = fastLockSluice.start();
+            	if (rtnval == -1)
+            	{
+            		// TODO: needs a better message
+            		std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
+            	}
+            	else if (rtnval == -2)
+            	{
+            		std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
+            	}
                 break;
+            case 'd':
+                std::cout << "Vrijgeven van sluis 3 voor uitvaren ingedrukt.\n";
+                // TODO: This should actually do something
+                break;
+            
+            // Pulsing motor sluice
+            case 'z':
+                std::cout << "Vrijgeven van sluis 4 voor invaren ingedrukt.\n";
+                // TODO: This should actually do something
+                break;
+            case 'x':
+                std::cout << "Startknop van sluis 4 ingedrukt. \n";
+                rtnval = pulseMotorSluice.start();
+            	if (rtnval == -1)
+            	{
+            		// TODO: needs a better message
+            		std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
+            	}
+            	else if (rtnval == -2)
+            	{
+            		std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
+            	}
+                break;
+            case 'c':
+                std::cout << "Vrijgeven van sluis 4 voor uitvaren ingedrukt.\n";
+                // TODO: This should actually do something
+                break;
+            
+            // Invalid input
             default:
                 std::cout << "Onjuiste keuze, probeer het opnieuw. \n";
                 break;

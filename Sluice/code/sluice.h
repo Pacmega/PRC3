@@ -19,7 +19,7 @@ class sluice
 {
 public:
 	// Note: if port 5557, doors start off as locked
-	sluice(int port, doorType dt, motorType mt);
+	sluice(int port, doorType dt, motorType mt, bool doorsStartLocked);
 	~sluice();
 
 	int start();
@@ -28,8 +28,9 @@ private:
 	door leftDoor;
 	door rightDoor;
 	waterLevel wLevel;
-
 	networkInterface interface;
+
+	char* receivedMessage;
 
 	waterLevel getWaterLevel();
 	waterLevel interpretWaterLevel(char* receivedMessage);

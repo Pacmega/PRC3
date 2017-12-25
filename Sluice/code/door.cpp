@@ -2,11 +2,11 @@
 #include "valveRow.h"
 #include "doorMotor.h"
 
-door::door(doorType dt, side Side, motorType mt)
+door::door(doorType dt, motorType mt, bool startsLocked)
 	: motor(doorMotor(mt))
 {
+	locked = startsLocked;
 	Type = dt;
-	dSide = Side;
 }
 
 door::~door()
