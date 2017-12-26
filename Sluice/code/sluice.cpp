@@ -84,6 +84,7 @@ int sluice::openValve(doorSide side, int valveRow)
 
 int sluice::closeValve(doorSide side, int valveRow)
 {
+    // testcomment
     if (valveRow < 1 || valveRow > 3)
     {
         // Invalid valveRow
@@ -150,7 +151,7 @@ int sluice::closeAllValves(doorSide side)
 }
 
 int sluice::start()
-{
+{/*
     switch(getWaterLevel()) // check the current waterlevel
     {
         case low:
@@ -191,7 +192,7 @@ int sluice::start()
             return -3; 
         }
         // Door isn't closed correctly
-        return -4;
+        break;
 
         case high:
         rightDoor.outerLightRed();
@@ -226,14 +227,14 @@ int sluice::start()
                 return -3; 
             }
             // Door isn't closed 
-            return -4;
+            break;
         }
         
         default:
             // Can't start moving boat, water level isn't at a level that would allow a boat in
             // return -2;
         break;
-    }
+    }*/
      return -1; // something unexpected went wrong
  }
 
