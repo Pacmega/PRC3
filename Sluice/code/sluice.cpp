@@ -9,9 +9,9 @@
 #include "commands.h"
 
 sluice::sluice(int port, doorType dt, motorType mt, bool doorsStartLocked)
-:leftDoor(door(dt, mt, doorsStartLocked))
-,rightDoor(door(dt, mt, doorsStartLocked))
-,interface(networkInterface(port))
+    :leftDoor(door(dt, mt, doorsStartLocked))
+    ,rightDoor(door(dt, mt, doorsStartLocked))
+    ,interface(networkInterface(port))
 {
 
 }
@@ -63,6 +63,12 @@ int sluice::closeDoor(doorSide side)
 
 int sluice::stopDoor(doorSide side)
 {
+    char* messageToSend;
+
+    if (side == left)
+    {
+        std::cout << "kek";
+    }
     /* 
         TO DO:
         - Check doorType
@@ -91,7 +97,7 @@ int sluice::closeValve(doorSide side, int valveRow)
         return -1;
     }
 
-    char* messageToSend;
+    const char* messageToSend;
 
     if(side == left)
     {
@@ -125,7 +131,7 @@ int sluice::closeValve(doorSide side, int valveRow)
     }
 
     receivedMessage = interface.sendMessage(messageToSend);
-    if (interpretAck(receivedMessage))
+    if (interface.interpretAck(receivedMessage))
     {
         return 0;
     }
@@ -151,7 +157,8 @@ int sluice::closeAllValves(doorSide side)
 }
 
 int sluice::start()
-{/*
+{
+    /*
     switch(getWaterLevel()) // check the current waterlevel
     {
         case low:
@@ -236,107 +243,107 @@ int sluice::start()
         break;
     }*/
      return -1; // something unexpected went wrong
- }
+}
 
- int sluice::allowEntry()
- {
+int sluice::allowEntry()
+{
     switch(getWaterLevel())
     {
         case low:
-        switch(getDoorState(left))
-        {
-            case doorOpen:
-                    // Door is open, so allow boats to enter
-            receivedMessage = interface.sendMessage(LeftOuterTrafficLightGreenOn);
-            if(interface.interpretAck(receivedMessage))
+            switch(getDoorState(left))
             {
+                case doorOpen:
+                    // Door is open, so allow boats to enter
+                    receivedMessage = interface.sendMessage(LeftOuterTrafficLightGreenOn);
+                    if(interface.interpretAck(receivedMessage))
+                    {
                         // Simulation has acknowledged command and changed the light
                         // Set the light in the virtual sluice to green as well
-                leftDoor.outerLightGreen();
-            }
-            break;
+                        leftDoor.outerLightGreen();
+                    }
+                    break;
 
-            default:
+                default:
                     // All other cases: door isn't fully open, do not allow boats to enter
-            return -2;
-        }
-        return 0;
+                    return -2;
+            }
+            return 0;
         
         case high:
-        switch(getDoorState(right))
-        {
-            case doorOpen:
-                    // Door is open, so allow boats to enter
-            receivedMessage = interface.sendMessage(RightOuterTrafficLightGreenOn);
-            if(interface.interpretAck(receivedMessage))
+            switch(getDoorState(right))
             {
+                case doorOpen:
+                    // Door is open, so allow boats to enter
+                    receivedMessage = interface.sendMessage(RightOuterTrafficLightGreenOn);
+                    if(interface.interpretAck(receivedMessage))
+                    {
                         // Simulation has acknowledged command and changed the light
                         // Set the light in the virtual sluice to green as well
-                rightDoor.outerLightGreen();
-            }
-            break;
+                        rightDoor.outerLightGreen();
+                    }
+                    break;
 
-            default:
+                default:
                     // All other cases: door isn't fully open, do not allow boats to enter
-            return -2;
-        }
-        return 0;
+                    return -2;
+            }
+            return 0;
 
         default:
             return -1; // Waterlevel not equal to high or low
             break;
-        }
     }
+}
 
-    int sluice::allowExit()
+int sluice::allowExit()
+{
+    switch(getWaterLevel())
     {
-        switch(getWaterLevel())
-        {
-            case low:
+        case low:
             switch(getDoorState(left))
             {
                 case doorOpen:
                     // Door is open, so allow boats to exit
-                receivedMessage = interface.sendMessage(LeftInnerTrafficLightGreenOn);
-                if(interface.interpretAck(receivedMessage))
-                {
+                    receivedMessage = interface.sendMessage(LeftInnerTrafficLightGreenOn);
+                    if(interface.interpretAck(receivedMessage))
+                    {
                         // Simulation has acknowledged command and changed the light
                         // Set the light in the virtual sluice to green as well
-                    leftDoor.innerLightGreen();
-                }
-                break;
+                        leftDoor.innerLightGreen();
+                    }
+                    break;
 
                 default:
                     // All other cases: door isn't fully open, do not allow boats to enter
-                return -2;
+                    return -2;
                     // break;
             }
             
             return 0;
-
-            case high:
+        
+        case high:
             switch(getDoorState(right))
             {
                 case doorOpen:
                     // Door is open, so allow boats to exit
-                receivedMessage = interface.sendMessage(RightInnerTrafficLightGreenOn);
-                if(interface.interpretAck(receivedMessage))
-                {
+                    receivedMessage = interface.sendMessage(RightInnerTrafficLightGreenOn);
+                    if(interface.interpretAck(receivedMessage))
+                    {
                         // Simulation has acknowledged command and changed the light
                         // Set the light in the virtual sluice to green as well
-                    rightDoor.innerLightGreen();
-                }
-                break;
+                        rightDoor.innerLightGreen();
+                    }
+                    break;
 
                 default:
                     // All other cases: door isn't fully open, do not allow boats to enter
-                return -2;
+                    return -2;
             }
 
             return 0;
 
-            default:
+        default:
             return -1; // Waterlevel not equal to high or low
             break;
-        }
     }
+}
