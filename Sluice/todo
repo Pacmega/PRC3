@@ -1,4 +1,5 @@
 - Start needs to actually, you know, do things
+- Opening & closing doors
 - GetDoorLockState is currently not used, will get a purpose in start
 - SetDoorLock is unused, will get a purpose in start
 

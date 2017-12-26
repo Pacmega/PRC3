@@ -5,7 +5,6 @@
 #include "lib/enums.h"
 #include "networkInterface.h"
 #include "trafficLight.h"
-// #include "cameraSystem.h"
 #include "door.h"
 #include "commands.h"
 
