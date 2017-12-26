@@ -13,34 +13,34 @@ static const char GetDoorLeft[] = "GetDoorLeft;\0";
 static const char GetDoorRight[] = "GetDoorRight;\0";
 
 // Open left door valves
-static const char DoorLeftOpenValve1[] = "SetDoorLeftValve1:open;\0";
-static const char DoorLeftOpenValve2[] = "SetDoorLeftValve2:open;\0";
-static const char DoorLeftOpenValve3[] = "SetDoorLeftValve3:open;\0";
+static const char DoorLeftOpenBottomValve[] = "SetDoorLeftValve1:open;\0";
+static const char DoorLeftOpenMiddleValve[] = "SetDoorLeftValve2:open;\0";
+static const char DoorLeftOpenTopValve[] = "SetDoorLeftValve3:open;\0";
 
 // Close left door valves
-static const char DoorLeftCloseValve1[] = "SetDoorLeftValve1:close;\0";
-static const char DoorLeftCloseValve2[] = "SetDoorLeftValve2:close;\0";
-static const char DoorLeftCloseValve3[] = "SetDoorLeftValve3:close;\0";
+static const char DoorLeftCloseBottomValve[] = "SetDoorLeftValve1:close;\0";
+static const char DoorLeftCloseMiddleValve[] = "SetDoorLeftValve2:close;\0";
+static const char DoorLeftCloseTopValve[] = "SetDoorLeftValve3:close;\0";
 
 // Open right door valves
-static const char DoorRightOpenValve1[] = "SetDoorRightValve1:open;\0";
-static const char DoorRightOpenValve2[] = "SetDoorRightValve2:open;\0";
-static const char DoorRightOpenValve3[] = "SetDoorRightValve3:open;\0";
+static const char DoorRightOpenBottomValve[] = "SetDoorRightValve1:open;\0";
+static const char DoorRightOpenMiddleValve[] = "SetDoorRightValve2:open;\0";
+static const char DoorRightOpenTopValve[] = "SetDoorRightValve3:open;\0";
 
 // Close right door valves
-static const char DoorRightCloseValve1[] = "SetDoorRightValve1:close;\0";
-static const char DoorRightCloseValve2[] = "SetDoorRightValve2:close;\0";
-static const char DoorRightCloseValve3[] = "SetDoorRightValve3:close;\0";
+static const char DoorRightCloseBottomValve[] = "SetDoorRightValve1:close;\0";
+static const char DoorRightCloseMiddleValve[] = "SetDoorRightValve2:close;\0";
+static const char DoorRightCloseTopValve[] = "SetDoorRightValve3:close;\0";
 
 // Get left door valve states
-static const char DoorLeftGetValve1[] = "GetDoorLeftValve1;\0";
-static const char DoorLeftGetValve2[] = "GetDoorLeftValve2;\0";
-static const char DoorLeftGetValve3[] = "GetDoorLeftValve3;\0";
+static const char DoorLeftGetBottomValve[] = "GetDoorLeftValve1;\0";
+static const char DoorLeftGetMiddleValve[] = "GetDoorLeftValve2;\0";
+static const char DoorLeftGetTopValve[] = "GetDoorLeftValve3;\0";
 
 // Get right door valve states
-static const char DoorRightGetValve1[] = "GetDoorRightValve1;\0";
-static const char DoorRightGetValve2[] = "GetDoorRightValve2;\0";
-static const char DoorRightGetValve3[] = "GetDoorRightValve3;\0";
+static const char DoorRightGetBottomValve[] = "GetDoorRightValve1;\0";
+static const char DoorRightGetMiddleValve[] = "GetDoorRightValve2;\0";
+static const char DoorRightGetTopValve[] = "GetDoorRightValve3;\0";
 
 // Enable red traffic lights
 static const char LeftOuterTrafficLightRedOn[] = "SetTrafficLight1Red:on;\0";

@@ -34,8 +34,8 @@ private:
 	int stopDoor(doorSide side);
 
 	int openValve(doorSide side, int valveRow);
-	int closeValve(doorSide side);
-	int stopValves(); // Valves don't break when taking unneccesary inputs (in sim), so let's close them all at once
+	int closeValve(doorSide side, int valveRow);
+	int closeAllValves(); // Valves don't break when taking unneccesary inputs (in sim), so let's close them all at once
 };
 
 #endif

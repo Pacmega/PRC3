@@ -71,17 +71,18 @@ int sluice::stopDoor(doorSide side)
     return 0;
 }
 
-int openValve(doorSide side, int valveRow)
+int sluice::openValve(doorSide side, int valveRow)
 {
     /* 
         TO DO:
+        - check if ValveRow is underwater
         - open ValveRow
         - Note: 
     */
     return 0;
 }
 
-int closeValves(doorSide side)
+int sluice::closeValve(doorSide side, int valveRow)
 {
 /* 
         TO DO:
@@ -91,7 +92,7 @@ int closeValves(doorSide side)
     return 0;
 }
 
-int stopValves()
+int sluice::closeAllValves()
 {
 /* 
         TO DO:
