@@ -119,18 +119,12 @@ int sluice::allowEntry()
                     // All other cases: door isn't fully open, do not allow boats to enter
                     return -2;
             }
-            /* 
-             TODO: 
-             - check if right door is fully opened
-             - if yes: enable green light outside right door
-            */
             return 0;
 
         default:
-            // TODO: alert user: waterlevel not equal to high or low
+            return -1; // Waterlevel not equal to high or low
             break;
     }
-    return -1; // something went wrong
 }
 
 int sluice::allowExit()
@@ -181,9 +175,7 @@ int sluice::allowExit()
             return 0;
 
         default:
-            // TODO: alert user: waterlevel not equal to high or low
+            return -1; // Waterlevel not equal to high or low
             break;
     }
-    return -1; // something went wrong
-    return -1; // something went wrong
 }
