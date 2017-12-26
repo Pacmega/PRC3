@@ -79,8 +79,6 @@ int sluice::start()
 
 int sluice::allowEntry()
 {
-    int rtnval;
-    
     switch(getWaterLevel())
     {
         case low:
@@ -97,41 +95,29 @@ int sluice::allowEntry()
                     }
                     break;
 
-                case doorClosed:
-                    rtnval = openDoor(left);
-                    // TODO: needs to open the door, but not completely freeze the program
-                    
-                    receivedMessage = interface.sendMessage(LeftOuterTrafficLightGreenOn);
+                default:
+                    // All other cases: door isn't fully open, do not allow boats to enter
+                    return -2;
+            }
+            return 0;
+        
+        case high:
+            switch(getDoorState(right))
+            {
+                case doorOpen:
+                    // Door is open, so allow boats to enter
+                    receivedMessage = interface.sendMessage(RightOuterTrafficLightGreenOn);
                     if(interface.interpretAck(receivedMessage))
                     {
                         // Simulation has acknowledged command and changed the light
                         // Set the light in the virtual sluice to green as well
-                        leftDoor.outerLightGreen();
+                        rightDoor.outerLightGreen();
                     }
                     break;
 
                 default:
                     // All other cases: door isn't fully open, do not allow boats to enter
                     return -2;
-                    // break;
-            }
-
-             
-             // TODO: 
-             // - check if left door is fully opened
-             // - if yes: enable green light outside left door
-            
-            return 0;
-        case high:
-            switch(getDoorState(right))
-            {
-                case doorOpen:
-                    std::cout << "woop";
-                    break;
-                default:
-                    // All other cases
-                    break;
-
             }
             /* 
              TODO: 
@@ -149,36 +135,55 @@ int sluice::allowEntry()
 
 int sluice::allowExit()
 {
-    // TODO: code this function (currently unfinished copy paste from allowEntry())
-    // switch(getWaterLevel())
-    // {
-    //     case low:
-    //         switch(getDoorState(left))
-    //         {
-    //             case doorOpen:
-    //                 std::cout << "woop";
-    //                 break;
-    //             default:
-    //                 // All other cases
-                    
-    //         }
+    switch(getWaterLevel())
+    {
+        case low:
+            switch(getDoorState(left))
+            {
+                case doorOpen:
+                    // Door is open, so allow boats to exit
+                    receivedMessage = interface.sendMessage(LeftInnerTrafficLightGreenOn);
+                    if(interface.interpretAck(receivedMessage))
+                    {
+                        // Simulation has acknowledged command and changed the light
+                        // Set the light in the virtual sluice to green as well
+                        leftDoor.innerLightGreen();
+                    }
+                    break;
 
-             
-    //          TODO: 
-    //          - check if left door is fully opened
-    //          - if yes: enable green light inside left door
+                default:
+                    // All other cases: door isn't fully open, do not allow boats to enter
+                    return -2;
+                    // break;
+            }
             
-    //         return 0;
-    //     case high:
-    //         /* 
-    //          TODO: 
-    //          - check if right door is fully opened
-    //          - if yes: enable green light inside right door
-    //         */
-    //         return 0;
-    //     default:
-    //         // TODO: alert user: waterlevel not equal to high or low
-    //         break;
-    // }
+            return 0;
+        
+        case high:
+            switch(getDoorState(right))
+            {
+                case doorOpen:
+                    // Door is open, so allow boats to exit
+                    receivedMessage = interface.sendMessage(RightInnerTrafficLightGreenOn);
+                    if(interface.interpretAck(receivedMessage))
+                    {
+                        // Simulation has acknowledged command and changed the light
+                        // Set the light in the virtual sluice to green as well
+                        rightDoor.innerLightGreen();
+                    }
+                    break;
+
+                default:
+                    // All other cases: door isn't fully open, do not allow boats to enter
+                    return -2;
+            }
+
+            return 0;
+
+        default:
+            // TODO: alert user: waterlevel not equal to high or low
+            break;
+    }
+    return -1; // something went wrong
     return -1; // something went wrong
 }
