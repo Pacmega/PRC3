@@ -83,20 +83,135 @@ int sluice::stopDoor(doorSide side)
     return -2; // Message was not acknowledged by the sim
 }
 
-int sluice::openValve(doorSide side, int valveRow)
+int sluice::openLeftValve(int valveRow)
 {
-    /* 
-        TO DO:
-        - check if ValveRow is underwater
-        - open ValveRow
-        - Note: 
-    */
-    return 0;
+    if (valveRow < 1 || valveRow > 3)
+    {
+        // Invalid valveRow
+        return -1;
+    }
+
+    // Water level can't reach beneath low and only the bottom valve can ever be opened,
+    // so as long as the user is trying to open the bottom valve it's always possible.
+
+    if (getWaterLevel() == low)
+    {
+        receivedMessage = interface.sendMessage(DoorLeftOpenBottomValve);
+        if (interface.interpretAck(receivedMessage))
+        {
+            // Message was correctly acknowledged by the sim
+            return 0;
+        }
+        else
+        {
+            return -2; // Message was not acknowledged by the sim
+        }
+    }
+    else
+    {
+        // Valves below the bottom one on left are not allowed to be opened
+        return -3;
+    }
+}
+
+int sluice::openRightValve(int valveRow)
+{
+    if (valveRow < 1 || valveRow > 3)
+    {
+        // Invalid valveRow
+        return -1;
+    }
+
+    const char* messageToSend;
+
+    switch(getWaterLevel())
+    {
+        case low:
+            if (valveRow == 1)
+            {
+                messageToSend = DoorRightOpenBottomValve;
+            }
+            else
+            {
+                // ValveRow is not underwater, so it can't be opened.
+                return -2;
+            }
+            break;
+
+        case belowValve2:
+            if (valveRow == 1)
+            {
+                messageToSend = DoorRightOpenBottomValve;
+            }
+            else
+            {
+                // ValveRow is not underwater, so it can't be opened.
+                return -2;
+            }
+            break;
+
+        case aboveValve2:
+            if (valveRow == 1)
+            {
+                messageToSend = DoorRightOpenBottomValve;
+            }
+            else if (valveRow == 2)
+            {
+                messageToSend = DoorRightOpenMiddleValve;
+            }
+            else
+            {
+                // ValveRow is not underwater, so it can't be opened.
+                return -2;
+            }
+            break;
+
+        case aboveValve3:
+            if (valveRow == 1)
+            {
+                messageToSend = DoorRightOpenBottomValve;
+            }
+            else if (valveRow == 2)
+            {
+                messageToSend = DoorRightOpenMiddleValve;
+            }
+            else // valveRow == 3
+            {
+                messageToSend = DoorRightOpenTopValve;
+            }
+            break;
+
+        case high:
+            if (valveRow == 1)
+            {
+                messageToSend = DoorRightOpenBottomValve;
+            }
+            else if (valveRow == 2)
+            {
+                messageToSend = DoorRightOpenMiddleValve;
+            }
+            else // valveRow == 3
+            {
+                messageToSend = DoorRightOpenTopValve;
+            }
+            break;
+
+        case waterError:
+            // Invalid waterLevel
+            return -1;
+    }
+    
+    receivedMessage = interface.sendMessage(messageToSend);
+    if (interface.interpretAck(receivedMessage))
+    {
+        // Message was correctly acknowledged by the sim
+        return 0;
+    }
+    return -2; // Message was not acknowledged by the sim
 }
 
 int sluice::closeValve(doorSide side, int valveRow)
 {
-    // testcomment
     if (valveRow < 1 || valveRow > 3)
     {
         // Invalid valveRow
