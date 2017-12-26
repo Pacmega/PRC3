@@ -37,6 +37,10 @@ enum motorType
 	motorError
 };
 
-
+enum doorSide
+{
+	left,
+	right
+};
 
 #endif

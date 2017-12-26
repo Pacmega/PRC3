@@ -13,7 +13,8 @@ public:
 	~sluice();
 
 	int start();
-	int release();
+	int allowEntry();
+	int allowExit();
 
 private:
 	door leftDoor;
@@ -24,6 +25,8 @@ private:
 	char* receivedMessage;
 
 	waterLevel getWaterLevel();
+	doorState getDoorState(doorSide side);
+
 	waterLevel interpretWaterLevel(char* receivedMessage);
 };
 

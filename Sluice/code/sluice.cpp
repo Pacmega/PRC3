@@ -28,12 +28,25 @@ waterLevel sluice::getWaterLevel()
     return interface.interpretWaterLevel(receivedMessage);
 }
 
+doorState sluice::getDoorState(doorSide side)
+{
+    if (side == left)
+    {
+        receivedMessage = interface.sendMessage(GetDoorLeft);
+    }
+    else // side has to be right
+    {
+        receivedMessage = interface.sendMessage(GetDoorRight);
+    }
+    
+    return interface.interpretDoorState(receivedMessage);
+}
+
 int sluice::start()
 {
     switch(getWaterLevel()) // check the current waterlevel
     {
         case low:
-            std::cout << "hmm" << std::endl;   
             /*
              TODO:
              - turn on red light on left door's outer traffic light
@@ -64,27 +77,86 @@ int sluice::start()
     return -1; // something unexpected went wrong
 }
 
-int sluice::release()
+int sluice::allowEntry()
 {
+    // TODO: finish this function (currently +- halfway done)
     switch(getWaterLevel())
     {
         case low:
-            /* 
-             TODO: 
-             - check if left door is fully opened
-             - if yes: enable green light inside left door
-            */
+            switch(getDoorState(left))
+            {
+                case doorOpen:
+                    // Door is open, so allow boats to enter
+                    std::cout << "woop";
+                    break;
+                default:
+                    // All other cases: door isn't fully open, do not allow boats to enter
+                    return -2;
+            }
+
+             
+             // TODO: 
+             // - check if left door is fully opened
+             // - if yes: enable green light outside left door
+            
             return 0;
         case high:
+            switch(getDoorState(right))
+            {
+                case doorOpen:
+                    std::cout << "woop";
+                    break;
+                default:
+                    // All other cases
+                    break;
+
+            }
             /* 
              TODO: 
              - check if right door is fully opened
-             - if yes: enable green light inside right door
+             - if yes: enable green light outside right door
             */
             return 0;
+
         default:
             // TODO: alert user: waterlevel not equal to high or low
             break;
     }
+    return -1; // something went wrong
+}
+
+int sluice::allowExit()
+{
+    // TODO: code this function (currently unfinished copy paste from allowEntry())
+    // switch(getWaterLevel())
+    // {
+    //     case low:
+    //         switch(getDoorState(left))
+    //         {
+    //             case doorOpen:
+    //                 std::cout << "woop";
+    //                 break;
+    //             default:
+    //                 // All other cases
+                    
+    //         }
+
+             
+    //          TODO: 
+    //          - check if left door is fully opened
+    //          - if yes: enable green light inside left door
+            
+    //         return 0;
+    //     case high:
+    //         /* 
+    //          TODO: 
+    //          - check if right door is fully opened
+    //          - if yes: enable green light inside right door
+    //         */
+    //         return 0;
+    //     default:
+    //         // TODO: alert user: waterlevel not equal to high or low
+    //         break;
+    // }
     return -1; // something went wrong
 }

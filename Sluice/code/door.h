@@ -12,6 +12,11 @@ public:
 	door(doorType doorType, motorType motorType, bool startsLocked);
 	~door();
 	
+	void OuterLightGreen();
+	void OuterLightRed();
+	void InnerLightGreen();
+	void InnerLightRed();
+
 	int openDoor();
 	int closeDoor();
 	int stopDoor();

@@ -99,3 +99,86 @@ waterLevel networkInterface::interpretWaterLevel(char* receivedMessage)
 
     return wLevel;
 }
+
+doorState networkInterface::interpretDoorState(char* receivedMessage)
+{
+	doorState dState;
+
+	// A switch case isn't possible for strings or character arrays.
+	if (strcmp(receivedMessage, "doorLocked") == 0)
+	{
+		dState = doorLocked;
+	}
+	else if (strcmp(receivedMessage, "doorClosed") == 0)
+	{
+		dState = doorClosed;
+	}
+	else if (strcmp(receivedMessage, "doorOpen") == 0)
+	{
+		dState = doorOpen;
+	}
+	else if (strcmp(receivedMessage, "doorClosing") == 0)
+	{
+		dState = doorClosing;
+	}
+	else if (strcmp(receivedMessage, "doorOpening") == 0)
+	{
+		dState = doorOpening;
+	}
+	else if (strcmp(receivedMessage, "doorStopped") == 0)
+	{
+		dState = doorStopped;
+	}
+	else if (strcmp(receivedMessage, "motorDamage") == 0)
+	{
+		dState = motorDamage;
+	}
+	else
+	{
+		dState = doorStateError;
+	}
+
+	return dState;
+}
+
+doorType interpretDoorType(char* receivedMessage)
+{
+	doorType dType;
+
+	// A switch case isn't possible for strings or character arrays.
+	if (strcmp(receivedMessage, "slowLock") == 0)
+	{
+		dType = slowLock;
+	}
+	else if (strcmp(receivedMessage, "fastLock") == 0)
+	{
+		dType = fastLock;
+	}
+	else
+	{
+		dType = doorTypeError;
+	}
+
+	return dType;
+}
+
+motorType interpretMotorType(char* receivedMessage)
+{
+	motorType mType;
+
+	// A switch case isn't possible for strings or character arrays.
+	if (strcmp(receivedMessage, "continuous") == 0)
+	{
+		mType = continuous;
+	}
+	else if (strcmp(receivedMessage, "pulse") == 0)
+	{
+		mType = pulse;
+	}
+	else
+	{
+		mType = motorError;
+	}
+
+	return mType;
+}
