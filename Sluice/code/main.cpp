@@ -2,8 +2,6 @@
 #include <signal.h>
 
 #include "sluice.h"
-#include "door.h"
-#include "doorMotor.h"
 
 void ctrlCHandler(int sig){
     std::cout << "\nDit compileert blijkbaar" << std::endl;

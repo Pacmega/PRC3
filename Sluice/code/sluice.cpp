@@ -1,5 +1,4 @@
 #include <string.h>
-#include <iostream>
 
 #include "sluice.h"
 #include "lib/enums.h"
@@ -48,6 +47,10 @@ int sluice::openDoor(doorSide side)
         - Check doorType
         - open door
     */
+
+    // For door at port 5558: check if the state is doorStopped,
+    // if so send DoorLeftOpen or DoorRightOpen again
+    
     return 0;
 }
 
