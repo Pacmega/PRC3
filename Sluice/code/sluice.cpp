@@ -41,19 +41,50 @@ doorState sluice::getDoorState(doorSide side)
     return interface.interpretDoorState(receivedMessage);
 }
 
-void openOnce(doorSide side)
+void sluice::openOnce(doorSide side)
 {
+    // TODO: Does this cause a blockage somewhere near its call?
+    if (side == left)
+    {
+        receivedMessage = interface.sendMessage(DoorLeftOpen);
+    }
+    else // side has to be right
+    {
+        receivedMessage = interface.sendMessage(DoorRightOpen);
+    }
 
+    doorState currentState = getDoorState(side);
+    while (currentState != doorOpen)
+    {
+        currentState = getDoorState(side);
+    }
+
+    // Door has been opened
 }
 
-void openLock(doorSide side)
+void sluice::openLock(doorSide side)
 {
+    if (side == left)
+    {
+        receivedMessage = interface.sendMessage(DoorLeftUnlock);
+    }
+    else // side has to be right
+    {
+        receivedMessage = interface.sendMessage(DoorRightUnlock);
+    }
 
+    // Door should be unlocked. If the message was received correctly, open it.
+    if (interface.interpretAck(receivedMessage))
+    {
+        openOnce(side);
+        // TODO: change the locally saved door as well
+    }
 }
 
-void openPulse(doorSide side)
+void sluice::openPulse(doorSide side)
 {
-    // TODO: 
+    // TODO: Does this cause a blockage somewhere near its call?
+    
     if (side == left)
     {
         receivedMessage = interface.sendMessage(DoorLeftOpen);
@@ -66,12 +97,20 @@ void openPulse(doorSide side)
     if (interface.interpretAck(receivedMessage))
     {
         doorState currentState = getDoorState(side);
-        while (currentState != doorOpened)
+        while (currentState != doorOpen)
         {
             if (currentState == doorStopped)
             {
-                receivedMessage = interface.sendMessage(DoorLeftOpen);
-                if (!interface.interpretAck)
+                if (side == left)
+                {
+                    receivedMessage = interface.sendMessage(DoorLeftOpen);
+                }
+                else // side == right
+                {
+                    receivedMessage = interface.sendMessage(DoorRightOpen);
+                }
+                
+                if (!interface.interpretAck(receivedMessage))
                 {
                     // If no ack was received, something is wrong
                     break;
@@ -84,12 +123,15 @@ void openPulse(doorSide side)
 
 void sluice::openDoor(doorSide side)
 {
-    // This is a thread
+    // TODO: Does this cause a blockage somewhere near its call?
+
+    // Note: this is a thread
 
     /* 
         TO DO:
+        - Check if door isn't open already
         - Check doorType
-        - open door
+        - Open door
     */
 
     // For door at port 5558: check if the state is doorStopped,
@@ -98,6 +140,10 @@ void sluice::openDoor(doorSide side)
 
 void sluice::closeDoor(doorSide side)
 {
+    // TODO: Does this cause a blockage somewhere near its call?
+
+    // Note: this is a thread
+
     /* 
         TO DO:
         - Check doorType
@@ -334,11 +380,7 @@ int sluice::start()
 
             if (getDoorState(left) == doorOpen)
             {
-                if (closeDoor(left) != 0)
-                {
-                    // Doors didn't close correctly
-                    return -1;
-                }
+                closeDoor(left);
             }
 
             if (getDoorState(left) == doorClosed)
@@ -371,11 +413,7 @@ int sluice::start()
 
             if (getDoorState(right) == doorOpen)
             {
-                if (closeDoor(right) != 0) // Close the door if it is open
-                {
-                    // Doors didn't close correctly
-                    return -1;
-                }
+                closeDoor(right);
             }
 
             if (getDoorState(right) == doorClosed)
