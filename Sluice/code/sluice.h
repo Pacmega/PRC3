@@ -16,10 +16,6 @@ public:
 	int allowEntry();
 	int allowExit();
 
-	int openDoor(doorSide side);
-	int closeDoor(doorSide side);
-	int stopDoor(doorSide side);
-
 private:
 	door leftDoor;
 	door rightDoor;
@@ -30,9 +26,16 @@ private:
 
 	waterLevel getWaterLevel();
 	doorState getDoorState(doorSide side);
-	
 
 	waterLevel interpretWaterLevel(char* receivedMessage);
+
+	int openDoor(doorSide side);
+	int closeDoor(doorSide side);
+	int stopDoor(doorSide side);
+
+	int openValve(doorSide side, int valveRow);
+	int closeValve(doorSide side);
+	int stopValves(); // Valves don't break when taking unneccesary inputs (in sim), so let's close them all at once
 };
 
 #endif

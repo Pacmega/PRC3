@@ -41,39 +41,135 @@ doorState sluice::getDoorState(doorSide side)
     return interface.interpretDoorState(receivedMessage);
 }
 
+int sluice::openDoor(doorSide side)
+{
+    /* 
+        TO DO:
+        - Check doorType
+        - open door
+    */
+    return 0;
+}
+
+int sluice::closeDoor(doorSide side)
+{
+    /* 
+        TO DO:
+        - Check doorType
+        - close door
+    */
+    return 0;
+}
+
+int sluice::stopDoor(doorSide side)
+{
+    /* 
+        TO DO:
+        - Check doorType
+        - stop door
+    */
+    return 0;
+}
+
+int openValve(doorSide side, int valveRow)
+{
+    /* 
+        TO DO:
+        - open ValveRow
+        - Note: 
+    */
+    return 0;
+}
+
+int closeValves(doorSide side)
+{
+/* 
+        TO DO:
+        - Doesn't need any checks right?
+        - close the valves of the door
+    */
+    return 0;
+}
+
+int stopValves()
+{
+/* 
+        TO DO:
+        - Just close all valves of all doors?
+    */
+    return 0;
+}
+
 int sluice::start()
 {
-    switch(getWaterLevel()) // check the current waterlevel
-    {
-        case low:
-            /*
-             TODO:
-             - turn on red light on left door's outer traffic light
-             - close left door
-             - open valves on right door to adjust water level
-             - continue checking if water level is now high
-             - close valves on right door
-             - open right door
-             */
-            return 0;
+    // switch(getWaterLevel()) // check the current waterlevel
+    // {
+    //     case low:
+    //         leftDoor.outerLightRed();
 
-        case high:
-            /* 
-             TODO: 
-             - turn on red light on right door's outer traffic light
-             - close right door
-             - open valves on left door to adjust water level
-             - continue checking if water level is now low
-             - close valves on left door
-             - open left door
-            */
-            return 0;
-        default:
-            // Can't start moving boat, water level isn't at a level that would allow a boat in
-            return -2;
-            break;
-    }
-    return -1; // something unexpected went wrong
+    //         doorState leftDoor = getDoorState(left);
+    //         if (leftDoor == doorOpen)
+    //         {
+    //             if (closeDoor(left) != 0)
+    //             {
+    //                 // Doors didn't close correctly
+    //                 return -1;
+    //             }
+
+    //             leftDoor = getDoorState(left); // Should be doorClosed now
+    //         }
+
+    //         if (leftDoor == doorClosed)
+    //         {
+                
+    //         }
+    //         /*
+    //          TODO:
+    //         Check - turn on red light on left door's outer traffic light
+    //         CHECK - close left door
+    //          - open valves on right door to adjust water level
+    //          - continue checking if water level is now high
+    //          - close valves on right door
+    //          - open right door
+    //          */
+
+    //         return -2;
+
+    //     case high:
+    //         rightDoor.outerLightRed();
+
+    //         doorState rightDoor = getDoorState(right);
+    //         if (rightDoor == doorOpen)
+    //         {
+    //             if (closeDoor(right) != 0)
+    //             {
+    //                 // Doors didn't close correctly
+    //                 return -1;
+    //             }
+
+    //             rightDoor = getDoorState(left); // Should be doorClosed now
+    //         }
+
+    //         if (rightDoor == doorClosed)
+    //         {
+                
+    //         }
+    //         /* 
+    //          TODO: 
+    //         CHECK - turn on red light on right door's outer traffic light
+    //         CHECK - close right door
+    //          - open valves on left door to adjust water level
+    //          - continue checking if water level is now low
+    //          - close valves on left door
+    //          - open left door
+    //         */
+    //         return 0;
+    //     default:
+    //         // Can't start moving boat, water level isn't at a level that would allow a boat in
+    //         // return -2;
+    //         break;
+    // }
+     return -1; // something unexpected went wrong
 }
 
 int sluice::allowEntry()
