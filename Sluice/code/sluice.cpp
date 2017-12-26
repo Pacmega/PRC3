@@ -41,23 +41,49 @@ doorState sluice::getDoorState(doorSide side)
     return interface.interpretDoorState(receivedMessage);
 }
 
-void openOnce()
+void openOnce(doorSide side)
 {
 
 }
 
-void openLock()
+void openLock(doorSide side)
 {
 
 }
 
-void openPulse()
+void openPulse(doorSide side)
 {
-    
+    if (side == left)
+    {
+        receivedMessage = interface.sendMessage(DoorLeftOpen);
+    }
+    else // side has to be right
+    {
+        receivedMessage = interface.sendMessage(DoorRightOpen);
+    }
+
+    if (interface.interpretAck(receivedMessage))
+    {
+        doorState currentState = getDoorState(side);
+        while (currentState != doorOpened)
+        {
+            if (currentState == doorStopped)
+            {
+                receivedMessage = interface.sendMessage(DoorLeftOpen);
+                if (!interface.interpretAck)
+                {
+                    // If no ack was received, something is wrong
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void sluice::openDoor(doorSide side)
 {
+    // This is a thread
+
     /* 
         TO DO:
         - Check doorType
@@ -66,18 +92,15 @@ void sluice::openDoor(doorSide side)
 
     // For door at port 5558: check if the state is doorStopped,
     // if so send DoorLeftOpen or DoorRightOpen again
-
-    return 0;
 }
 
-int sluice::closeDoor(doorSide side)
+void sluice::closeDoor(doorSide side)
 {
     /* 
         TO DO:
         - Check doorType
         - close door
     */
-    return 0;
 }
 
 int sluice::stopDoor(doorSide side)
