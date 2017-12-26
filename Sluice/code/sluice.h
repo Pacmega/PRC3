@@ -27,8 +27,6 @@ private:
 	waterLevel getWaterLevel();
 	doorState getDoorState(doorSide side);
 
-	waterLevel interpretWaterLevel(char* receivedMessage);
-
 	void openOnce(doorSide side);
 	void openLock(doorSide side);
 	void openPulse(doorSide side);
