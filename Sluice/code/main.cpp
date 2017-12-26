@@ -1,11 +1,18 @@
 #include <iostream>
+#include <signal.h>
 
 #include "sluice.h"
 #include "door.h"
 #include "doorMotor.h"
 
+void ctrlCHandler(int sig){
+           std::cout << "\nDit compileert blijkbaar" << std::endl;
+}
+
 int main(int argc, char const *argv[])
 {
+	signal (SIGINT,&ctrlCHandler);
+
 	// Create virtual sluices for the program to save the status
 	sluice normalSluice1 = sluice(5555, slowLock, continuous, false);
 	sluice normalSluice2 = sluice(5556, slowLock, continuous, false);

@@ -30,6 +30,7 @@ private:
 
 	waterLevel getWaterLevel();
 	doorState getDoorState(doorSide side);
+	
 
 	waterLevel interpretWaterLevel(char* receivedMessage);
 };
