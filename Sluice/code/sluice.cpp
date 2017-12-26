@@ -280,64 +280,59 @@ int sluice::closeAllValves(doorSide side)
 
 int sluice::start()
 {
-    /*
+
     switch(getWaterLevel()) // check the current waterlevel
     {
         case low:
-        leftDoor.outerLightRed();
+            leftDoor.outerLightRed();
 
-        doorState leftDoor = getDoorState(left);
-        if (leftDoor == doorOpen)
-        {
-            if (closeDoor(left) != 0)
+            if (getDoorState(left) == doorOpen)
             {
-                // Doors didn't close correctly
-                return -1;
-            }
-                // Should be doorClosed now
-            leftDoor = getDoorState(left); 
-        }
-
-        if (leftDoor == doorClosed)
-        {
-            // Open the bottom valves
-            for (int i = 1; i <= 3; ++i)
-            {
-                openValve(right, i);
-            }
-
-            if (getWaterLevel() == high)
-            {
-                if (closeAllValves(right))
+                if (closeDoor(left) != 0)
                 {
-                    // If the valves closed correctly, open the right door and return succes
-                    openDoor(right);
-                    return 0;
+                    // Doors didn't close correctly
+                    return -1;
                 }
-                // Error closing valves
-                return -2;
             }
-            // waterLevel is not high
-            return -3; 
-        }
-        // Door isn't closed correctly
-        break;
+
+            if (getDoorState(left) == doorClosed)
+            {
+                // Open the bottom valves
+                for (int i = 1; i <= 3; ++i)
+                {
+                    openValve(right, i);
+                }
+
+                if (getWaterLevel() == high)
+                {
+                    if (closeAllValves(right))
+                    {
+                    // If the valves closed correctly, open the right door and return succes
+                        openDoor(right);
+                        return 0;
+                    }
+                    // Error closing valves
+                    return -2;
+                }
+                // waterLevel is not high
+                return -3; 
+            }
+            // Door isn't closed correctly
+            break;
 
         case high:
-        rightDoor.outerLightRed();
+            rightDoor.outerLightRed();
 
-        doorState rightDoor = getDoorState(right);
-        if (rightDoor == doorOpen)
-        {
-            if (closeDoor(right) != 0) // Close the door if it is open
+            if (getDoorState(right) == doorOpen)
             {
-                // Doors didn't close correctly
-                return -1;
+                if (closeDoor(right) != 0) // Close the door if it is open
+                {
+                    // Doors didn't close correctly
+                    return -1;
+                }
             }
 
-            rightDoor = getDoorState(left); // Should be doorClosed now
-
-            if (rightDoor == doorClosed)
+            if (getDoorState(right) == doorClosed)
             {
                 // Open the valves
                 openValve(left, 1);
@@ -357,14 +352,14 @@ int sluice::start()
             }
             // Door isn't closed 
             break;
-        }
         
         default:
             // Can't start moving boat, water level isn't at a level that would allow a boat in
             // return -2;
         break;
-    }*/
-     return -1; // something unexpected went wrong
+        
+    }
+    return -1; // something unexpected went wrong
 }
 
 int sluice::allowEntry()
