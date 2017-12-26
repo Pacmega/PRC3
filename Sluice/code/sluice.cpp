@@ -67,17 +67,15 @@ void sluice::openDoor(doorSide side)
     // For door at port 5558: check if the state is doorStopped,
     // if so send DoorLeftOpen or DoorRightOpen again
 
-    return 0;
 }
 
-int sluice::closeDoor(doorSide side)
+void sluice::closeDoor(doorSide side)
 {
     /* 
         TO DO:
         - Check doorType
         - close door
     */
-    return 0;
 }
 
 int sluice::stopDoor(doorSide side)
@@ -309,11 +307,7 @@ int sluice::start()
 
             if (getDoorState(left) == doorOpen)
             {
-                if (closeDoor(left) != 0)
-                {
-                    // Doors didn't close correctly
-                    return -1;
-                }
+                closeDoor(left);
             }
 
             if (getDoorState(left) == doorClosed)
@@ -346,11 +340,7 @@ int sluice::start()
 
             if (getDoorState(right) == doorOpen)
             {
-                if (closeDoor(right) != 0) // Close the door if it is open
-                {
-                    // Doors didn't close correctly
-                    return -1;
-                }
+                closeDoor(right);
             }
 
             if (getDoorState(right) == doorClosed)
