@@ -53,6 +53,7 @@ void openLock(doorSide side)
 
 void openPulse(doorSide side)
 {
+    // TODO: 
     if (side == left)
     {
         receivedMessage = interface.sendMessage(DoorLeftOpen);
@@ -76,6 +77,7 @@ void openPulse(doorSide side)
                     break;
                 }
             }
+            // Else the door is currently opening
         }
     }
 }
