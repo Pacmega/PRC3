@@ -83,45 +83,25 @@ int sluice::stopDoor(doorSide side)
     return -2; // Message was not acknowledged by the sim
 }
 
-int sluice::openLeftValve(int valveRow)
+int sluice::openLeftValve()
 {
-    if (valveRow < 1 || valveRow > 3)
-    {
-        // Invalid valveRow
-        return -1;
-    }
-
     // Water level can't reach beneath low and only the bottom valve can ever be opened,
     // so as long as the user is trying to open the bottom valve it's always possible.
 
-    if (getWaterLevel() == low)
+    receivedMessage = interface.sendMessage(DoorLeftOpenBottomValve);
+    if (interface.interpretAck(receivedMessage))
     {
-        receivedMessage = interface.sendMessage(DoorLeftOpenBottomValve);
-        if (interface.interpretAck(receivedMessage))
-        {
-            // Message was correctly acknowledged by the sim
-            return 0;
-        }
-        else
-        {
-            return -2; // Message was not acknowledged by the sim
-        }
+        // Message was correctly acknowledged by the sim
+        return 0;
     }
     else
     {
-        // Valves below the bottom one on left are not allowed to be opened
-        return -3;
+        return -1; // Message was not acknowledged by the sim
     }
 }
 
 int sluice::openRightValve(int valveRow)
 {
-    if (valveRow < 1 || valveRow > 3)
-    {
-        // Invalid valveRow
-        return -1;
-    }
-
     const char* messageToSend;
 
     switch(getWaterLevel())
@@ -208,6 +188,28 @@ int sluice::openRightValve(int valveRow)
         return 0;
     }
     return -2; // Message was not acknowledged by the sim
+}
+
+int sluice::openValve(doorSide side, int valveRow)
+{
+    int rtnval;
+
+    if (side == left)
+    {
+        rtnval = openLeftValve();
+    }
+    else // side == right
+    {
+        if (valveRow < 1 || valveRow > 3)
+        {
+            // Invalid valveRow
+            return -1;
+        }
+
+        rtnval = openRightValve(valveRow);
+    }
+    
+    return rtnval;
 }
 
 int sluice::closeValve(doorSide side, int valveRow)
