@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
 	sluice normalSluice2 = sluice(5556, slowLock, continuous, false);
 	sluice fastLockSluice = sluice(5557, fastLock, continuous, true);
 	sluice pulseMotorSluice = sluice(5558, slowLock, pulse, false);
-    
+
     int rtnval;
     int choice = ' ';
     char line[80];
@@ -46,105 +46,186 @@ int main(int argc, char const *argv[])
         {
         	// Sluice 1
         	case '1':
-                std::cout << "Vrijgeven van sluis 1 voor invaren ingedrukt.\n";
-                // TODO: This should actually do something
-                break;
+            switch(normalSluice1.allowEntry())
+            {
+                case 0:
+                    std::cout << "Invaren toegestaan. \n";
+                    break;
+                case -1:
+                    std::cout << "Error: waterlevel nog niet hoog genoeg om de deur te openen. \n";
+                    break;
+                case -2:
+                    std::cout << "Error: deur niet volledig open. Kan invaren niet toestaan. \n";
+                    break;
+            }
+            break;
             case '2':
-                std::cout << "Startknop van sluis 1 ingedrukt. \n";
-                rtnval = normalSluice1.start();
-            	if (rtnval == -1)
-            	{
+            std::cout << "Startknop van sluis 1 ingedrukt. \n";
+            rtnval = normalSluice1.start();
+            if (rtnval == -1)
+            {
             		// TODO: needs a better message
-            		std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
-            	}
-            	else if (rtnval == -2)
-            	{
-            		std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
-            	}
+                std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
+            }
+            else if (rtnval == -2)
+            {
+                std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
+            }
+          break;
+          case '3':
+          switch(normalSluice1.allowExit())
+          {
+            case 0:
+                std::cout << "Invaren toegestaan. \n";
                 break;
-            case '3':
-                std::cout << "Vrijgeven van sluis 1 voor uitvaren ingedrukt.\n";
-                // TODO: This should actually do something
+            case -1:
+                std::cout << "Error: waterlevel nog niet hoog genoeg om de deur te openen. \n";
                 break;
-
-            // Sluice 2
-            case 'q':
-                std::cout << "Vrijgeven van sluis 2 voor invaren ingedrukt.\n";
-                // TODO: This should actually do something
-                break;
-            case 'w':
-                std::cout << "Startknop van sluis 2 ingedrukt. \n";
-                rtnval = normalSluice2.start();
-            	if (rtnval == -1)
-            	{
-            		// TODO: needs a better message
-            		std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
-            	}
-            	else if (rtnval == -2)
-            	{
-            		std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
-            	}
-                break;
-            case 'e':
-                std::cout << "Vrijgeven van sluis 2 voor uitvaren ingedrukt.\n";
-                // TODO: This should actually do something
-                break;
-
-            // Fast lock sluice
-            case 'a':
-                std::cout << "Vrijgeven van sluis 3 voor invaren ingedrukt.\n";
-                // TODO: This should actually do something
-                break;
-            case 's':
-                std::cout << "Startknop van sluis 3 ingedrukt. \n";
-                rtnval = fastLockSluice.start();
-            	if (rtnval == -1)
-            	{
-            		// TODO: needs a better message
-            		std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
-            	}
-            	else if (rtnval == -2)
-            	{
-            		std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
-            	}
-                break;
-            case 'd':
-                std::cout << "Vrijgeven van sluis 3 voor uitvaren ingedrukt.\n";
-                // TODO: This should actually do something
-                break;
-            
-            // Pulsing motor sluice
-            case 'z':
-                std::cout << "Vrijgeven van sluis 4 voor invaren ingedrukt.\n";
-                // TODO: This should actually do something
-                break;
-            case 'x':
-                std::cout << "Startknop van sluis 4 ingedrukt. \n";
-                rtnval = pulseMotorSluice.start();
-            	if (rtnval == -1)
-            	{
-            		// TODO: needs a better message
-            		std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
-            	}
-            	else if (rtnval == -2)
-            	{
-            		std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
-            	}
-                break;
-            case 'c':
-                std::cout << "Vrijgeven van sluis 4 voor uitvaren ingedrukt.\n";
-                // TODO: This should actually do something
-                break;
-
-            case '0':
-                std::cout << "Afsluiten... \n";
-                break;
-            
-            // Invalid input
-            default:
-                std::cout << "Onjuiste keuze, probeer het opnieuw. \n";
+            case -2:
+                std::cout << "Error: deur niet volledig open. Kan invaren niet toestaan. \n";
                 break;
         }
+
+        break;
+
+            // Sluice 2
+        case 'q':
+        switch(normalSluice2.allowEntry())
+        {
+            case 0:
+                std::cout << "Invaren toegestaan. \n";
+                break;
+            case -1:
+                std::cout << "Error: waterlevel nog niet hoog genoeg om de deur te openen. \n";
+                break;
+            case -2:
+                std::cout << "Error: deur niet volledig open. Kan invaren niet toestaan. \n";
+                break;
+        }
+        break;
+        case 'w':
+        std::cout << "Startknop van sluis 2 ingedrukt. \n";
+        rtnval = normalSluice2.start();
+        if (rtnval == -1)
+        {
+            		// TODO: needs a better message
+            std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
+        }
+        else if (rtnval == -2)
+        {
+            std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
+        }
+      break;
+      case 'e':
+      switch(normalSluice2.allowExit())
+      {
+        case 0:
+            std::cout << "Invaren toegestaan. \n";
+            break;
+        case -1:
+            std::cout << "Error: waterlevel nog niet hoog genoeg om de deur te openen. \n";
+            break;
+        case -2:
+            std::cout << "Error: deur niet volledig open. Kan invaren niet toestaan. \n";
+            break;
     }
-    return 0;
+    break;
+
+            // Fast lock sluice
+    case 'a':
+    switch(fastLockSluice.allowEntry())
+    {
+        case 0:
+            std::cout << "Invaren toegestaan. \n";
+            break;
+        case -1:
+            std::cout << "Error: waterlevel nog niet hoog genoeg om de deur te openen. \n";
+            break;
+        case -2:
+            std::cout << "Error: deur niet volledig open. Kan invaren niet toestaan. \n";
+            break;
+    }
+    break;
+    case 's':
+    std::cout << "Startknop van sluis 3 ingedrukt. \n";
+    rtnval = fastLockSluice.start();
+    if (rtnval == -1)
+    {
+            		// TODO: needs a better message
+      std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
+  }
+  else if (rtnval == -2)
+  {
+      std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
+  }
+  break;
+  case 'd':
+  switch(fastLockSluice.allowExit())
+  {
+    case 0:
+        std::cout << "Invaren toegestaan. \n";
+        break;
+    case -1:
+        std::cout << "Error: waterlevel nog niet hoog genoeg om de deur te openen. \n";
+        break;
+    case -2:
+        std::cout << "Error: deur niet volledig open. Kan invaren niet toestaan. \n";
+        break;
+}
+break;
+
+            // Pulsing motor sluice
+case 'z':
+switch(pulseMotorSluice.allowEntry())
+{
+    case 0:
+        std::cout << "Invaren toegestaan. \n";
+        break;
+    case -1:
+        std::cout << "Error: waterlevel nog niet hoog genoeg om de deur te openen. \n";
+        break;
+    case -2:
+        std::cout << "Error: deur niet volledig open. Kan invaren niet toestaan. \n";
+        break;
+}
+break;
+case 'x':
+std::cout << "Startknop van sluis 4 ingedrukt. \n";
+rtnval = pulseMotorSluice.start();
+if (rtnval == -1)
+{
+            		// TODO: needs a better message
+  std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
+}
+else if (rtnval == -2)
+{
+  std::cout << "Het waterniveau is niet laag of hoog genoeg om een boot te kunnen schutten." << std::endl;
+}
+break;
+case 'c':
+switch(pulseMotorSluice.allowExit())
+{
+    case 0:
+        std::cout << "Invaren toegestaan. \n";
+        break;
+    case -1:
+        std::cout << "Error: waterlevel nog niet hoog genoeg om de deur te openen. \n";
+        break;
+    case -2:
+        std::cout << "Error: deur niet volledig open. Kan invaren niet toestaan. \n";
+        break;
+}
+break;
+
+case '0':
+std::cout << "Afsluiten... \n";
+break;
+
+            // Invalid input
+default:
+std::cout << "Onjuiste keuze, probeer het opnieuw. \n";
+break;
+}
+}
+return 0;
 }
