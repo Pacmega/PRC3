@@ -6,7 +6,7 @@
 #include "doorMotor.h"
 
 void ctrlCHandler(int sig){
-           std::cout << "\nDit compileert blijkbaar" << std::endl;
+    std::cout << "\nDit compileert blijkbaar" << std::endl;
 }
 
 int main(int argc, char const *argv[])
@@ -72,7 +72,7 @@ int main(int argc, char const *argv[])
                 rtnval = normalSluice1.start();
                 if (rtnval == -1)
                 {
-                        // TODO: needs a better message
+                    // TODO: needs a better message
                     std::cout << "Er is een onbekend probleem opgetreden." << std::endl;
                 }
                 else if (rtnval == -2)
@@ -198,7 +198,7 @@ int main(int argc, char const *argv[])
                         break;
                 }
                 break;
-            
+
             case 'x':
                 std::cout << "Startknop van sluis 4 ingedrukt. \n";
                 rtnval = pulseMotorSluice.start();
