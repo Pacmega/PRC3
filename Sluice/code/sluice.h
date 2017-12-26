@@ -16,6 +16,10 @@ public:
 	int allowEntry();
 	int allowExit();
 
+	int openDoor(doorSide side);
+	int closeDoor(doorSide side);
+	int stopDoor(doorSide side);
+
 private:
 	door leftDoor;
 	door rightDoor;

@@ -141,7 +141,7 @@ doorState networkInterface::interpretDoorState(char* receivedMessage)
 	return dState;
 }
 
-doorType interpretDoorType(char* receivedMessage)
+doorType networkInterface::interpretDoorType(char* receivedMessage)
 {
 	doorType dType;
 
@@ -162,7 +162,7 @@ doorType interpretDoorType(char* receivedMessage)
 	return dType;
 }
 
-motorType interpretMotorType(char* receivedMessage)
+motorType networkInterface::interpretMotorType(char* receivedMessage)
 {
 	motorType mType;
 
@@ -181,4 +181,16 @@ motorType interpretMotorType(char* receivedMessage)
 	}
 
 	return mType;
+}
+
+bool networkInterface::interpretAck(char* receivedMessage)
+{
+	bool ack = false;
+
+	if (strcmp(receivedMessage, "ack") == 0)
+	{
+		ack = true;
+	}
+
+	return ack;
 }

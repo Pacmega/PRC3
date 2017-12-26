@@ -14,27 +14,27 @@ door::~door()
 	
 }
 
-void door::OuterLightGreen()
+void door::outerLightGreen()
 {
 
 	lightOutside.lightRed.turnOff();
 	lightOutside.lightGreen.turnOn();
 }
 
-void door::OuterLightRed()
+void door::outerLightRed()
 {
 	lightOutside.lightGreen.turnOff();
 	lightOutside.lightRed.turnOn();
 }
 
-void door::InnerLightGreen()
+void door::innerLightGreen()
 {
 
 	lightInside.lightRed.turnOff();
 	lightInside.lightGreen.turnOn();
 }
 
-void door::InnerLightRed()
+void door::innerLightRed()
 {
 	lightInside.lightGreen.turnOff();
 	lightInside.lightRed.turnOn();
