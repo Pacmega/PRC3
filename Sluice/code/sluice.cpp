@@ -84,21 +84,69 @@ int sluice::openValve(doorSide side, int valveRow)
 
 int sluice::closeValve(doorSide side, int valveRow)
 {
-/* 
-        TO DO:
-        - Doesn't need any checks right?
-        - close the valves of the door
-    */
-    return 0;
+    if (valveRow < 1 || valveRow > 3)
+    {
+        // Invalid valveRow
+        return -1;
+    }
+
+    char* messageToSend;
+
+    if(side == left)
+    {
+        switch(valveRow)
+        {
+            case 1:
+                messageToSend = DoorLeftCloseBottomValve;
+                break;
+            case 2:
+                messageToSend = DoorLeftCloseMiddleValve;
+                break;
+            case 3:
+                messageToSend = DoorLeftCloseTopValve;
+                break;
+        }
+    }
+    else // side == right
+    {
+        switch(valveRow)
+        {
+            case 1:
+                messageToSend = DoorRightCloseBottomValve;
+                break;
+            case 2:
+                messageToSend = DoorRightCloseMiddleValve;
+                break;
+            case 3:
+                messageToSend = DoorRightCloseTopValve;
+                break;
+        }
+    }
+
+    receivedMessage = interface.sendMessage(messageToSend);
+    if (interpretAck(receivedMessage))
+    {
+        return 0;
+    }
+    return -2; // Message was not acknowledged by the sim
 }
 
-int sluice::closeAllValves()
+int sluice::closeAllValves(doorSide side)
 {
-/* 
-        TO DO:
-        - Just close all valves of all doors?
-    */
-    return 0;
+    int rtnval;
+
+    for (int i = 1; i <= 3; i++)
+    {
+        rtnval = closeValve(side, i);
+
+        if (rtnval != 0)
+        {
+            // If one of the valves was somehow unable to close, immediately stop and return the error code.
+            break;
+        }
+    }
+
+    return rtnval;
 }
 
 int sluice::start()
