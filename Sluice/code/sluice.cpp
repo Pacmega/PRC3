@@ -63,18 +63,24 @@ int sluice::closeDoor(doorSide side)
 
 int sluice::stopDoor(doorSide side)
 {
-    char* messageToSend;
+    const char* messageToSend;
 
     if (side == left)
     {
-        std::cout << "kek";
+        messageToSend = DoorLeftStop;
     }
-    /* 
-        TO DO:
-        - Check doorType
-        - stop door
-    */
-    return 0;
+    else
+    {
+        messageToSend = DoorRightStop;
+    }
+
+    receivedMessage = interface.sendMessage(messageToSend);
+    if (interface.interpretAck(receivedMessage))
+    {
+        // Message was correctly acknowledged by the sim
+        return 0;
+    }
+    return -2; // Message was not acknowledged by the sim
 }
 
 int sluice::openValve(doorSide side, int valveRow)
@@ -132,6 +138,7 @@ int sluice::closeValve(doorSide side, int valveRow)
     receivedMessage = interface.sendMessage(messageToSend);
     if (interface.interpretAck(receivedMessage))
     {
+        // Message was correctly acknowledged by the sim
         return 0;
     }
     return -2; // Message was not acknowledged by the sim
