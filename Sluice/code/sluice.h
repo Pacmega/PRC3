@@ -29,8 +29,12 @@ private:
 
 	waterLevel interpretWaterLevel(char* receivedMessage);
 
-	int openDoor(doorSide side);
-	int closeDoor(doorSide side);
+	void openOnce();
+	void openLock();
+	void openPulse();
+
+	void openDoor(doorSide side);
+	void closeDoor(doorSide side);
 	int stopDoor(doorSide side);
 
 	int openValve(doorSide side, int valveRow);

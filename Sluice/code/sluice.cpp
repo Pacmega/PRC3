@@ -1,4 +1,5 @@
 #include <string.h>
+#include <iostream>
 
 #include "sluice.h"
 #include "lib/enums.h"
@@ -40,7 +41,22 @@ doorState sluice::getDoorState(doorSide side)
     return interface.interpretDoorState(receivedMessage);
 }
 
-int sluice::openDoor(doorSide side)
+void openOnce()
+{
+
+}
+
+void openLock()
+{
+
+}
+
+void openPulse()
+{
+    
+}
+
+void sluice::openDoor(doorSide side)
 {
     /* 
         TO DO:
@@ -50,7 +66,7 @@ int sluice::openDoor(doorSide side)
 
     // For door at port 5558: check if the state is doorStopped,
     // if so send DoorLeftOpen or DoorRightOpen again
-    
+
     return 0;
 }
 
