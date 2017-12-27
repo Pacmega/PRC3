@@ -1,9 +1,10 @@
 #include "networkInterface.h"
+#include "lib/enums.h"
 
 class communicationHandler
 {
 public:
-	communicationHandler();
+	communicationHandler(networkInterface nI);
 	~communicationHandler();
 
 	waterLevel interpretWaterLevel(char* receivedMessage);
@@ -12,4 +13,6 @@ public:
 	motorType interpretMotorType(char* receivedMessage);
 	bool sendMsgAck(char* receivedMessage);
 	
+private:
+	networkInterface interface;
 };

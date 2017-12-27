@@ -1,7 +1,8 @@
 #include "valveRow.h"
 
-valveRow::valveRow()
+valveRow::valveRow(communicationHandler cHandler)
 {
+	handler = cHandler;
 	opened = false;
 }
 
@@ -12,6 +13,7 @@ valveRow::~valveRow()
 
 void valveRow::open()
 {
+
 	opened = true;
 }
 

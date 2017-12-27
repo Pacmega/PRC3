@@ -4,6 +4,7 @@
 #include "door.h"
 #include "trafficLight.h"
 #include "networkInterface.h"
+#include "communicationHandler.h"
 
 class sluice
 {
