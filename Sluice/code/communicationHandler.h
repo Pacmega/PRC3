@@ -10,6 +10,6 @@ public:
 	doorState interpretDoorState(char* receivedMessage);
 	doorType interpretDoorType(char* receivedMessage);
 	motorType interpretMotorType(char* receivedMessage);
-	bool interpretAck(char* receivedMessage);
+	bool sendMsgAck(char* receivedMessage);
 	
 };

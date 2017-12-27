@@ -9,7 +9,7 @@
 class door
 {
 public:
-	door(doorType doorType, motorType motorType, bool startsLocked);
+	door(doorType doorType, doorSide side, motorType motorType, bool startsLocked, communicationHandler Handler);
 	~door();
 	
 	void outerLightGreen();
@@ -25,11 +25,23 @@ public:
 
 private:
 	bool locked;
+	bool messageReceived;
+
 	valveRow valves[3];
 	doorMotor motor;
-	doorType Type;
+	doorType type;
+	doorSide side;
 	trafficLight lightInside;
 	trafficLight lightOutside;
+	communicationHandler handler;
+
+	void openOnce(doorSide side);
+	void openLock(doorSide side);
+	void openPulse(doorSide side);
+
+	void openDoor(doorSide side);
+	void closeDoor(doorSide side);
+	int stopDoor(doorSide side);
 };
 
 #endif
