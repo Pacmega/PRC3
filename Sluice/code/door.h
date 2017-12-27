@@ -24,7 +24,6 @@ public:
 	int unlock();
 
 private:
-	bool locked;
 	bool messageReceived;
 
 	valveRow valves[3];
@@ -35,13 +34,13 @@ private:
 	trafficLight lightOutside;
 	communicationHandler handler;
 
-	void openOnce(doorSide side);
-	void openLock(doorSide side);
-	void openPulse(doorSide side);
+	void openOnce();
+	void openLock();
+	void openPulse();
 
-	void openDoor(doorSide side);
-	void closeDoor(doorSide side);
-	int stopDoor(doorSide side);
+	void openDoor();
+	void closeDoor();
+	int stopDoor();
 };
 
 #endif

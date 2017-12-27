@@ -146,9 +146,9 @@ doorType networkInterface::interpretDoorType(char* receivedMessage)
 	doorType dType;
 
 	// A switch case isn't possible for strings or character arrays.
-	if (strcmp(receivedMessage, "slowLock") == 0)
+	if (strcmp(receivedMessage, "noLock") == 0)
 	{
-		dType = slowLock;
+		dType = noLock;
 	}
 	else if (strcmp(receivedMessage, "fastLock") == 0)
 	{

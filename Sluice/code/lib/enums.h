@@ -25,7 +25,7 @@ enum doorState
 
 enum doorType
 {
-	slowLock,
+	noLock,
 	fastLock, // Has to be locked fast, otherwise it breaks the motor.
 	doorTypeError
 };

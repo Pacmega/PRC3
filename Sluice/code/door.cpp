@@ -40,7 +40,7 @@ void door::innerLightRed()
 	lightInside.lightRed.turnOn();
 }
 
-void door::openOnce(doorSide side)
+void door::openOnce()
 {
     // TODO: Does this cause a blockage somewhere near its call?
     if (side == left)
@@ -52,18 +52,19 @@ void door::openOnce(doorSide side)
         messageReceived = handler.sendMsgAck(DoorRightOpen);
     }
 
-    if (handler.interpretAck(messageReceived))
+    if (messageReceived)
     {
-    doorState currentState = getDoorState(side);
-    while (currentState != doorOpen)
-    {
-        currentState = getDoorState(side);
-    }
+	    doorState currentState = getDoorState(side);
+	    while (currentState != doorOpen)
+	    {
+	        currentState = getDoorState(side);
+	    }
+	}
 
     // Door has been opened
 }
 
-void door::openLock(doorSide side)
+void door::openLock()
 {
     if (side == left)
     {
@@ -75,14 +76,14 @@ void door::openLock(doorSide side)
     }
 
     // Door should be unlocked. If the message was received correctly, open it.
-    if (handler.interpretAck(messageReceived))
+    if (messageReceived)
     {
         openOnce(side);
         // TODO: change the locally saved door as well
     }
 }
 
-void door::openPulse(doorSide side)
+void door::openPulse()
 {
     // TODO: Does this cause a blockage somewhere near its call?
     
@@ -122,24 +123,116 @@ void door::openPulse(doorSide side)
     }
 }
 
-void door::openDoor(doorSide side)
+void door::openDoor()
 {
     // TODO: Does this cause a blockage somewhere near its call?
 
     // Note: this is a thread
 
-    /* 
-        TO DO:
-        - Check if door isn't open already
-        - Check doorType
-        - Open door
-    */
+	doorState currentState = getDoorState(side);
+	if (currentState != doorOpen)
+	{
+		switch(type)
+		{
+			case noLock:
+				switch(motor.type)
+				{
+					case continuous:
+						openOnce();
+						break;
+					case pulse:
+						openPulse();
+						break;
+				}
+				break;
 
-    // For door at port 5558: check if the state is doorStopped,
-    // if so send DoorLeftOpen or DoorRightOpen again
+			case fastLock:
+				openLock();
+				break;
+		}
+	}
 }
 
-void door::closeDoor(doorSide side)
+void door::closeOnce()
+{
+    // TODO: Does this cause a blockage somewhere near its call?
+    if (side == left)
+    {
+        messageReceived = handler.sendMsgAck(DoorLeftClose);
+    }
+    else // side has to be right
+    {
+        messageReceived = handler.sendMsgAck(DoorRightClose);
+    }
+
+    if (messageReceived)
+    {
+	    doorState currentState = getDoorState(side);
+	    while (currentState != doorClosed)
+	    {
+	        currentState = getDoorState(side);
+	    }
+	}
+
+    // Door has been opened
+}
+
+void door::closeLock()
+{
+    closeOnce();
+    
+    // Door should be unlocked. If the message was received correctly, open it.
+    if (side == left)
+    {
+        messageReceived = handler.sendMsgAck(DoorLeftLock);
+    }
+    else // side has to be right
+    {
+        messageReceived = handler.sendMsgAck(DoorRightLock);
+    }
+}
+
+void door::closePulse()
+{
+    // TODO: Does this cause a blockage somewhere near its call?
+    
+    if (side == left)
+    {
+        messageReceived = handler.sendMsgAck(DoorLeftClose);
+    }
+    else // side has to be right
+    {
+        messageReceived = handler.sendMsgAck(DoorRightClose);
+    }
+
+    if (messageReceived)
+    {
+        doorState currentState = getDoorState(side);
+        while (currentState != doorClosed)
+        {
+            if (currentState == doorStopped)
+            {
+                if (side == left)
+                {
+                    messageReceived = handler.sendMsgAck(DoorLeftClosed);
+                }
+                else // side == right
+                {
+                    messageReceived = handler.sendMsgAck(DoorRightClosed);
+                }
+                
+                if (messageReceived)
+                {
+                    // If no ack was received, something is wrong
+                    break;
+                }
+            }
+            // Else the door is currently opening
+        }
+    }
+}
+
+void door::closeDoor()
 {
     // TODO: Does this cause a blockage somewhere near its call?
 
@@ -152,7 +245,7 @@ void door::closeDoor(doorSide side)
     */
 }
 
-int door::stopDoor(doorSide side)
+int door::stopDoor()
 {
     const char* messageToSend;
 
