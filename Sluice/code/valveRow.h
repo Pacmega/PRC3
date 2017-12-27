@@ -3,19 +3,27 @@
 
 #include "light.h"
 #include "communicationHandler.h"
+#include "lib/enums.h"
 
 class valveRow
 {
 public:
-	valveRow(communicationHandler cHandler);
+	valveRow(communicationHandler cHandler, int row, doorSide side);
 	~valveRow();
 
-	void open();
-	void close();
+	bool open();
+	bool close();
+	bool getStatus(); // true when opened, false when closed
 
 private:
-	bool opened;
 	communicationHandler handler;
+
+	char[] openCommand;
+	char[] closeCommand;
+	char[] statusCommand;
+	
+	char commandConstructor(int row, doorSide side);
+
 
 	/*
 	int openValve(doorSide side, int valveRow);
