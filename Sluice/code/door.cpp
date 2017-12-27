@@ -1,11 +1,15 @@
 #include "door.h"
 #include "valveRow.h"
 #include "doorMotor.h"
+#include "commands.h"
+#include "communicationHandler.h"
 
-door::door(doorType dt, doorSide ds, motorType mt, bool startsLocked, communicationHandler Handler)
-	: motor(doorMotor(mt))
+door::door(doorType dt, doorSide ds, motorType mt, communicationHandler Handler)
+	: topValves(valveRow(handler, 1, ds))
+	, middleValves(valveRow(handler, 2, ds))
+	, bottomValves(valveRow(handler, 3, ds))
+	, motor(doorMotor(mt))
 {
-	locked = startsLocked;
 	type = dt;
 	side = ds;
 	handler = Handler;
@@ -135,7 +139,7 @@ void door::openDoor()
 		switch(type)
 		{
 			case noLock:
-				switch(motor.type)
+				switch(motor.getType())
 				{
 					case continuous:
 						openOnce();
@@ -143,12 +147,18 @@ void door::openDoor()
 					case pulse:
 						openPulse();
 						break;
+					case motorError:
+						// Invalid engine, don't know how to open
+						return;
 				}
 				break;
 
 			case fastLock:
 				openLock();
 				break;
+			case doorTypeError:
+				// Invalid door type, don't know how to open
+				return;
 		}
 	}
 }
@@ -168,7 +178,7 @@ void door::closeOnce()
     if (messageReceived)
     {
 	    doorState currentState = getDoorState(side);
-	    while (currentState != doorClosed)
+	    while (currentState != doorOpen)
 	    {
 	        currentState = getDoorState(side);
 	    }
@@ -179,9 +189,6 @@ void door::closeOnce()
 
 void door::closeLock()
 {
-    closeOnce();
-    
-    // Door should be unlocked. If the message was received correctly, open it.
     if (side == left)
     {
         messageReceived = handler.sendMsgAck(DoorLeftLock);
@@ -189,6 +196,13 @@ void door::closeLock()
     else // side has to be right
     {
         messageReceived = handler.sendMsgAck(DoorRightLock);
+    }
+
+    // Door should be unlocked. If the message was received correctly, open it.
+    if (messageReceived)
+    {
+        closeOnce(side);
+        // TODO: change the locally saved door as well
     }
 }
 
@@ -198,27 +212,27 @@ void door::closePulse()
     
     if (side == left)
     {
-        messageReceived = handler.sendMsgAck(DoorLeftClose);
+        messageReceived = handler.sendMsgAck(DoorLeftOpen);
     }
     else // side has to be right
     {
-        messageReceived = handler.sendMsgAck(DoorRightClose);
+        messageReceived = handler.sendMsgAck(DoorRightOpen);
     }
 
     if (messageReceived)
     {
         doorState currentState = getDoorState(side);
-        while (currentState != doorClosed)
+        while (currentState != doorOpen)
         {
             if (currentState == doorStopped)
             {
                 if (side == left)
                 {
-                    messageReceived = handler.sendMsgAck(DoorLeftClosed);
+                    messageReceived = handler.sendMsgAck(DoorLeftOpen);
                 }
                 else // side == right
                 {
-                    messageReceived = handler.sendMsgAck(DoorRightClosed);
+                    messageReceived = handler.sendMsgAck(DoorRightOpen);
                 }
                 
                 if (messageReceived)
@@ -259,7 +273,7 @@ int door::stopDoor()
     }
 
     messageReceived = handler.sendMsgAck(messageToSend);
-    if (handler.interpretAck(messageReceived))
+    if (messageReceived)
     {
         // Message was correctly acknowledged by the sim
         return 0;

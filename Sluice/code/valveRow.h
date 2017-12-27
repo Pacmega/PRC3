@@ -18,9 +18,9 @@ public:
 private:
 	communicationHandler handler;
 
-	char[] openCommand;
-	char[] closeCommand;
-	char[] statusCommand;
+	// char[] openCommand;
+	// char[] closeCommand;
+	// char[] statusCommand;
 	
 	char commandConstructor(int row, doorSide side);
 

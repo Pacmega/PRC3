@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "valveRow.h"
 
 valveRow::valveRow(communicationHandler cHandler, int row, doorSide side)
@@ -29,17 +31,23 @@ bool valveRow::getStatus()
 
 void commandConstructor(int row, doorSide side)
 {
-	char [] Side;
-	switch(side)
-	{
-		case left:
-			Side = "Left";
-			break;
-		case right:
-			Side = "Right"
-			break;
-	}
-	openCommand = "SetDoor" + Side + "Valve" + row ":open;\0"
-	closeCommand =  "SetDoor" + Side + "Valve" + row ":close;\0"
-	statusCommand = "GetDoor" + Side + "Valve" + row + ";\0";
+	// std::string Side;
+
+	// switch(side)
+	// {
+	// 	case left:
+	// 		Side = "Left";
+	// 		break;
+	// 	case right:
+	// 		Side = "Right"
+	// 		break;
+	// }
+
+	// std::string tempOpenCommand = "SetDoor" + Side + "Valve" + row ":open;\0";
+	// std::string tempCloseCommand =  "SetDoor" + Side + "Valve" + row ":close;\0";
+	// std::string tempStatusCommand = "GetDoor" + Side + "Valve" + row + ";\0";
+
+	// strcpy(openCommand, tempOpenCommand);
+	// strcpy(closeCommand, tempCloseCommand);
+	// strcpy(statusCommand, tempStatusCommand);
 }

@@ -8,6 +8,7 @@ class doorMotor
 public:
 	doorMotor(motorType Type);
 	~doorMotor();
+	motorType getType();
 
 private:
 	bool damaged;

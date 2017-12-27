@@ -17,16 +17,12 @@ public:
 	void innerLightGreen();
 	void innerLightRed();
 
-	int openDoor();
-	int closeDoor();
-	int stopDoor();
-	int lock();
-	int unlock();
-
 private:
 	bool messageReceived;
 
-	valveRow valves[3];
+	valveRow topValves;
+	valveRow middleValves;
+	valveRow bottomValves;
 	doorMotor motor;
 	doorType type;
 	doorSide side;
@@ -37,6 +33,10 @@ private:
 	void openOnce();
 	void openLock();
 	void openPulse();
+
+	void closeOnce();
+	void closeLock();
+	void closePulse();
 
 	void openDoor();
 	void closeDoor();

@@ -12,3 +12,8 @@ doorMotor::~doorMotor()
 {
 	
 }
+
+doorMotor::getType()
+{
+	return type;
+}
