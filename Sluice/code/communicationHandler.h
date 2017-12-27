@@ -7,11 +7,9 @@ public:
 	communicationHandler(networkInterface nI);
 	~communicationHandler();
 
-	waterLevel interpretWaterLevel(char* receivedMessage);
-	doorState interpretDoorState(char* receivedMessage);
-	doorType interpretDoorType(char* receivedMessage);
-	motorType interpretMotorType(char* receivedMessage);
-	bool sendMsgAck(char* receivedMessage);
+	waterLevel getWaterLevel(char* messageToSend);
+	doorState getDoorState(char* messageToSend);
+	bool sendMsgAck(char* messageToSend);
 	
 private:
 	networkInterface interface;

@@ -10,9 +10,11 @@ communicationHandler::~communicationHandler()
 
 }
 
-waterLevel communicationHandler::interpretWaterLevel(char* receivedMessage)
+waterLevel communicationHandler::getWaterLevel(char* messageToSend)
 {
     waterLevel wLevel;
+
+    char* receivedMessage = interface.sendMessage(messageToSend)
 
     // A switch case isn't possible for strings or character arrays.
     if (strcmp(receivedMessage, "low") == 0)
@@ -43,7 +45,7 @@ waterLevel communicationHandler::interpretWaterLevel(char* receivedMessage)
     return wLevel;
 }
 
-doorState communicationHandler::interpretDoorState(char* receivedMessage)
+doorState communicationHandler::getDoorState(char* messageToSend)
 {
 	doorState dState;
 
@@ -84,51 +86,11 @@ doorState communicationHandler::interpretDoorState(char* receivedMessage)
 	return dState;
 }
 
-doorType communicationHandler::interpretDoorType(char* receivedMessage)
-{
-	doorType dType;
-
-	// A switch case isn't possible for strings or character arrays.
-	if (strcmp(receivedMessage, "slowLock") == 0)
-	{
-		dType = slowLock;
-	}
-	else if (strcmp(receivedMessage, "fastLock") == 0)
-	{
-		dType = fastLock;
-	}
-	else
-	{
-		dType = doorTypeError;
-	}
-
-	return dType;
-}
-
-motorType communicationHandler::interpretMotorType(char* receivedMessage)
-{
-	motorType mType;
-
-	// A switch case isn't possible for strings or character arrays.
-	if (strcmp(receivedMessage, "continuous") == 0)
-	{
-		mType = continuous;
-	}
-	else if (strcmp(receivedMessage, "pulse") == 0)
-	{
-		mType = pulse;
-	}
-	else
-	{
-		mType = motorError;
-	}
-
-	return mType;
-}
-
-bool communicationHandler::interpretAck(char* receivedMessage)
+bool communicationHandler::sendMsgAck(char* messageToSend)
 {
 	bool ack = false;
+
+	char* receivedMessage = interface.sendMessage(messageToSend);
 
 	if (strcmp(receivedMessage, "ack") == 0)
 	{
