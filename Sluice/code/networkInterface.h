@@ -17,12 +17,6 @@ public:
 
 	char* sendMessage(const char message[]);
 
-	waterLevel interpretWaterLevel(char* receivedMessage);
-	doorState interpretDoorState(char* receivedMessage);
-	doorType interpretDoorType(char* receivedMessage);
-	motorType interpretMotorType(char* receivedMessage);
-	bool interpretAck(char* receivedMessage);
-
 
 private:
 	// int port; <- Maybe not used since the auxiliary handles this?
